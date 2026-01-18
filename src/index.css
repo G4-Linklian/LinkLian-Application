@@ -135,12 +135,13 @@
 }
 
 @layer components {
-  /* Hero button variants - Using #FFCF9A */
+  /* Hero button variants - Using #FFCF9A with orange border */
   .btn-hero {
     @apply inline-flex h-14 items-center justify-center gap-2 rounded-full px-8 text-lg font-semibold transition-all duration-300;
     background-color: #FFCF9A;
     color: hsl(220 14% 10%);
     box-shadow: var(--shadow-soft);
+    border: 1.5px solid hsl(25 95% 53%);
   }
 
   .btn-hero:hover {
@@ -151,7 +152,7 @@
 
   .btn-hero-outline {
     @apply inline-flex h-14 items-center justify-center gap-2 rounded-full border-2 bg-transparent px-8 text-lg font-semibold transition-all duration-300;
-    border-color: #FFCF9A;
+    border-color: hsl(25 95% 53%);
     color: hsl(25 95% 53%);
   }
 
