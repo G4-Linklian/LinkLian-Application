@@ -233,13 +233,35 @@ export default function MobileDisplaySection() {
             </div>
           </motion.div>
 
-          {/* Floating Cards - Positioned outside phones to not block */}
-          {/* Top right - Purple card */}
+          {/* Floating Cards - Positioned to not block phones */}
+          {/* Top left of left phone - 200k+ card */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.6 }}
+            className="absolute left-0 top-0 z-30 rounded-2xl bg-gradient-to-br from-emerald-300 to-green-400 px-4 py-3 shadow-xl animate-float sm:left-0"
+          >
+            <div className="flex items-center gap-3 text-white">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/30">
+                <IconChartBar size={20} />
+              </div>
+              <div>
+                <div className="text-lg font-bold">200k+</div>
+                <div className="flex items-center gap-1">
+                  <span className="h-2 w-2 rounded-full bg-white/60"></span>
+                  <span className="text-xs opacity-90">8 Launches</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Top right - Purple card */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.7 }}
             className="absolute right-0 -top-2 z-30 rounded-2xl bg-gradient-to-br from-violet-400 to-purple-500 px-4 py-3 shadow-xl animate-float sm:right-0"
           >
             <div className="flex items-center gap-3 text-white">
@@ -253,60 +275,38 @@ export default function MobileDisplaySection() {
             </div>
           </motion.div>
 
-          {/* Left side - Blue chart card */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.7 }}
-            className="absolute -left-4 top-[35%] z-30 rounded-2xl bg-[#FFF5E6] px-4 py-3 shadow-xl animate-float-slow sm:-left-6"
-          >
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-500">
-                <IconChartBar size={20} className="text-white" />
-              </div>
-              <div>
-                <div className="text-lg font-bold text-gray-900">200k+</div>
-                <div className="flex items-center gap-1">
-                  <span className="h-2 w-2 rounded-full bg-pink-400"></span>
-                  <span className="text-xs text-gray-600">8 Launches</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Bottom left - Star rating card */}
+          {/* Bottom left - Pink star rating card */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="absolute -left-4 bottom-[15%] z-30 rounded-2xl bg-[#FFF5E6] px-4 py-3 shadow-xl animate-float sm:-left-6"
+            className="absolute -left-4 bottom-[12%] z-30 rounded-2xl bg-gradient-to-br from-pink-300 to-rose-400 px-4 py-3 shadow-xl animate-float sm:-left-6"
           >
-            <div className="text-center">
-              <div className="mb-1 flex items-center justify-center gap-1 text-base font-bold text-gray-900">
-                <IconStar size={16} className="fill-amber-400 text-amber-400" /> 4.9
+            <div className="text-center text-white">
+              <div className="mb-1 flex items-center justify-center gap-1 text-base font-bold">
+                <IconStar size={16} className="fill-white text-white" /> 4.9
               </div>
-              <div className="text-sm font-semibold text-gray-700">189</div>
-              <div className="text-xs text-gray-500">Good Responses</div>
+              <div className="text-sm font-semibold">189</div>
+              <div className="text-xs opacity-90">Good Responses</div>
             </div>
           </motion.div>
 
-          {/* Bottom right - Efficiency card */}
+          {/* Bottom right - Blue efficiency card */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.9 }}
-            className="absolute right-0 bottom-[8%] z-30 rounded-2xl bg-[#FFF5E6] px-4 py-3 shadow-xl animate-float-slow sm:right-0"
+            className="absolute right-0 bottom-[8%] z-30 rounded-2xl bg-gradient-to-br from-sky-300 to-blue-400 px-4 py-3 shadow-xl animate-float-slow sm:right-0"
           >
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-400">
-                <IconChartLine size={20} className="text-white" />
+            <div className="flex items-center gap-3 text-white">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/30">
+                <IconChartLine size={20} />
               </div>
               <div>
-                <div className="text-lg font-bold text-gray-900">92.5%</div>
-                <div className="text-xs text-gray-600">Work more efficient</div>
+                <div className="text-lg font-bold">92.5%</div>
+                <div className="text-xs opacity-90">Work more efficient</div>
               </div>
             </div>
           </motion.div>
