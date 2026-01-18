@@ -10,7 +10,7 @@ export default function ButtomSection() {
     <section id="contact" className="section-padding">
       {/* Top Badge - Outside the card */}
       <div className="text-center mb-8">
-        <SectionBadge icon={IconRocket} text="เริ่มต้นใช้งานวันนี้" className="bg-[#FFE3BB]" />
+        <SectionBadge icon={IconRocket} text="เริ่มต้นใช้งานวันนี้" className="bg-[#FFCF9A]" />
       </div>
 
       <motion.div
@@ -63,7 +63,7 @@ export default function ButtomSection() {
           >
             <Link
               to="/institution-register"
-              className="group flex h-14 w-full items-center justify-center gap-2 rounded-full bg-white px-8 text-lg font-semibold text-foreground transition-all duration-300 hover:bg-gray-100 hover:scale-105 hover:shadow-lg sm:w-auto"
+              className="group flex h-14 w-full items-center justify-center gap-2 rounded-full bg-white px-8 text-lg font-semibold text-foreground transition-all duration-300 hover:bg-gray-100 hover:scale-105 hover:shadow-lg sm:w-auto border border-[hsl(25,95%,53%)]"
             >
               ลงทะเบียนสถาบัน
               <IconArrowRight size={20} className="transition-transform group-hover:translate-x-1" />

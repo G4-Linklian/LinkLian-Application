@@ -39,7 +39,7 @@ export default function FeaturesMobileSection() {
     <section id="features" className="section-padding">
       {/* Section Badge outside */}
       <div className="text-center mb-8">
-        <SectionBadge icon={IconDeviceMobile} text="ฟีเจอร์แอปพลิเคชัน" className="bg-[#FFE3BB]" />
+        <SectionBadge icon={IconDeviceMobile} text="ฟีเจอร์แอปพลิเคชัน" className="bg-[#FFCF9A]" />
       </div>
 
       <motion.div
