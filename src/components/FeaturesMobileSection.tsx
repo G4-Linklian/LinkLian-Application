@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   IconMapPin, 
@@ -9,10 +9,10 @@ import {
   IconBook, 
   IconFlask, 
   IconCalendarEvent,
-  IconHome
+  IconHome,
+  IconDeviceMobile
 } from '@tabler/icons-react';
 import SectionBadge from './ui/SectionBadge';
-import { IconDeviceMobile } from '@tabler/icons-react';
 
 interface Feature {
   id: number;
@@ -36,7 +36,12 @@ export default function FeaturesMobileSection() {
   const activeData = features.find(f => f.id === activeFeature) || features[0];
 
   return (
-    <section id="features" className="section-padding bg-[#FFE3BB]">
+    <section id="features" className="section-padding">
+      {/* Section Badge outside */}
+      <div className="text-center mb-8">
+        <SectionBadge icon={IconDeviceMobile} text="ฟีเจอร์แอปพลิเคชัน" className="bg-[#FFE3BB]" />
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -53,7 +58,6 @@ export default function FeaturesMobileSection() {
         <div className="relative z-10">
           {/* Header */}
           <div className="text-center mb-12">
-            <SectionBadge icon={IconDeviceMobile} text="ฟีเจอร์แอปพลิเคชัน" className="mb-6" />
             <h2 className="heading-lg text-foreground mb-4">
               ฟีเจอร์ที่มี
             </h2>
@@ -76,13 +80,13 @@ export default function FeaturesMobileSection() {
                   className={`w-full flex items-center gap-4 p-4 rounded-2xl text-left transition-all duration-300 ${
                     activeFeature === feature.id
                       ? 'bg-white shadow-lg scale-[1.02]'
-                      : 'bg-white/20 hover:bg-white/30'
+                      : 'bg-[#FFE3BB] hover:bg-[#FFD9A8]'
                   }`}
                 >
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-white ${
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
                     activeFeature === feature.id
-                      ? `bg-gradient-to-br ${feature.color}`
-                      : 'bg-white/30 text-foreground'
+                      ? `bg-gradient-to-br ${feature.color} text-white`
+                      : 'bg-white/50 text-foreground'
                   }`}>
                     {feature.icon}
                   </div>

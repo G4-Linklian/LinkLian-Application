@@ -77,7 +77,7 @@ export default function MobileDisplaySection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="absolute left-8 top-12 z-10 sm:left-12 sm:top-16"
+            className="absolute left-12 top-12 z-10 sm:left-20 sm:top-16"
           >
             <div className="relative h-[420px] w-[200px] sm:h-[480px] sm:w-[230px]">
               {/* Phone Frame */}
@@ -164,7 +164,7 @@ export default function MobileDisplaySection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="absolute right-4 top-24 z-20 sm:right-8 sm:top-32"
+            className="absolute right-12 top-24 z-20 sm:right-20 sm:top-32"
           >
             <div className="relative h-[420px] w-[200px] sm:h-[480px] sm:w-[230px]">
               {/* Phone Frame */}
@@ -244,21 +244,21 @@ export default function MobileDisplaySection() {
             </div>
           </motion.div>
 
-          {/* Floating Cards - Pastel Colors */}
+          {/* Floating Cards - Positioned outside phones */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="absolute right-0 top-4 z-30 rounded-2xl bg-gradient-to-br from-violet-400 to-purple-500 p-4 shadow-xl animate-float sm:right-2"
+            className="absolute -right-2 top-0 z-30 rounded-2xl bg-gradient-to-br from-violet-400 to-purple-500 p-3 shadow-xl animate-float sm:-right-4"
           >
             <div className="flex items-center gap-2 text-white">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/30">
-                <IconUsers size={20} />
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/30">
+                <IconUsers size={16} />
               </div>
               <div>
-                <div className="text-lg font-bold">50+</div>
-                <div className="text-xs opacity-90">Monthly Partner</div>
+                <div className="text-sm font-bold">50+</div>
+                <div className="text-[10px] opacity-90">Monthly Partner</div>
               </div>
             </div>
           </motion.div>
@@ -268,17 +268,17 @@ export default function MobileDisplaySection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.7 }}
-            className="absolute left-0 top-1/3 z-30 rounded-2xl bg-gradient-to-br from-sky-300 to-blue-400 p-4 shadow-xl animate-float-slow"
+            className="absolute -left-2 top-1/4 z-30 rounded-2xl bg-gradient-to-br from-sky-300 to-blue-400 p-3 shadow-xl animate-float-slow sm:-left-4"
           >
             <div className="flex items-center gap-2 text-white">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/30">
-                <IconChartBar size={20} />
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/30">
+                <IconChartBar size={16} />
               </div>
               <div>
-                <div className="text-lg font-bold">200k+</div>
+                <div className="text-sm font-bold">200k+</div>
                 <div className="flex items-center gap-1">
-                  <span className="h-2 w-2 rounded-full bg-pink-400"></span>
-                  <span className="text-xs opacity-90">8 Launches</span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-pink-400"></span>
+                  <span className="text-[10px] opacity-90">8 Launches</span>
                 </div>
               </div>
             </div>
@@ -289,14 +289,14 @@ export default function MobileDisplaySection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="absolute bottom-16 left-4 z-30 rounded-2xl bg-gradient-to-br from-pink-300 to-rose-400 p-3 shadow-xl animate-float sm:left-8"
+            className="absolute -left-2 bottom-20 z-30 rounded-2xl bg-gradient-to-br from-pink-300 to-rose-400 p-2.5 shadow-xl animate-float sm:-left-4"
           >
             <div className="text-center text-white">
-              <div className="mb-1 flex items-center justify-center gap-1 text-sm font-bold">
-                <IconStar size={14} className="fill-white" /> 4.9
+              <div className="mb-0.5 flex items-center justify-center gap-1 text-xs font-bold">
+                <IconStar size={12} className="fill-white" /> 4.9
               </div>
-              <div className="text-xs">189</div>
-              <div className="text-[10px] opacity-90">Good Responses</div>
+              <div className="text-[10px]">189</div>
+              <div className="text-[8px] opacity-90">Good Responses</div>
             </div>
           </motion.div>
 
@@ -305,15 +305,15 @@ export default function MobileDisplaySection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.9 }}
-            className="absolute bottom-4 right-4 z-30 rounded-2xl bg-gradient-to-br from-emerald-300 to-green-400 p-3 shadow-xl animate-float-slow sm:right-8"
+            className="absolute -right-2 bottom-8 z-30 rounded-2xl bg-gradient-to-br from-emerald-300 to-green-400 p-2.5 shadow-xl animate-float-slow sm:-right-4"
           >
             <div className="flex items-center gap-2 text-white">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/30">
-                <IconChartLine size={20} />
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/30">
+                <IconChartLine size={16} />
               </div>
               <div>
-                <div className="text-lg font-bold">92.5%</div>
-                <div className="text-xs opacity-90">Work more efficient</div>
+                <div className="text-sm font-bold">92.5%</div>
+                <div className="text-[10px] opacity-90">Work more efficient</div>
               </div>
             </div>
           </motion.div>

@@ -37,54 +37,54 @@ interface RegisterFeature {
 }
 
 const slides: Slide[] = [
-  { id: 1, title: 'หน้าแรกระบบ', description: 'แดชบอร์ดหลักของ LinkLian แสดงข้อมูลสรุปอย่างชัดเจน', icon: <IconHome size={48} /> },
-  { id: 2, title: 'จัดการนักเรียน', description: 'ระบบจัดการข้อมูลนักเรียนแบบครบวงจร', icon: <IconUsers size={48} /> },
-  { id: 3, title: 'ตารางเรียน', description: 'จัดการตารางเรียนและห้องเรียนได้ง่าย', icon: <IconCalendar size={48} /> },
-  { id: 4, title: 'การบ้านและคะแนน', description: 'ติดตามการบ้านและให้คะแนนแบบเรียลไทม์', icon: <IconClipboard size={48} /> },
-  { id: 5, title: 'สื่อสารกับผู้ปกครอง', description: 'ส่งข้อความแจ้งข้อมูลความก้าวหน้าให้ผู้ปกครอง', icon: <IconMessage size={48} /> },
-  { id: 6, title: 'รายงานผลการเรียน', description: 'ดูรายงานผลการเรียนแบบรายตัวและรายชั้น', icon: <IconChartBar size={48} /> },
-  { id: 7, title: 'ระบบเงิน', description: 'จัดการค่าเรียน ค่าธรรมเนียม และการชำระเงิน', icon: <IconCreditCard size={48} /> },
-  { id: 8, title: 'วิเคราะห์ข้อมูล', description: 'Dashboard ข้อมูลแบบเรียลไทม์และการวิเคราะห์', icon: <IconTrendingUp size={48} /> }
+  { id: 1, title: 'ลงทะเบียนนักเรียนใหม่', description: 'ระบบรับสมัครนักเรียนใหม่ออนไลน์', icon: <IconClipboardList size={48} /> },
+  { id: 2, title: 'จัดการรายวิชา', description: 'เพิ่ม ลบ แก้ไขรายวิชา กำหนดหน่วยกิต', icon: <IconBook size={48} /> },
+  { id: 3, title: 'ตารางเรียน/ตารางสอน', description: 'สร้างตารางเรียนอัตโนมัติ', icon: <IconCalendarEvent size={48} /> },
+  { id: 4, title: 'จัดการข้อมูลนักเรียน', description: 'เก็บข้อมูลประวัติ ผลการเรียน', icon: <IconUserCircle size={48} /> },
+  { id: 5, title: 'รายงานและสถิติ', description: 'ดูสถิติการลงทะเบียน จำนวนนักเรียน', icon: <IconReportAnalytics size={48} /> },
+  { id: 6, title: 'ระบบความปลอดภัย', description: 'การเข้าถึงตามสิทธิ์ บันทึก Log', icon: <IconShieldLock size={48} /> },
 ];
 
 const registerFeatures: RegisterFeature[] = [
   {
     icon: <IconClipboardList size={28} />,
     title: 'ลงทะเบียนนักเรียนใหม่',
-    description: 'ระบบรับสมัครนักเรียนใหม่ออนไลน์',
+    description: 'ระบบรับสมัครนักเรียนใหม่ออนไลน์ ลดการกรอกเอกสารซ้ำซ้อน',
     highlight: 'ลด 80% เวลา'
   },
   {
     icon: <IconBook size={28} />,
     title: 'จัดการรายวิชา',
-    description: 'เพิ่ม ลบ แก้ไขรายวิชา กำหนดหน่วยกิต',
+    description: 'เพิ่ม ลบ แก้ไขรายวิชา กำหนดหน่วยกิต และเงื่อนไขการลงทะเบียน',
     highlight: 'ยืดหยุ่น 100%'
   },
   {
     icon: <IconCalendarEvent size={28} />,
     title: 'ตารางเรียน/ตารางสอน',
-    description: 'สร้างตารางเรียนอัตโนมัติ',
+    description: 'สร้างตารางเรียนอัตโนมัติ จัดสรรห้องเรียนและครูผู้สอน',
     highlight: 'Auto Scheduling'
   },
   {
     icon: <IconUserCircle size={28} />,
     title: 'จัดการข้อมูลนักเรียน',
-    description: 'เก็บข้อมูลประวัติ ผลการเรียน',
+    description: 'เก็บข้อมูลประวัติ ผลการเรียน และข้อมูลติดต่อผู้ปกครอง',
     highlight: 'ครบทุกข้อมูล'
   },
   {
     icon: <IconReportAnalytics size={28} />,
     title: 'รายงานและสถิติ',
-    description: 'ดูสถิติการลงทะเบียน จำนวนนักเรียน',
+    description: 'ดูสถิติการลงทะเบียน จำนวนนักเรียน และรายงานต่างๆ',
     highlight: 'Real-time Report'
   },
   {
     icon: <IconShieldLock size={28} />,
     title: 'ระบบความปลอดภัย',
-    description: 'การเข้าถึงตามสิทธิ์ บันทึก Log',
+    description: 'การเข้าถึงตามสิทธิ์ บันทึก Log และการสำรองข้อมูล',
     highlight: '99.9% Secure'
   },
 ];
+
+const AUTO_SLIDE_INTERVAL = 5000; // 5 seconds
 
 export default function RegisterSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -94,7 +94,7 @@ export default function RegisterSection() {
     if (!isAutoPlaying) return;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 4000);
+    }, AUTO_SLIDE_INTERVAL);
     return () => clearInterval(timer);
   }, [isAutoPlaying]);
 
@@ -107,9 +107,6 @@ export default function RegisterSection() {
     setIsAutoPlaying(false);
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
-
-  // Map current slide to feature index (cycle through 6 features)
-  const activeFeatureIndex = currentSlide % registerFeatures.length;
 
   return (
     <section className="section-padding">
@@ -202,11 +199,11 @@ export default function RegisterSection() {
             <div className="relative min-h-[280px]">
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={activeFeatureIndex}
+                  key={currentSlide}
                   initial={{ opacity: 0, x: 50, scale: 0.95 }}
                   animate={{ opacity: 1, x: 0, scale: 1 }}
                   exit={{ opacity: 0, x: -50, scale: 0.95 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
                   className="relative"
                 >
                   <div className="relative overflow-hidden rounded-3xl bg-card border border-border/50 p-8 shadow-xl">
@@ -219,19 +216,19 @@ export default function RegisterSection() {
                         transition={{ duration: 0.5, type: "spring" }}
                         className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#FFCF9A] to-[#FFE3BB] flex items-center justify-center text-foreground shadow-lg mb-6"
                       >
-                        {registerFeatures[activeFeatureIndex].icon}
+                        {registerFeatures[currentSlide].icon}
                       </motion.div>
 
                       <h3 className="text-2xl font-bold text-foreground mb-3">
-                        {registerFeatures[activeFeatureIndex].title}
+                        {registerFeatures[currentSlide].title}
                       </h3>
                       <p className="text-muted-foreground mb-6 text-lg leading-relaxed">
-                        {registerFeatures[activeFeatureIndex].description}
+                        {registerFeatures[currentSlide].description}
                       </p>
 
                       <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent text-sm font-semibold text-accent-foreground">
                         <span className="w-2 h-2 rounded-full bg-[#F97316] animate-pulse" />
-                        {registerFeatures[activeFeatureIndex].highlight}
+                        {registerFeatures[currentSlide].highlight}
                       </div>
                     </div>
 

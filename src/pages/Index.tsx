@@ -3,7 +3,6 @@ import MainSection from '@/components/MainSection';
 import MobileDisplaySection from '@/components/MobileDisplaySection';
 import FeaturesMobileSection from '@/components/FeaturesMobileSection';
 import RegisterSection from '@/components/RegisterSection';
-import FeaturesRegisterSection from '@/components/FeaturesRegisterSection';
 import BenefitsSection from '@/components/BenefitsSection';
 import ButtomSection from '@/components/ButtomSection';
 import Footer from '@/components/Footer';
@@ -17,7 +16,6 @@ const Index = () => {
         <MobileDisplaySection />
         <FeaturesMobileSection />
         <RegisterSection />
-        <FeaturesRegisterSection />
         <BenefitsSection />
         <ButtomSection />
       </main>
