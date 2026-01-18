@@ -18,7 +18,7 @@ export default function ButtomSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.6 }}
-        className="relative overflow-hidden rounded-3xl bg-gradient-cta p-8 md:p-12 lg:p-16 text-center"
+        className="relative overflow-hidden rounded-3xl bg-[#FFD9A8] p-8 md:p-12 lg:p-16 text-center"
       >
         {/* Background decorations */}
         <div className="absolute inset-0 overflow-hidden">
