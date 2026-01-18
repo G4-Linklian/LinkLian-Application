@@ -47,14 +47,8 @@ export default function FeaturesMobileSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.6 }}
-        className="relative overflow-hidden rounded-3xl bg-gradient-cta p-8 md:p-12 lg:p-16"
+        className="relative overflow-hidden rounded-3xl bg-[#FFD9A8] p-8 md:p-12 lg:p-16"
       >
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-white blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-white blur-3xl" />
-        </div>
-
         <div className="relative z-10">
           {/* Header */}
           <div className="text-center mb-12">
@@ -189,10 +183,6 @@ export default function FeaturesMobileSection() {
                     <h4 className="font-bold text-lg text-foreground mb-2">{activeData.title}</h4>
                     <p className="text-sm text-muted-foreground">{activeData.description}</p>
                   </div>
-
-                  {/* Decorative elements */}
-                  <div className="absolute -top-4 -right-4 w-20 h-20 bg-primary/30 rounded-full blur-xl" />
-                  <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-accent rounded-full blur-xl" />
                 </motion.div>
               </AnimatePresence>
             </div>
