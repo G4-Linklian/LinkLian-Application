@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* LinkLian Design System - Egg Orange Theme */
+/* LinkLian Design System - Updated Colors */
 
 @layer base {
   :root {
@@ -18,9 +18,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 14% 10%;
 
-    /* Primary - Egg Orange */
-    --primary: 25 95% 53%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary - Soft Peach #FFE3BB */
+    --primary: 35 100% 87%;
+    --primary-foreground: 220 14% 10%;
+
+    /* Primary Button - #FFCF9A */
+    --primary-button: 32 100% 80%;
+    --primary-button-foreground: 220 14% 10%;
+
+    /* Primary Text - Orange for text accents */
+    --primary-text: 25 95% 53%;
 
     /* Secondary - Warm Cream */
     --secondary: 35 40% 95%;
@@ -31,7 +38,7 @@
     --muted-foreground: 220 10% 45%;
 
     /* Accent - Light Orange */
-    --accent: 30 85% 92%;
+    --accent: 35 100% 92%;
     --accent-foreground: 25 90% 40%;
 
     /* Destructive */
@@ -46,21 +53,21 @@
     --radius: 0.75rem;
 
     /* Custom gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(25 95% 53%), hsl(35 95% 58%));
+    --gradient-primary: linear-gradient(135deg, hsl(35 100% 87%), hsl(32 100% 80%));
     --gradient-warm: linear-gradient(135deg, hsl(35 40% 97%), hsl(30 50% 93%));
     --gradient-hero: linear-gradient(180deg, hsl(40 33% 98%), hsl(35 40% 95%));
-    --gradient-cta: linear-gradient(135deg, hsl(25 95% 53%), hsl(18 90% 48%));
+    --gradient-cta: linear-gradient(135deg, hsl(32 100% 80%), hsl(25 95% 65%));
     
     /* Shadows */
-    --shadow-soft: 0 4px 20px -2px hsl(25 95% 53% / 0.12);
-    --shadow-elevated: 0 12px 40px -8px hsl(25 95% 53% / 0.18);
+    --shadow-soft: 0 4px 20px -2px hsl(32 100% 80% / 0.25);
+    --shadow-elevated: 0 12px 40px -8px hsl(32 100% 80% / 0.35);
     --shadow-card: 0 2px 16px -2px hsl(220 14% 10% / 0.06);
 
     /* Sidebar (keeping for compatibility) */
     --sidebar-background: 40 33% 98%;
     --sidebar-foreground: 220 14% 10%;
-    --sidebar-primary: 25 95% 53%;
-    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-primary: 35 100% 87%;
+    --sidebar-primary-foreground: 220 14% 10%;
     --sidebar-accent: 35 40% 95%;
     --sidebar-accent-foreground: 220 14% 10%;
     --sidebar-border: 35 25% 88%;
@@ -77,8 +84,13 @@
     --popover: 220 14% 12%;
     --popover-foreground: 40 33% 98%;
 
-    --primary: 25 95% 58%;
+    --primary: 35 100% 87%;
     --primary-foreground: 220 14% 10%;
+
+    --primary-button: 32 100% 80%;
+    --primary-button-foreground: 220 14% 10%;
+
+    --primary-text: 25 95% 58%;
 
     --secondary: 220 14% 18%;
     --secondary-foreground: 40 33% 98%;
@@ -98,7 +110,7 @@
 
     --sidebar-background: 220 14% 8%;
     --sidebar-foreground: 40 33% 98%;
-    --sidebar-primary: 25 95% 58%;
+    --sidebar-primary: 35 100% 87%;
     --sidebar-primary-foreground: 220 14% 10%;
     --sidebar-accent: 220 14% 18%;
     --sidebar-accent-foreground: 40 33% 98%;
@@ -123,23 +135,30 @@
 }
 
 @layer components {
-  /* Hero button variants */
+  /* Hero button variants - Using #FFCF9A */
   .btn-hero {
-    @apply inline-flex h-14 items-center justify-center gap-2 rounded-full bg-primary px-8 text-lg font-semibold text-primary-foreground transition-all duration-300;
+    @apply inline-flex h-14 items-center justify-center gap-2 rounded-full px-8 text-lg font-semibold transition-all duration-300;
+    background-color: #FFCF9A;
+    color: hsl(220 14% 10%);
     box-shadow: var(--shadow-soft);
   }
 
   .btn-hero:hover {
     @apply scale-105;
+    background-color: #FFE3BB;
     box-shadow: var(--shadow-elevated);
   }
 
   .btn-hero-outline {
-    @apply inline-flex h-14 items-center justify-center gap-2 rounded-full border-2 border-primary bg-transparent px-8 text-lg font-semibold text-primary transition-all duration-300;
+    @apply inline-flex h-14 items-center justify-center gap-2 rounded-full border-2 bg-transparent px-8 text-lg font-semibold transition-all duration-300;
+    border-color: #FFCF9A;
+    color: hsl(25 95% 53%);
   }
 
   .btn-hero-outline:hover {
-    @apply bg-primary text-primary-foreground scale-105;
+    background-color: #FFCF9A;
+    color: hsl(220 14% 10%);
+    @apply scale-105;
   }
 
   /* Card styles */
@@ -175,9 +194,9 @@
     background: var(--gradient-cta);
   }
 
-  /* Section spacing */
+  /* Section spacing - Reduced */
   .section-padding {
-    @apply py-16 lg:py-24;
+    @apply py-8 lg:py-12;
   }
 
   /* Typography */
@@ -197,6 +216,11 @@
     text-wrap: balance;
   }
 
+  /* Primary text color (orange) */
+  .text-primary-orange {
+    color: hsl(25 95% 53%);
+  }
+
   /* Feature card special */
   .feature-card {
     @apply relative overflow-hidden rounded-2xl border border-border/50 bg-card p-6 transition-all duration-500;
@@ -205,7 +229,7 @@
   .feature-card::before {
     content: '';
     @apply absolute inset-0 opacity-0 transition-opacity duration-500;
-    background: linear-gradient(135deg, hsl(25 95% 53% / 0.05), hsl(35 95% 58% / 0.08));
+    background: linear-gradient(135deg, hsl(35 100% 87% / 0.3), hsl(32 100% 80% / 0.4));
   }
 
   .feature-card:hover::before {

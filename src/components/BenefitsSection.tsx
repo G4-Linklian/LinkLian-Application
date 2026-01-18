@@ -74,7 +74,7 @@ export default function BenefitsSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.6 }}
-        className="space-y-12"
+        className="space-y-10"
       >
         {/* Header */}
         <div className="text-center">
@@ -82,14 +82,14 @@ export default function BenefitsSection() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-2 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-4"
+            className="inline-block px-4 py-2 rounded-full bg-primary text-foreground text-sm font-medium mb-4"
           >
             ประโยชน์ที่ได้รับ
           </motion.span>
           <h2 className="heading-lg text-foreground mb-4">
             LinkLian ช่วยให้สถาบันของคุณ
             <br />
-            <span className="text-primary">ทำงานได้อย่างมีประสิทธิภาพ</span>
+            <span className="text-primary-orange">ทำงานได้อย่างมีประสิทธิภาพ</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             เปลี่ยนวิธีการจัดการการศึกษาของคุณด้วยเครื่องมือที่ทรงพลัง
@@ -115,21 +115,24 @@ export default function BenefitsSection() {
               className="group relative overflow-hidden rounded-2xl bg-card border border-border/50 p-6 transition-shadow duration-300 hover:shadow-xl"
             >
               {/* Gradient overlay on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
               <div className="relative z-10">
                 {/* Icon with animation */}
                 <motion.div 
                   whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
                   transition={{ duration: 0.5 }}
-                  className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-2xl shadow-lg"
-                  style={{ boxShadow: '0 4px 20px -4px hsl(25 95% 53% / 0.4)' }}
+                  className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl text-2xl shadow-lg"
+                  style={{ 
+                    backgroundColor: '#FFCF9A',
+                    boxShadow: '0 4px 20px -4px hsl(32 100% 80% / 0.5)' 
+                  }}
                 >
                   {benefit.icon}
                 </motion.div>
 
                 {/* Content */}
-                <h3 className="mb-2 text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                <h3 className="mb-2 text-xl font-bold text-foreground group-hover:text-primary-orange transition-colors">
                   {benefit.title}
                 </h3>
                 <p className="text-muted-foreground mb-4">
@@ -138,13 +141,13 @@ export default function BenefitsSection() {
 
                 {/* Stat badge */}
                 <div className="flex items-center gap-2 pt-2 border-t border-border/50">
-                  <span className="text-2xl font-bold text-primary">{benefit.stat}</span>
+                  <span className="text-2xl font-bold text-primary-orange">{benefit.stat}</span>
                   <span className="text-sm text-muted-foreground">{benefit.statLabel}</span>
                 </div>
               </div>
 
               {/* Decorative corner */}
-              <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-primary/5 rounded-full group-hover:scale-150 transition-transform duration-500" />
+              <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-primary/10 rounded-full group-hover:scale-150 transition-transform duration-500" />
             </motion.div>
           ))}
         </motion.div>
