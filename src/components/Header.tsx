@@ -10,7 +10,9 @@ export default function Header() {
       className="flex items-center justify-between py-4"
     >
       <Link to="/" className="flex items-center gap-3 group">
+        {/* Logo placeholder - ready for image */}
         <div className="relative h-11 w-11 rounded-xl bg-primary flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-105">
+          {/* Replace this with: <img src="/path/to/logo.png" alt="LinkLian" className="h-full w-full object-contain" /> */}
           <span className="text-primary-foreground font-bold text-xl">L</span>
           <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
         </div>
