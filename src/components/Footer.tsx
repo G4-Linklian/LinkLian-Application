@@ -12,9 +12,10 @@ export default function Footer() {
     >
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Logo */}
+          {/* Logo placeholder - ready for image */}
           <Link to="/" className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center">
+            <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center overflow-hidden">
+              {/* Replace this with: <img src="/path/to/logo.png" alt="LinkLian" className="h-full w-full object-contain" /> */}
               <span className="text-primary-foreground font-bold text-lg">L</span>
             </div>
             <span className="text-xl font-bold text-foreground">LinkLian</span>

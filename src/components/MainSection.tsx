@@ -1,4 +1,7 @@
+'use client';
+
 import { motion } from 'framer-motion';
+import { IconChevronDown, IconStar } from '@tabler/icons-react';
 
 export default function MainSection() {
   const handleScrollToFeatures = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -62,9 +65,7 @@ export default function MainSection() {
             className="btn-hero w-full sm:w-auto"
           >
             ดูฟีเจอร์ทั้งหมด
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
+            <IconChevronDown size={20} stroke={2} />
           </a>
         </motion.div>
 
@@ -87,7 +88,8 @@ export default function MainSection() {
           <div className="w-px h-8 bg-border hidden sm:block" />
           <div className="flex items-center gap-2">
             <span className="text-3xl font-bold text-primary-orange">4.8</span>
-            <span className="text-sm">⭐ คะแนนรีวิว</span>
+            <IconStar size={18} className="text-primary-orange fill-primary-orange" />
+            <span className="text-sm">คะแนนรีวิว</span>
           </div>
         </motion.div>
       </div>

@@ -1,9 +1,19 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { 
+  IconClipboardList, 
+  IconBook, 
+  IconCalendarEvent, 
+  IconUserCircle, 
+  IconReportAnalytics, 
+  IconShieldLock,
+  IconSchool
+} from '@tabler/icons-react';
+import SectionBadge from './ui/SectionBadge';
 
 interface RegisterFeature {
-  icon: string;
+  icon: React.ReactNode;
   title: string;
   description: string;
   highlight: string;
@@ -11,37 +21,37 @@ interface RegisterFeature {
 
 const registerFeatures: RegisterFeature[] = [
   {
-    icon: '📋',
+    icon: <IconClipboardList size={32} />,
     title: 'ลงทะเบียนนักเรียนใหม่',
     description: 'ระบบรับสมัครนักเรียนใหม่ออนไลน์ ลดการกรอกเอกสารซ้ำซ้อน',
     highlight: 'ลด 80% เวลาลงทะเบียน'
   },
   {
-    icon: '📚',
+    icon: <IconBook size={32} />,
     title: 'จัดการรายวิชา',
     description: 'เพิ่ม ลบ แก้ไขรายวิชา กำหนดหน่วยกิต และเงื่อนไขการลงทะเบียน',
     highlight: 'ยืดหยุ่น 100%'
   },
   {
-    icon: '📅',
+    icon: <IconCalendarEvent size={32} />,
     title: 'ตารางเรียน/ตารางสอน',
     description: 'สร้างตารางเรียนอัตโนมัติ จัดสรรห้องเรียนและครูผู้สอน',
     highlight: 'Auto Scheduling'
   },
   {
-    icon: '👥',
+    icon: <IconUserCircle size={32} />,
     title: 'จัดการข้อมูลนักเรียน',
     description: 'เก็บข้อมูลประวัติ ผลการเรียน และข้อมูลติดต่อผู้ปกครอง',
     highlight: 'ครบทุกข้อมูล'
   },
   {
-    icon: '📊',
+    icon: <IconReportAnalytics size={32} />,
     title: 'รายงานและสถิติ',
     description: 'ดูสถิติการลงทะเบียน จำนวนนักเรียน และรายงานต่างๆ',
     highlight: 'Real-time Report'
   },
   {
-    icon: '🔐',
+    icon: <IconShieldLock size={32} />,
     title: 'ระบบความปลอดภัย',
     description: 'การเข้าถึงตามสิทธิ์ บันทึก Log และการสำรองข้อมูล',
     highlight: '99.9% Secure'
@@ -82,16 +92,7 @@ export default function FeaturesRegisterSection() {
       >
         {/* Header */}
         <div className="text-center relative">
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary mb-6"
-          >
-            <span className="text-lg">🎓</span>
-            <span className="text-sm font-semibold text-foreground">ระบบทะเบียน</span>
-          </motion.div>
+          <SectionBadge icon={IconSchool} text="ระบบทะเบียน" className="mb-6" />
           
           <h2 className="heading-lg text-foreground mb-4">
             ฟีเจอร์ระบบทะเบียน
@@ -130,7 +131,7 @@ export default function FeaturesRegisterSection() {
                     <motion.div
                       whileHover={{ rotate: [0, -5, 5, 0] }}
                       transition={{ duration: 0.5 }}
-                      className="relative z-10 w-16 h-16 rounded-2xl bg-gradient-to-br from-[#FFCF9A] to-[#FFE3BB] flex items-center justify-center text-3xl shadow-lg"
+                      className="relative z-10 w-16 h-16 rounded-2xl bg-gradient-to-br from-[#FFCF9A] to-[#FFE3BB] flex items-center justify-center text-foreground shadow-lg"
                     >
                       {feature.icon}
                     </motion.div>

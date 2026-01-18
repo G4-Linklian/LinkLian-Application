@@ -1,45 +1,55 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { 
+  IconBolt, 
+  IconTarget, 
+  IconShieldCheck, 
+  IconMessageCircle, 
+  IconChartPie, 
+  IconWorld 
+} from '@tabler/icons-react';
+import SectionBadge from './ui/SectionBadge';
+import { IconSparkles } from '@tabler/icons-react';
 
 const benefits = [
   {
-    icon: '⚡',
+    icon: <IconBolt size={28} />,
     title: 'ประหยัดเวลา',
     description: 'ลดการทำงานด้วยมือมากกว่า 70% ด้วยระบบอัตโนมัติ',
     stat: '70%',
     statLabel: 'ลดเวลางาน'
   },
   {
-    icon: '🎯',
+    icon: <IconTarget size={28} />,
     title: 'เพิ่มประสิทธิภาพ',
     description: 'ทำให้การจัดการเรียนการสอนเป็นระเบียบและมีประสิทธิภาพ',
     stat: '3x',
     statLabel: 'เร็วขึ้น'
   },
   {
-    icon: '🔒',
+    icon: <IconShieldCheck size={28} />,
     title: 'ปลอดภัย',
     description: 'เก็บข้อมูลได้อย่างปลอดภัยและมีการสำรองข้อมูล',
     stat: '99.9%',
     statLabel: 'Uptime'
   },
   {
-    icon: '💬',
+    icon: <IconMessageCircle size={28} />,
     title: 'สื่อสารดีขึ้น',
     description: 'ครู นักเรียน และผู้ปกครองสามารถสื่อสารได้ง่าย',
     stat: '24/7',
     statLabel: 'การสื่อสาร'
   },
   {
-    icon: '📊',
+    icon: <IconChartPie size={28} />,
     title: 'วิเคราะห์ข้อมูล',
     description: 'ดูรายงานและข้อมูลแบบเรียลไทม์เพื่อการตัดสินใจ',
     stat: 'Real-time',
     statLabel: 'Analytics'
   },
   {
-    icon: '🌍',
+    icon: <IconWorld size={28} />,
     title: 'ใช้ได้ทุกที่',
     description: 'เข้าถึงได้จากที่ไหนก็ได้ อุปกรณ์ใดก็ได้ตลอด 24/7',
     stat: '∞',
@@ -78,14 +88,7 @@ export default function BenefitsSection() {
       >
         {/* Header */}
         <div className="text-center">
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-block px-4 py-2 rounded-full bg-primary text-foreground text-sm font-medium mb-4"
-          >
-            ประโยชน์ที่ได้รับ
-          </motion.span>
+          <SectionBadge icon={IconSparkles} text="ประโยชน์ที่ได้รับ" className="mb-6" />
           <h2 className="heading-lg text-foreground mb-4">
             LinkLian ช่วยให้สถาบันของคุณ
             <br />
@@ -122,7 +125,7 @@ export default function BenefitsSection() {
                 <motion.div 
                   whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
                   transition={{ duration: 0.5 }}
-                  className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl text-2xl shadow-lg"
+                  className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl text-foreground shadow-lg"
                   style={{ 
                     backgroundColor: '#FFCF9A',
                     boxShadow: '0 4px 20px -4px hsl(32 100% 80% / 0.5)' 

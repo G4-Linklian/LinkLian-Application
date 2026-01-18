@@ -2,8 +2,22 @@
 
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { 
+  IconDeviceMobile, 
+  IconStar, 
+  IconUsers, 
+  IconChartBar, 
+  IconMessage, 
+  IconUser, 
+  IconHome, 
+  IconBook, 
+  IconSchool, 
+  IconCreditCard,
+  IconChartLine,
+  IconDeviceTablet
+} from '@tabler/icons-react';
 
-export default function MobileAppDisplay() {
+export default function MobileDisplaySection() {
   return (
     <section className="section-padding">
       <motion.div
@@ -19,7 +33,7 @@ export default function MobileAppDisplay() {
             <h2 className="heading-lg text-foreground mb-4">
               แอปพลิเคชันที่ออกแบบ
               <br />
-              <span className="text-primary">สำหรับทุกคนในสถาบัน</span>
+              <span className="text-primary-orange">สำหรับทุกคนในสถาบัน</span>
             </h2>
             <p className="text-lg text-muted-foreground">
               ใช้งานจาก tablet หรือมือถือได้เต็มที่ สำหรับนักเรียน ครู ผู้ปกครอง และบุคลากรสถาบัน
@@ -30,7 +44,7 @@ export default function MobileAppDisplay() {
             to="/institution-register"
             className="btn-hero inline-flex"
           >
-            <span>📱</span>
+            <IconDeviceMobile size={20} />
             ดาวน์โหลดแอป
           </Link>
 
@@ -38,7 +52,7 @@ export default function MobileAppDisplay() {
           <div className="flex gap-8 pt-4">
             <div className="space-y-1">
               <div className="flex items-center gap-1">
-                <span className="text-2xl">⭐</span>
+                <IconStar size={24} className="text-primary-orange fill-primary-orange" />
                 <span className="text-3xl font-bold text-foreground">4.8</span>
               </div>
               <p className="text-sm text-muted-foreground">คะแนน</p>
@@ -73,10 +87,10 @@ export default function MobileAppDisplay() {
                 
                 {/* Screen Content */}
                 <div className="flex h-full flex-col p-5">
-                  {/* Header */}
+                  {/* Header - Logo placeholder */}
                   <div className="mb-4 flex items-center gap-3">
                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500 text-white">
-                      <span className="text-lg">👤</span>
+                      <IconUser size={20} />
                     </div>
                     <div>
                       <div className="text-sm font-bold text-gray-900">Hi Sugiwa</div>
@@ -95,7 +109,7 @@ export default function MobileAppDisplay() {
                   {/* Blue Card */}
                   <div className="mb-3 rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 p-4 text-white">
                     <div className="mb-2 flex items-center gap-2">
-                      <span className="text-xl">📚</span>
+                      <IconBook size={20} />
                       <div className="text-xs font-semibold">Today's Classes</div>
                     </div>
                     <div className="text-xs opacity-90">4 subjects remaining</div>
@@ -105,7 +119,10 @@ export default function MobileAppDisplay() {
                   <div className="mb-3 rounded-2xl bg-blue-50 p-4">
                     <div className="mb-2 flex items-center justify-between">
                       <span className="text-xs font-semibold text-gray-700">Progress</span>
-                      <span className="text-xs text-gray-600">3.7⭐</span>
+                      <span className="flex items-center gap-1 text-xs text-gray-600">
+                        3.7
+                        <IconStar size={12} className="text-amber-500 fill-amber-500" />
+                      </span>
                     </div>
                     <div className="h-2 overflow-hidden rounded-full bg-gray-200">
                       <div className="h-full w-3/4 rounded-full bg-blue-500"></div>
@@ -116,23 +133,23 @@ export default function MobileAppDisplay() {
                   <div className="mt-auto grid grid-cols-4 gap-4 pt-4">
                     <div className="flex flex-col items-center gap-1">
                       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500">
-                        <span className="text-white">🏠</span>
+                        <IconHome size={18} className="text-white" />
                       </div>
                       <div className="h-1 w-6 rounded-full bg-blue-500"></div>
                     </div>
                     <div className="flex flex-col items-center gap-1">
                       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gray-200">
-                        <span className="text-gray-400">📊</span>
+                        <IconChartBar size={18} className="text-gray-400" />
                       </div>
                     </div>
                     <div className="flex flex-col items-center gap-1">
                       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gray-200">
-                        <span className="text-gray-400">💬</span>
+                        <IconMessage size={18} className="text-gray-400" />
                       </div>
                     </div>
                     <div className="flex flex-col items-center gap-1">
                       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gray-200">
-                        <span className="text-gray-400">👤</span>
+                        <IconUser size={18} className="text-gray-400" />
                       </div>
                     </div>
                   </div>
@@ -160,7 +177,7 @@ export default function MobileAppDisplay() {
                   {/* Header */}
                   <div className="mb-3 flex items-center gap-3">
                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary">
-                      <span className="text-lg">👤</span>
+                      <IconUser size={20} className="text-foreground" />
                     </div>
                     <div>
                       <div className="text-sm font-bold text-gray-900">Naghma Sahu</div>
@@ -172,7 +189,7 @@ export default function MobileAppDisplay() {
                   <div className="mb-3 rounded-2xl bg-gradient-to-br from-primary to-red-500 p-4 text-white shadow-lg">
                     <div className="mb-1 flex items-center gap-2">
                       <div className="flex h-6 w-6 items-center justify-center rounded-full bg-white/30">
-                        <span className="text-xs">ℹ️</span>
+                        <IconCreditCard size={14} />
                       </div>
                       <span className="text-xs font-semibold">Payment</span>
                     </div>
@@ -184,13 +201,13 @@ export default function MobileAppDisplay() {
                   <div className="mb-3 grid grid-cols-2 gap-2">
                     <div className="flex items-center gap-2 rounded-xl bg-gray-50 p-2">
                       <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100">
-                        <span className="text-xs">🎓</span>
+                        <IconSchool size={16} className="text-blue-600" />
                       </div>
                       <span className="text-[10px] font-semibold text-gray-700">Student Number</span>
                     </div>
                     <div className="flex items-center gap-2 rounded-xl bg-gray-50 p-2">
                       <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent">
-                        <span className="text-xs">📱</span>
+                        <IconDeviceTablet size={16} className="text-foreground" />
                       </div>
                       <span className="text-[10px] font-semibold text-gray-700">Phone Number</span>
                     </div>
@@ -199,7 +216,7 @@ export default function MobileAppDisplay() {
                   {/* University Section */}
                   <div className="mb-3 rounded-2xl bg-blue-600 p-4 text-white">
                     <div className="mb-2 flex items-center gap-2">
-                      <span className="text-sm">🏛️</span>
+                      <IconSchool size={16} />
                       <span className="text-xs font-semibold">University</span>
                     </div>
                     <div className="text-xs opacity-90">University Institute of Knowledge</div>
@@ -208,7 +225,7 @@ export default function MobileAppDisplay() {
                   {/* Study Program */}
                   <div className="mb-3 rounded-2xl bg-purple-50 p-3">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm">📚</span>
+                      <IconBook size={16} className="text-purple-600" />
                       <div>
                         <div className="text-xs font-semibold text-gray-800">Study Program</div>
                         <div className="text-[10px] text-gray-600">Course of Management</div>
@@ -227,17 +244,17 @@ export default function MobileAppDisplay() {
             </div>
           </motion.div>
 
-          {/* Floating Cards */}
+          {/* Floating Cards - Pastel Colors */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="absolute right-0 top-4 z-30 rounded-2xl bg-gradient-to-br from-purple-400 to-purple-500 p-4 shadow-xl animate-float sm:right-2"
+            className="absolute right-0 top-4 z-30 rounded-2xl bg-gradient-to-br from-violet-400 to-purple-500 p-4 shadow-xl animate-float sm:right-2"
           >
             <div className="flex items-center gap-2 text-white">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/30">
-                <span className="text-lg">👥</span>
+                <IconUsers size={20} />
               </div>
               <div>
                 <div className="text-lg font-bold">50+</div>
@@ -251,17 +268,17 @@ export default function MobileAppDisplay() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.7 }}
-            className="absolute left-0 top-1/3 z-30 rounded-2xl bg-gradient-to-br from-yellow-100 to-orange-100 p-4 shadow-xl animate-float-slow"
+            className="absolute left-0 top-1/3 z-30 rounded-2xl bg-gradient-to-br from-sky-300 to-blue-400 p-4 shadow-xl animate-float-slow"
           >
-            <div className="flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-400">
-                <span className="text-lg">📊</span>
+            <div className="flex items-center gap-2 text-white">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/30">
+                <IconChartBar size={20} />
               </div>
               <div>
-                <div className="text-lg font-bold text-gray-900">200k+</div>
+                <div className="text-lg font-bold">200k+</div>
                 <div className="flex items-center gap-1">
-                  <span className="h-2 w-2 rounded-full bg-red-400"></span>
-                  <span className="text-xs text-gray-600">8 Launches</span>
+                  <span className="h-2 w-2 rounded-full bg-pink-400"></span>
+                  <span className="text-xs opacity-90">8 Launches</span>
                 </div>
               </div>
             </div>
@@ -272,12 +289,14 @@ export default function MobileAppDisplay() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="absolute bottom-16 left-4 z-30 rounded-2xl bg-gradient-to-br from-yellow-100 to-orange-100 p-3 shadow-xl animate-float sm:left-8"
+            className="absolute bottom-16 left-4 z-30 rounded-2xl bg-gradient-to-br from-pink-300 to-rose-400 p-3 shadow-xl animate-float sm:left-8"
           >
-            <div className="text-center">
-              <div className="mb-1 text-sm font-bold text-gray-900">⭐ 4,9</div>
-              <div className="text-xs text-gray-600">189</div>
-              <div className="text-[10px] text-gray-500">Good Responses</div>
+            <div className="text-center text-white">
+              <div className="mb-1 flex items-center justify-center gap-1 text-sm font-bold">
+                <IconStar size={14} className="fill-white" /> 4.9
+              </div>
+              <div className="text-xs">189</div>
+              <div className="text-[10px] opacity-90">Good Responses</div>
             </div>
           </motion.div>
 
@@ -286,15 +305,15 @@ export default function MobileAppDisplay() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.9 }}
-            className="absolute bottom-4 right-4 z-30 rounded-2xl bg-gradient-to-br from-yellow-100 to-orange-100 p-3 shadow-xl animate-float-slow sm:right-8"
+            className="absolute bottom-4 right-4 z-30 rounded-2xl bg-gradient-to-br from-emerald-300 to-green-400 p-3 shadow-xl animate-float-slow sm:right-8"
           >
-            <div className="flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-400">
-                <span className="text-white">📈</span>
+            <div className="flex items-center gap-2 text-white">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/30">
+                <IconChartLine size={20} />
               </div>
               <div>
-                <div className="text-lg font-bold text-gray-900">92,5%</div>
-                <div className="text-xs text-gray-600">Work more efficient</div>
+                <div className="text-lg font-bold">92.5%</div>
+                <div className="text-xs opacity-90">Work more efficient</div>
               </div>
             </div>
           </motion.div>
