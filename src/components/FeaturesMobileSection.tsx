@@ -74,7 +74,7 @@ export default function FeaturesMobileSection() {
                   className={`w-full flex items-center gap-4 p-4 rounded-2xl text-left transition-all duration-300 ${
                     activeFeature === feature.id
                       ? 'bg-white shadow-lg scale-[1.02]'
-                      : 'bg-[#FFCF9A] hover:bg-[#FFD9A8]'
+                      : 'bg-[#FBBA7A] hover:bg-[#FFC48A]'
                   }`}
                 >
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
