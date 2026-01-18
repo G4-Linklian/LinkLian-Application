@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
+// Logo path - replace with your actual logo
+const LOGO_PATH = "/logo.png";
+
 export default function Footer() {
   return (
     <motion.footer 
@@ -12,11 +15,20 @@ export default function Footer() {
     >
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Logo placeholder - ready for image */}
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
             <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center overflow-hidden">
-              {/* Replace this with: <img src="/path/to/logo.png" alt="LinkLian" className="h-full w-full object-contain" /> */}
-              <span className="text-primary-foreground font-bold text-lg">L</span>
+              <img 
+                src={LOGO_PATH} 
+                alt="LinkLian" 
+                className="h-full w-full object-contain"
+                onError={(e) => {
+                  // Fallback to text if image fails to load
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                }}
+              />
+              <span className="hidden text-primary-foreground font-bold text-lg">L</span>
             </div>
             <span className="text-xl font-bold text-foreground">LinkLian</span>
           </Link>

@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
+// Logo path - replace with your actual logo
+const LOGO_PATH = "/logo.png";
+
 export default function Header() {
   return (
     <motion.header 
@@ -10,10 +13,19 @@ export default function Header() {
       className="flex items-center justify-between py-4"
     >
       <Link to="/" className="flex items-center gap-3 group">
-        {/* Logo placeholder - ready for image */}
+        {/* Logo */}
         <div className="relative h-11 w-11 rounded-xl bg-primary flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-105">
-          {/* Replace this with: <img src="/path/to/logo.png" alt="LinkLian" className="h-full w-full object-contain" /> */}
-          <span className="text-primary-foreground font-bold text-xl">L</span>
+          <img 
+            src={LOGO_PATH} 
+            alt="LinkLian" 
+            className="h-full w-full object-contain"
+            onError={(e) => {
+              // Fallback to text if image fails to load
+              e.currentTarget.style.display = 'none';
+              e.currentTarget.nextElementSibling?.classList.remove('hidden');
+            }}
+          />
+          <span className="hidden text-primary-foreground font-bold text-xl">L</span>
           <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
         </div>
         <span className="text-2xl font-bold text-foreground">LinkLian</span>
