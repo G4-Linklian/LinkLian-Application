@@ -12,51 +12,15 @@ interface Feature {
 }
 
 const features: Feature[] = [
-  {
-    id: 1,
-    icon: '📍',
-    title: 'Presence',
-    description: 'ระบบบันทึกสถานที่เรียน เช็คชื่อแบบดิจิทัล ติดตามการเข้าเรียน',
-    color: 'from-blue-500 to-blue-600'
-  },
-  {
-    id: 2,
-    icon: '✍️',
-    title: 'Assignment',
-    description: 'ส่งการบ้านออนไลน์ ให้ครูปรับแต่งเวลาส่ง และแสดงข้อเสนอแนะ',
-    color: 'from-purple-500 to-purple-600'
-  },
-  {
-    id: 3,
-    icon: '💳',
-    title: 'Bill Payment',
-    description: 'ชำระเงินค่าเรียน ค่าธรรมเนียมต่างๆ ผ่านแอปแบบออนไลน์',
-    color: 'from-green-500 to-green-600'
-  },
-  {
-    id: 4,
-    icon: '📚',
-    title: 'KRS/KRSS',
-    description: 'ลงทะเบียนเรียน ดูตารางเรียน และจัดการวิชาต่างๆ',
-    color: 'from-amber-500 to-orange-500'
-  },
-  {
-    id: 5,
-    icon: '🧪',
-    title: 'Final Exam',
-    description: 'สอบปลายภาค ดูผลการสอบ และวิเคราะห์ความแข็งแกร่ง',
-    color: 'from-red-500 to-pink-500'
-  },
-  {
-    id: 6,
-    icon: '📅',
-    title: 'Events',
-    description: 'ดูกิจกรรม ประกาศข่าวสาร และรับการแจ้งเตือนต่างๆ',
-    color: 'from-teal-500 to-cyan-500'
-  },
+  { id: 1, icon: '📍', title: 'Presence', description: 'ระบบบันทึกสถานที่เรียน เช็คชื่อแบบดิจิทัล ติดตามการเข้าเรียน', color: 'from-blue-500 to-blue-600' },
+  { id: 2, icon: '✍️', title: 'Assignment', description: 'ส่งการบ้านออนไลน์ ให้ครูปรับแต่งเวลาส่ง และแสดงข้อเสนอแนะ', color: 'from-purple-500 to-purple-600' },
+  { id: 3, icon: '💳', title: 'Bill Payment', description: 'ชำระเงินค่าเรียน ค่าธรรมเนียมต่างๆ ผ่านแอปแบบออนไลน์', color: 'from-green-500 to-green-600' },
+  { id: 4, icon: '📚', title: 'KRS/KRSS', description: 'ลงทะเบียนเรียน ดูตารางเรียน และจัดการวิชาต่างๆ', color: 'from-amber-500 to-orange-500' },
+  { id: 5, icon: '🧪', title: 'Final Exam', description: 'สอบปลายภาค ดูผลการสอบ และวิเคราะห์ความแข็งแกร่ง', color: 'from-red-500 to-pink-500' },
+  { id: 6, icon: '📅', title: 'Events', description: 'ดูกิจกรรม ประกาศข่าวสาร และรับการแจ้งเตือนต่างๆ', color: 'from-teal-500 to-cyan-500' },
 ];
 
-export default function FeaturesShowcase() {
+export default function FeaturesMobileSection() {
   const [activeFeature, setActiveFeature] = useState<number>(1);
   const activeData = features.find(f => f.id === activeFeature) || features[0];
 
@@ -78,10 +42,10 @@ export default function FeaturesShowcase() {
         <div className="relative z-10">
           {/* Header */}
           <div className="text-center mb-12">
-            <h2 className="heading-lg text-primary-foreground mb-4">
+            <h2 className="heading-lg text-foreground mb-4">
               ฟีเจอร์ที่มี
             </h2>
-            <p className="text-xl text-primary-foreground/80 max-w-2xl mx-auto">
+            <p className="text-xl text-foreground/80 max-w-2xl mx-auto">
               ทั้งหมด 6 ฟีเจอร์หลักที่ได้รับการออกแบบมาให้ใช้งานได้สะดวก
             </p>
           </div>
@@ -100,20 +64,18 @@ export default function FeaturesShowcase() {
                   className={`w-full flex items-center gap-4 p-4 rounded-2xl text-left transition-all duration-300 ${
                     activeFeature === feature.id
                       ? 'bg-white shadow-lg scale-[1.02]'
-                      : 'bg-white/10 hover:bg-white/20'
+                      : 'bg-white/20 hover:bg-white/30'
                   }`}
                 >
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl ${
                     activeFeature === feature.id
                       ? `bg-gradient-to-br ${feature.color}`
-                      : 'bg-white/20'
+                      : 'bg-white/30'
                   }`}>
                     {feature.icon}
                   </div>
                   <div className="flex-1">
-                    <h3 className={`font-bold ${
-                      activeFeature === feature.id ? 'text-foreground' : 'text-primary-foreground'
-                    }`}>
+                    <h3 className="font-bold text-foreground">
                       {feature.title}
                     </h3>
                     {activeFeature === feature.id && (
@@ -127,13 +89,13 @@ export default function FeaturesShowcase() {
                     )}
                   </div>
                   <div className={`w-2 h-2 rounded-full transition-all ${
-                    activeFeature === feature.id ? 'bg-primary scale-150' : 'bg-white/30'
+                    activeFeature === feature.id ? 'bg-[#F97316] scale-150' : 'bg-white/40'
                   }`} />
                 </motion.button>
               ))}
             </div>
 
-            {/* Feature Preview - Right side */}
+            {/* Feature Preview - Right side with Phone Mockup */}
             <div className="relative">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -144,32 +106,72 @@ export default function FeaturesShowcase() {
                   transition={{ duration: 0.4 }}
                   className="relative bg-white rounded-3xl p-8 shadow-2xl"
                 >
-                  {/* Phone mockup style preview */}
+                  {/* Phone mockup with placeholder */}
                   <div className="relative mx-auto w-48 h-96 bg-gradient-to-b from-gray-800 to-gray-900 rounded-[2.5rem] p-2 shadow-xl">
-                    <div className="relative h-full bg-white rounded-[2rem] overflow-hidden">
+                    <div className="relative h-full bg-gray-100 rounded-[2rem] overflow-hidden">
                       {/* Status bar */}
-                      <div className="absolute top-0 inset-x-0 h-6 bg-gradient-to-b from-gray-100 to-transparent flex items-center justify-center">
-                        <div className="w-16 h-1 bg-gray-300 rounded-full" />
+                      <div className="absolute top-0 inset-x-0 h-6 bg-gradient-to-b from-gray-200 to-transparent flex items-center justify-center z-10">
+                        <div className="w-16 h-1 bg-gray-400 rounded-full" />
                       </div>
                       
-                      {/* Content */}
-                      <div className="h-full flex flex-col items-center justify-center p-4 text-center">
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ delay: 0.2, type: "spring" }}
-                          className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${activeData.color} flex items-center justify-center mb-4`}
-                        >
-                          <span className="text-3xl">{activeData.icon}</span>
-                        </motion.div>
-                        <h4 className="font-bold text-lg text-foreground mb-2">{activeData.title}</h4>
-                        <p className="text-xs text-muted-foreground">{activeData.description}</p>
+                      {/* Mockup content */}
+                      <div className="h-full flex flex-col">
+                        {/* App header */}
+                        <div className="bg-[#FFCF9A] p-4 pt-8">
+                          <div className="flex items-center gap-2 mb-3">
+                            <div className="w-8 h-8 rounded-full bg-white/50" />
+                            <div className="flex-1">
+                              <div className="h-3 w-20 bg-white/50 rounded" />
+                              <div className="h-2 w-14 bg-white/30 rounded mt-1" />
+                            </div>
+                          </div>
+                          <div className="h-16 bg-white/30 rounded-xl" />
+                        </div>
+                        
+                        {/* Content area */}
+                        <div className="flex-1 p-4 space-y-3">
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ delay: 0.2, type: "spring" }}
+                            className={`w-12 h-12 rounded-xl bg-gradient-to-br ${activeData.color} flex items-center justify-center mx-auto`}
+                          >
+                            <span className="text-2xl">{activeData.icon}</span>
+                          </motion.div>
+                          
+                          <div className="space-y-2">
+                            <div className="h-3 bg-gray-300 rounded w-3/4 mx-auto" />
+                            <div className="h-2 bg-gray-200 rounded w-full" />
+                            <div className="h-2 bg-gray-200 rounded w-5/6" />
+                          </div>
+                          
+                          <div className="grid grid-cols-2 gap-2 mt-4">
+                            <div className="h-16 bg-gray-200 rounded-lg" />
+                            <div className="h-16 bg-gray-200 rounded-lg" />
+                          </div>
+                          
+                          <div className="h-12 bg-[#FFCF9A] rounded-xl mt-4" />
+                        </div>
+                        
+                        {/* Bottom nav */}
+                        <div className="h-14 bg-white border-t border-gray-200 flex items-center justify-around px-4">
+                          <div className="w-6 h-6 rounded-full bg-[#FFCF9A]" />
+                          <div className="w-6 h-6 rounded-full bg-gray-300" />
+                          <div className="w-6 h-6 rounded-full bg-gray-300" />
+                          <div className="w-6 h-6 rounded-full bg-gray-300" />
+                        </div>
                       </div>
                     </div>
                   </div>
 
+                  {/* Feature info */}
+                  <div className="text-center mt-6">
+                    <h4 className="font-bold text-lg text-foreground mb-2">{activeData.title}</h4>
+                    <p className="text-sm text-muted-foreground">{activeData.description}</p>
+                  </div>
+
                   {/* Decorative elements */}
-                  <div className="absolute -top-4 -right-4 w-20 h-20 bg-primary/10 rounded-full blur-xl" />
+                  <div className="absolute -top-4 -right-4 w-20 h-20 bg-primary/30 rounded-full blur-xl" />
                   <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-accent rounded-full blur-xl" />
                 </motion.div>
               </AnimatePresence>

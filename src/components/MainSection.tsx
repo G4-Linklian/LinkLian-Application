@@ -1,22 +1,19 @@
 import { motion } from 'framer-motion';
 
-export default function HeroSection() {
+export default function MainSection() {
   const handleScrollToFeatures = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const featuresSection = document.querySelector('#features');
     if (featuresSection) {
-      featuresSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
+      featuresSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
   return (
-    <section className="relative py-12 lg:py-20">
+    <section className="relative py-12 lg:py-16">
       {/* Background decoration */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/40 rounded-full blur-3xl" />
       </div>
 
@@ -26,8 +23,8 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-6">
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse-soft" />
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-foreground text-sm font-medium mb-6">
+            <span className="w-2 h-2 rounded-full bg-[#F97316] animate-pulse-soft" />
             แพลตฟอร์มการศึกษาแห่งอนาคต
           </span>
         </motion.div>
@@ -40,7 +37,7 @@ export default function HeroSection() {
         >
           ยกระดับการศึกษาของสถาบันคุณ
           <br />
-          <span className="text-primary">ด้วยแพลตฟอร์มเรียนการสอนอัจฉริยะ</span>
+          <span className="text-primary-orange">ด้วยแพลตฟอร์มเรียนการสอนอัจฉริยะ</span>
         </motion.h1>
 
         <motion.p
@@ -69,12 +66,6 @@ export default function HeroSection() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
             </svg>
           </a>
-          <a
-            href="#contact"
-            className="btn-hero-outline w-full sm:w-auto"
-          >
-            ติดต่อสอบถาม
-          </a>
         </motion.div>
 
         {/* Trust indicators */}
@@ -95,7 +86,7 @@ export default function HeroSection() {
           </div>
           <div className="w-px h-8 bg-border hidden sm:block" />
           <div className="flex items-center gap-2">
-            <span className="text-3xl font-bold text-primary">4.8</span>
+            <span className="text-3xl font-bold text-primary-orange">4.8</span>
             <span className="text-sm">⭐ คะแนนรีวิว</span>
           </div>
         </motion.div>

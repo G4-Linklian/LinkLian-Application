@@ -11,57 +11,17 @@ interface Slide {
 }
 
 const slides: Slide[] = [
-  {
-    id: 1,
-    title: 'หน้าแรกระบบ',
-    description: 'แดชบอร์ดหลักของ LinkLian แสดงข้อมูลสรุปอย่างชัดเจน',
-    icon: '🏠'
-  },
-  {
-    id: 2,
-    title: 'จัดการนักเรียน',
-    description: 'ระบบจัดการข้อมูลนักเรียนแบบครบวงจร',
-    icon: '👥'
-  },
-  {
-    id: 3,
-    title: 'ตารางเรียน',
-    description: 'จัดการตารางเรียนและห้องเรียนได้ง่าย',
-    icon: '📅'
-  },
-  {
-    id: 4,
-    title: 'การบ้านและคะแนน',
-    description: 'ติดตามการบ้านและให้คะแนนแบบเรียลไทม์',
-    icon: '📝'
-  },
-  {
-    id: 5,
-    title: 'สื่อสารกับผู้ปกครอง',
-    description: 'ส่งข้อความแจ้งข้อมูลความก้าวหน้าให้ผู้ปกครอง',
-    icon: '💬'
-  },
-  {
-    id: 6,
-    title: 'รายงานผลการเรียน',
-    description: 'ดูรายงานผลการเรียนแบบรายตัวและรายชั้น',
-    icon: '📊'
-  },
-  {
-    id: 7,
-    title: 'ระบบเงิน',
-    description: 'จัดการค่าเรียน ค่าธรรมเนียม และการชำระเงิน',
-    icon: '💳'
-  },
-  {
-    id: 8,
-    title: 'วิเคราะห์ข้อมูล',
-    description: 'Dashboard ข้อมูลแบบเรียลไทม์และการวิเคราะห์',
-    icon: '📈'
-  }
+  { id: 1, title: 'หน้าแรกระบบ', description: 'แดชบอร์ดหลักของ LinkLian แสดงข้อมูลสรุปอย่างชัดเจน', icon: '🏠' },
+  { id: 2, title: 'จัดการนักเรียน', description: 'ระบบจัดการข้อมูลนักเรียนแบบครบวงจร', icon: '👥' },
+  { id: 3, title: 'ตารางเรียน', description: 'จัดการตารางเรียนและห้องเรียนได้ง่าย', icon: '📅' },
+  { id: 4, title: 'การบ้านและคะแนน', description: 'ติดตามการบ้านและให้คะแนนแบบเรียลไทม์', icon: '📝' },
+  { id: 5, title: 'สื่อสารกับผู้ปกครอง', description: 'ส่งข้อความแจ้งข้อมูลความก้าวหน้าให้ผู้ปกครอง', icon: '💬' },
+  { id: 6, title: 'รายงานผลการเรียน', description: 'ดูรายงานผลการเรียนแบบรายตัวและรายชั้น', icon: '📊' },
+  { id: 7, title: 'ระบบเงิน', description: 'จัดการค่าเรียน ค่าธรรมเนียม และการชำระเงิน', icon: '💳' },
+  { id: 8, title: 'วิเคราะห์ข้อมูล', description: 'Dashboard ข้อมูลแบบเรียลไทม์และการวิเคราะห์', icon: '📈' }
 ];
 
-export default function SchoolWorkflowSlider() {
+export default function RegisterSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
@@ -90,7 +50,7 @@ export default function SchoolWorkflowSlider() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.6 }}
-        className="space-y-12"
+        className="space-y-8"
       >
         {/* Header */}
         <div className="text-center">
@@ -128,7 +88,7 @@ export default function SchoolWorkflowSlider() {
                       initial={{ scale: 0.5, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       transition={{ delay: 0.2, duration: 0.4 }}
-                      className="w-24 h-24 rounded-3xl bg-primary/10 flex items-center justify-center mb-6"
+                      className="w-24 h-24 rounded-3xl bg-primary/30 flex items-center justify-center mb-6"
                     >
                       <span className="text-5xl">{slides[currentSlide].icon}</span>
                     </motion.div>
@@ -167,7 +127,7 @@ export default function SchoolWorkflowSlider() {
           {/* Navigation Arrows */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-16 z-20 p-3 rounded-full bg-card shadow-lg text-muted-foreground hover:text-primary hover:scale-110 transition-all duration-300"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-16 z-20 p-3 rounded-full bg-card shadow-lg text-muted-foreground hover:text-[#F97316] hover:scale-110 transition-all duration-300"
             aria-label="Previous slide"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -177,7 +137,7 @@ export default function SchoolWorkflowSlider() {
 
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-16 z-20 p-3 rounded-full bg-card shadow-lg text-muted-foreground hover:text-primary hover:scale-110 transition-all duration-300"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-16 z-20 p-3 rounded-full bg-card shadow-lg text-muted-foreground hover:text-[#F97316] hover:scale-110 transition-all duration-300"
             aria-label="Next slide"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -186,8 +146,8 @@ export default function SchoolWorkflowSlider() {
           </button>
         </div>
 
-        {/* Slide indicators - Modern pill style */}
-        <div className="flex flex-col items-center gap-6">
+        {/* Slide indicators */}
+        <div className="flex flex-col items-center gap-4">
           <div className="flex items-center gap-2">
             {slides.map((slide, index) => (
               <button
@@ -198,7 +158,7 @@ export default function SchoolWorkflowSlider() {
                 }}
                 className={`relative transition-all duration-500 ${
                   index === currentSlide
-                    ? 'w-12 h-3 bg-primary rounded-full'
+                    ? 'w-12 h-3 bg-[#FFCF9A] rounded-full'
                     : 'w-3 h-3 bg-muted hover:bg-muted-foreground/30 rounded-full'
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
@@ -206,7 +166,7 @@ export default function SchoolWorkflowSlider() {
                 {index === currentSlide && (
                   <motion.div
                     layoutId="activeIndicator"
-                    className="absolute inset-0 bg-primary rounded-full"
+                    className="absolute inset-0 bg-[#FFCF9A] rounded-full"
                   />
                 )}
               </button>
