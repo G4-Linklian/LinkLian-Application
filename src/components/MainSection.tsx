@@ -13,7 +13,7 @@ export default function MainSection() {
   };
 
   return (
-    <section className="relative py-12 lg:py-16 bg-card">
+    <section className="relative py-12 lg:py-16">
       {/* Background decoration */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />

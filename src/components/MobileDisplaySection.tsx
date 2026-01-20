@@ -19,7 +19,7 @@ import {
 
 export default function MobileDisplaySection() {
   return (
-    <section className="section-padding bg-card">
+    <section className="section-padding">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}

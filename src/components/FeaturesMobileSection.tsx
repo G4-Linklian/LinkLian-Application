@@ -37,7 +37,7 @@ export default function FeaturesMobileSection() {
   const activeData = features.find(f => f.id === activeFeature) || features[0];
 
   return (
-    <section id="features" className="section-padding bg-card">
+    <section id="features" className="section-padding">
       {/* Section Badge outside */}
       <div className="text-center mb-8">
         <SectionBadge icon={IconDeviceMobile} text="ฟีเจอร์แอปพลิเคชัน" className="bg-[#FFCF9A]" />

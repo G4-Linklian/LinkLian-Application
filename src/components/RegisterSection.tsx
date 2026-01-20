@@ -109,7 +109,7 @@ export default function RegisterSection() {
   };
 
   return (
-    <section className="section-padding bg-card">
+    <section className="section-padding">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -141,43 +141,13 @@ export default function RegisterSection() {
                   <div className="w-1 h-1 rounded-full bg-gray-800" />
                 </div>
                 
-                {/* Screen */}
-                <div className="relative bg-gradient-to-br from-secondary to-accent rounded-t-lg overflow-hidden" style={{ aspectRatio: '16/10' }}>
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={currentSlide}
-                      initial={{ opacity: 0, scale: 0.98 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 1.02 }}
-                      transition={{ duration: 0.5 }}
-                      className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center"
-                    >
-                      <motion.div
-                        initial={{ scale: 0.5, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 0.2, duration: 0.4 }}
-                        className="w-16 h-16 rounded-2xl bg-primary/30 flex items-center justify-center mb-4 text-foreground"
-                      >
-                        {slides[currentSlide].icon}
-                      </motion.div>
-                      <motion.h3
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.3, duration: 0.4 }}
-                        className="text-xl md:text-2xl font-bold text-foreground mb-2"
-                      >
-                        {slides[currentSlide].title}
-                      </motion.h3>
-                      <motion.p
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.4, duration: 0.4 }}
-                        className="text-sm text-muted-foreground max-w-xs"
-                      >
-                        {slides[currentSlide].description}
-                      </motion.p>
-                    </motion.div>
-                  </AnimatePresence>
+                {/* Screen with real screenshot */}
+                <div className="relative rounded-t-lg overflow-hidden" style={{ aspectRatio: '16/10' }}>
+                  <img 
+                    src="/mobile/notebook-screen.png" 
+                    alt="LinkLian Dashboard" 
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
               </div>
               
