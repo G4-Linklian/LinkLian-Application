@@ -71,7 +71,7 @@ export default function MobileDisplaySection() {
           {/* Warm Gradient Background */}
           <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-br from-purple-200 via-pink-200 to-orange-200 opacity-40"></div>
           
-          {/* Back Phone (Left) - รูปสีขาว ll2 อยู่ด้านหลัง */}
+          {/* Back Phone (Left) - positioned behind and to the left */}
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -79,16 +79,14 @@ export default function MobileDisplaySection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="absolute left-[5%] top-[8%] z-10 sm:left-[10%]"
           >
-            <div className="h-[380px] w-[185px] sm:h-[460px] sm:w-[225px] overflow-hidden rounded-[2.5rem] shadow-2xl">
-              <img 
-                src="/mobile/phone-right.png" 
-                alt="LinkLian App - คณิตศาสตร์พื้นฐาน" 
-                className="h-full w-full object-cover object-top"
-              />
-            </div>
+            <img 
+              src="/mobile/phone-left.png" 
+              alt="LinkLian App - ห้องเรียนของคุณ" 
+              className="h-[380px] w-auto sm:h-[460px] drop-shadow-2xl"
+            />
           </motion.div>
 
-          {/* Front Phone (Right) - รูปสีส้ม ll1 อยู่ด้านหน้า */}
+          {/* Front Phone (Right) - positioned in front and to the right, overlapping */}
           <motion.div 
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -96,13 +94,11 @@ export default function MobileDisplaySection() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="absolute right-[5%] top-[18%] z-20 sm:right-[10%]"
           >
-            <div className="h-[380px] w-[185px] sm:h-[460px] sm:w-[225px] overflow-hidden rounded-[2.5rem] shadow-2xl">
-              <img 
-                src="/mobile/phone-left.png" 
-                alt="LinkLian App - ห้องเรียนของคุณ" 
-                className="h-full w-full object-cover object-top"
-              />
-            </div>
+            <img 
+              src="/mobile/phone-right.png" 
+              alt="LinkLian App - คณิตศาสตร์พื้นฐาน" 
+              className="h-[380px] w-auto sm:h-[460px] drop-shadow-2xl"
+            />
           </motion.div>
 
           {/* Floating Cards - Positioned to not block phones */}
