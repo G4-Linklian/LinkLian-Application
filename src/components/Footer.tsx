@@ -11,7 +11,7 @@ export default function Footer() {
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="mt-16 border-t border-border bg-card py-12"
+      className="mt-16 border-t border-border bg-[#FFE3BB] py-12"
     >
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
