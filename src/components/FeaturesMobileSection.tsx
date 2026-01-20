@@ -106,7 +106,7 @@ export default function FeaturesMobileSection() {
               ))}
             </div>
 
-            {/* Feature Preview - Right side with Phone Image */}
+            {/* Feature Preview - Right side with Phone Mockup */}
             <div className="relative flex justify-center">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -117,12 +117,32 @@ export default function FeaturesMobileSection() {
                   transition={{ duration: 0.4 }}
                   className="relative"
                 >
-                  {/* Phone image from path */}
-                  <img 
-                    src={activeData.previewImage} 
-                    alt={`${activeData.title} preview`}
-                    className="w-64 h-auto object-contain drop-shadow-2xl"
-                  />
+                  {/* Phone Mockup Frame */}
+                  <div className="relative">
+                    {/* Phone outer frame */}
+                    <div className="relative w-64 h-[520px] bg-gray-900 rounded-[3rem] p-2 shadow-2xl">
+                      {/* Phone inner bezel */}
+                      <div className="relative w-full h-full bg-gray-800 rounded-[2.5rem] overflow-hidden">
+                        {/* Notch */}
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-gray-900 rounded-b-2xl z-10" />
+                        
+                        {/* Screen content - Image from path */}
+                        <div className="w-full h-full bg-white overflow-hidden">
+                          <img 
+                            src={activeData.previewImage} 
+                            alt={`${activeData.title} preview`}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Phone side button (power) */}
+                    <div className="absolute -right-1 top-24 w-1 h-12 bg-gray-700 rounded-r-sm" />
+                    {/* Phone side buttons (volume) */}
+                    <div className="absolute -left-1 top-20 w-1 h-8 bg-gray-700 rounded-l-sm" />
+                    <div className="absolute -left-1 top-32 w-1 h-8 bg-gray-700 rounded-l-sm" />
+                  </div>
 
                   {/* Feature info */}
                   <div className="text-center mt-6">

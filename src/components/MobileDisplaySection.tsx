@@ -76,11 +76,27 @@ export default function MobileDisplaySection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="absolute left-[5%] top-[8%] z-10 sm:left-[10%]"
           >
-            <img 
-              src={PHONE_LEFT_IMAGE} 
-              alt="LinkLian App Preview - Student View"
-              className="h-[380px] sm:h-[460px] w-auto object-contain drop-shadow-2xl"
-            />
+            {/* Phone Mockup Frame - Left */}
+            <div className="relative">
+              <div className="relative w-44 sm:w-52 h-[380px] sm:h-[460px] bg-gray-900 rounded-[2.5rem] p-1.5 shadow-2xl">
+                <div className="relative w-full h-full bg-gray-800 rounded-[2rem] overflow-hidden">
+                  {/* Notch */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-5 bg-gray-900 rounded-b-xl z-10" />
+                  {/* Screen content - Image from path */}
+                  <div className="w-full h-full bg-white overflow-hidden">
+                    <img 
+                      src={PHONE_LEFT_IMAGE} 
+                      alt="LinkLian App Preview - Student View"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+              {/* Side buttons */}
+              <div className="absolute -right-0.5 top-20 w-0.5 h-10 bg-gray-700 rounded-r-sm" />
+              <div className="absolute -left-0.5 top-16 w-0.5 h-6 bg-gray-700 rounded-l-sm" />
+              <div className="absolute -left-0.5 top-26 w-0.5 h-6 bg-gray-700 rounded-l-sm" />
+            </div>
           </motion.div>
 
           {/* Front Phone (Right) - positioned in front and to the right, overlapping */}
@@ -91,11 +107,27 @@ export default function MobileDisplaySection() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="absolute right-[5%] top-[18%] z-20 sm:right-[10%]"
           >
-            <img 
-              src={PHONE_RIGHT_IMAGE} 
-              alt="LinkLian App Preview - Director View"
-              className="h-[380px] sm:h-[460px] w-auto object-contain drop-shadow-2xl"
-            />
+            {/* Phone Mockup Frame - Right */}
+            <div className="relative">
+              <div className="relative w-44 sm:w-52 h-[380px] sm:h-[460px] bg-gray-900 rounded-[2.5rem] p-1.5 shadow-2xl">
+                <div className="relative w-full h-full bg-gray-800 rounded-[2rem] overflow-hidden">
+                  {/* Notch */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-5 bg-gray-900 rounded-b-xl z-10" />
+                  {/* Screen content - Image from path */}
+                  <div className="w-full h-full bg-white overflow-hidden">
+                    <img 
+                      src={PHONE_RIGHT_IMAGE} 
+                      alt="LinkLian App Preview - Director View"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+              {/* Side buttons */}
+              <div className="absolute -right-0.5 top-20 w-0.5 h-10 bg-gray-700 rounded-r-sm" />
+              <div className="absolute -left-0.5 top-16 w-0.5 h-6 bg-gray-700 rounded-l-sm" />
+              <div className="absolute -left-0.5 top-26 w-0.5 h-6 bg-gray-700 rounded-l-sm" />
+            </div>
           </motion.div>
 
           {/* Floating Cards - Positioned to not block phones */}
