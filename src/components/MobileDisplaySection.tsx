@@ -68,8 +68,8 @@ export default function MobileDisplaySection() {
 
         {/* Right Content - Dual Phone Mockup like reference image */}
         <div className="relative h-[580px] sm:h-[680px] flex items-center justify-center">
-          {/* Warm Gradient Background */}
-          <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-br from-purple-200 via-pink-200 to-orange-200 opacity-40"></div>
+          {/* White Background */}
+          <div className="absolute inset-0 -z-10 rounded-3xl bg-white"></div>
           
           {/* Back Phone (Left) - positioned behind and to the left */}
           <motion.div 
@@ -80,7 +80,7 @@ export default function MobileDisplaySection() {
             className="absolute left-[5%] top-[8%] z-10 sm:left-[10%]"
           >
             <img 
-              src="/mobile/phone-left.png" 
+              src="/mobile/phone-right.png" 
               alt="LinkLian App - ห้องเรียนของคุณ" 
               className="h-[380px] w-auto sm:h-[460px] drop-shadow-2xl"
             />
@@ -95,7 +95,7 @@ export default function MobileDisplaySection() {
             className="absolute right-[5%] top-[18%] z-20 sm:right-[10%]"
           >
             <img 
-              src="/mobile/phone-right.png" 
+              src="/mobile/phone-left.png" 
               alt="LinkLian App - คณิตศาสตร์พื้นฐาน" 
               className="h-[380px] w-auto sm:h-[460px] drop-shadow-2xl"
             />
