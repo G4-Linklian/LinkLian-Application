@@ -12,23 +12,13 @@ export default function Header() {
       transition={{ duration: 0.5 }}
       className="flex items-center justify-between py-4"
     >
-      <Link to="/" className="flex items-center gap-3 group">
+      <Link to="/" className="flex items-center group">
         {/* Logo */}
-        <div className="relative h-11 w-11 rounded-xl bg-primary flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-105">
-          <img 
-            src={LOGO_PATH} 
-            alt="LinkLian" 
-            className="h-full w-full object-contain"
-            onError={(e) => {
-              // Fallback to text if image fails to load
-              e.currentTarget.style.display = 'none';
-              e.currentTarget.nextElementSibling?.classList.remove('hidden');
-            }}
-          />
-          <span className="hidden text-primary-foreground font-bold text-xl">L</span>
-          <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
-        </div>
-        <span className="text-2xl font-bold text-foreground">LinkLian</span>
+        <img 
+          src={LOGO_PATH} 
+          alt="LinkLian" 
+          className="h-10 object-contain transition-transform duration-300 group-hover:scale-105"
+        />
       </Link>
       
       <Link
