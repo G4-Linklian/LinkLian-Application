@@ -106,7 +106,7 @@ export default function FeaturesMobileSection() {
               ))}
             </div>
 
-            {/* Feature Preview - Right side with Real Screenshot */}
+            {/* Feature Preview - Right side with White Card */}
             <div className="relative flex justify-center">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -115,14 +115,16 @@ export default function FeaturesMobileSection() {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95, y: -20 }}
                   transition={{ duration: 0.4 }}
-                  className="relative"
+                  className="relative bg-white rounded-3xl p-8 shadow-2xl"
                 >
-                  {/* Real app screenshot */}
-                  <img 
-                    src={activeData.screenshot} 
-                    alt={`LinkLian - ${activeData.title}`}
-                    className="h-[420px] sm:h-[500px] w-auto drop-shadow-2xl"
-                  />
+                  {/* Real app screenshot centered */}
+                  <div className="flex justify-center">
+                    <img 
+                      src={activeData.screenshot} 
+                      alt={`LinkLian - ${activeData.title}`}
+                      className="h-[360px] sm:h-[420px] w-auto drop-shadow-xl"
+                    />
+                  </div>
 
                   {/* Feature info */}
                   <div className="text-center mt-6">
