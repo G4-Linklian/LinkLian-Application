@@ -7,7 +7,7 @@ import SectionBadge from './ui/SectionBadge';
 
 export default function ButtomSection() {
   return (
-    <section id="contact" className="section-padding">
+    <section id="contact" className="section-padding bg-card">
       {/* Top Badge - Outside the card */}
       <div className="text-center mb-8">
         <SectionBadge icon={IconRocket} text="เริ่มต้นใช้งานวันนี้" className="bg-[#FFCF9A]" />
