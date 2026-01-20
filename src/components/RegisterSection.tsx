@@ -39,10 +39,10 @@ interface RegisterFeature {
 const slides: Slide[] = [
   { id: 1, title: 'ลงทะเบียนนักเรียนใหม่', description: 'ระบบรับสมัครนักเรียนใหม่ออนไลน์', icon: <IconClipboardList size={48} /> },
   { id: 2, title: 'จัดการรายวิชา', description: 'เพิ่ม ลบ แก้ไขรายวิชา กำหนดหน่วยกิต', icon: <IconBook size={48} /> },
-  { id: 3, title: 'ตารางเรียน/ตารางสอน', description: 'สร้างตารางเรียนอัตโนมัติ', icon: <IconCalendarEvent size={48} /> },
+  { id: 3, title: 'ตารางเรียนและตารางสอน', description: 'สร้างตารางเรียนได้ง่ายดาย', icon: <IconCalendarEvent size={48} /> },
   { id: 4, title: 'จัดการข้อมูลนักเรียน', description: 'เก็บข้อมูลประวัติ ผลการเรียน', icon: <IconUserCircle size={48} /> },
   { id: 5, title: 'รายงานและสถิติ', description: 'ดูสถิติการลงทะเบียน จำนวนนักเรียน', icon: <IconReportAnalytics size={48} /> },
-  { id: 6, title: 'ระบบความปลอดภัย', description: 'การเข้าถึงตามสิทธิ์ บันทึก Log', icon: <IconShieldLock size={48} /> },
+  { id: 6, title: 'ระบบความปลอดภัย', description: 'การเข้าถึงตามสิทธิ์ต่าง ๆ ของบุคคลากรในสถานศึกษา', icon: <IconShieldLock size={48} /> },
 ];
 
 const registerFeatures: RegisterFeature[] = [
@@ -50,37 +50,37 @@ const registerFeatures: RegisterFeature[] = [
     icon: <IconClipboardList size={28} />,
     title: 'ลงทะเบียนนักเรียนใหม่',
     description: 'ระบบรับสมัครนักเรียนใหม่ออนไลน์ ลดการกรอกเอกสารซ้ำซ้อน',
-    highlight: 'ลด 80% เวลา'
+    highlight: 'คัดกรองข้อมูลได้อย่างเป็นระบบ'
   },
   {
     icon: <IconBook size={28} />,
     title: 'จัดการรายวิชา',
     description: 'เพิ่ม ลบ แก้ไขรายวิชา กำหนดหน่วยกิต และเงื่อนไขการลงทะเบียน',
-    highlight: 'ยืดหยุ่น 100%'
+    highlight: 'ยืดหยุ่นตามความต้องการ'
   },
   {
     icon: <IconCalendarEvent size={28} />,
-    title: 'ตารางเรียน/ตารางสอน',
-    description: 'สร้างตารางเรียนอัตโนมัติ จัดสรรห้องเรียนและครูผู้สอน',
-    highlight: 'Auto Scheduling'
+    title: 'ตารางเรียนและตารางสอน',
+    description: 'สร้างตารางเรียน จัดสรรห้องเรียนและครูผู้สอน',
+    highlight: 'จัดการบุคลากรและชั้นเรียนได้ง่ายดาย'
   },
   {
     icon: <IconUserCircle size={28} />,
     title: 'จัดการข้อมูลนักเรียน',
     description: 'เก็บข้อมูลประวัติ ผลการเรียน และข้อมูลติดต่อผู้ปกครอง',
-    highlight: 'ครบทุกข้อมูล'
+    highlight: 'ข้อมูลครบถ้วนในที่เดียว แก้ไขสะดวก'
   },
   {
     icon: <IconReportAnalytics size={28} />,
     title: 'รายงานและสถิติ',
     description: 'ดูสถิติการลงทะเบียน จำนวนนักเรียน และรายงานต่างๆ',
-    highlight: 'Real-time Report'
+    highlight: 'เห็นข้อมูลทันทีที่ต้องการ'
   },
   {
     icon: <IconShieldLock size={28} />,
     title: 'ระบบความปลอดภัย',
-    description: 'การเข้าถึงตามสิทธิ์ บันทึก Log และการสำรองข้อมูล',
-    highlight: '99.9% Secure'
+    description: 'การเข้าถึงตามสิทธิ์ต่าง ๆ ของบุคคลากรในสถานศึกษา',
+    highlight: 'ปกป้องข้อมูลสำคัญของสถานศึกษาได้อย่างมั่นใจ'
   },
 ];
 
@@ -119,12 +119,12 @@ export default function RegisterSection() {
       >
         {/* Header */}
         <div className="text-center">
-          <SectionBadge icon={IconClipboardList} text="ระบบทะเบียน" className="mb-6" />
+          <SectionBadge icon={IconClipboardList} text="ระบบทะเบียนของสถาบันศึกษา" className="mb-6" />
           <h2 className="heading-lg text-foreground mb-4">
-            ระบบการทำงานของโรงเรียน
+            ระบบการทำงานขอฝ่ายทะเบียนของสถานศึกษา
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            ดูตัวอย่างการใช้งาน LinkLian ในระบบสถาบันการศึกษา
+            ตัวอย่างการใช้งาน LinkLian ในระบบสถาบันการศึกษา
           </p>
         </div>
 

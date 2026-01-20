@@ -24,12 +24,12 @@ interface Feature {
 }
 
 const features: Feature[] = [
-  { id: 1, icon: <IconMapPin size={24} />, title: 'Presence', description: 'ระบบบันทึกสถานที่เรียน เช็คชื่อแบบดิจิทัล ติดตามการเข้าเรียน', color: 'from-blue-500 to-blue-600', screenshot: '/mobile/feature-1.png' },
-  { id: 2, icon: <IconPencil size={24} />, title: 'Assignment', description: 'ส่งการบ้านออนไลน์ ให้ครูปรับแต่งเวลาส่ง และแสดงข้อเสนอแนะ', color: 'from-purple-500 to-purple-600', screenshot: '/mobile/feature-2.png' },
-  { id: 3, icon: <IconCreditCard size={24} />, title: 'Bill Payment', description: 'ชำระเงินค่าเรียน ค่าธรรมเนียมต่างๆ ผ่านแอปแบบออนไลน์', color: 'from-green-500 to-green-600', screenshot: '/mobile/feature-3.png' },
-  { id: 4, icon: <IconBook size={24} />, title: 'KRS/KRSS', description: 'ลงทะเบียนเรียน ดูตารางเรียน และจัดการวิชาต่างๆ', color: 'from-amber-500 to-orange-500', screenshot: '/mobile/feature-1.png' },
-  { id: 5, icon: <IconFlask size={24} />, title: 'Final Exam', description: 'สอบปลายภาค ดูผลการสอบ และวิเคราะห์ความแข็งแกร่ง', color: 'from-red-500 to-pink-500', screenshot: '/mobile/feature-2.png' },
-  { id: 6, icon: <IconCalendarEvent size={24} />, title: 'Events', description: 'ดูกิจกรรม ประกาศข่าวสาร และรับการแจ้งเตือนต่างๆ', color: 'from-teal-500 to-cyan-500', screenshot: '/mobile/feature-3.png' },
+  { id: 1, icon: <IconDeviceMobile size={24} />, title: 'รองรับทุกอุปกรณ์', description: 'รองรับการใช้งานทุกอุปกรณ์ ใช้งานง่ายได้ทุกที่ ทุกเวลา', color: 'from-blue-500 to-blue-600', screenshot: '/mobile/feature-1.png' },
+  { id: 2, icon: <IconPencil size={24} />, title: 'รูปแบบการส่งงาน', description: 'ส่งการบ้านออนไลน์ ให้ครูปรับแต่งเวลาส่งได้ตามใจต้องการ และให้ความเห็นต่อชิ้นงานของผู้เรียน', color: 'from-purple-500 to-purple-600', screenshot: '/mobile/feature-2.png' },
+  { id: 3, icon: <IconBook size={24} />, title: 'เตรียมสอบได้ง่าย ๆ เพียงปลายนิ้ว', description: 'สามารถใช้ AI Summarize เพื่อเตรียมสอบ จากข้อมูลสื่อการสอนในห้องเรียนได้', color: 'from-green-500 to-green-600', screenshot: '/mobile/feature-3.png' },
+  { id: 4, icon: <IconHome size={24} />, title: 'ชุมชนผู้เรียนสำหรับแบ่งปันความรู้', description: 'เปิดโอกาสให้ผู้เรียนที่มีความสนใจเหมือนกันเปิดชุมชนไว้สำหรับพูดคุยแลกเปลี่ยนความรู้', color: 'from-amber-500 to-orange-500', screenshot: '/mobile/feature-1.png' },
+  { id: 5, icon: <IconCalendarEvent size={24} />, title: 'ดูข้อมูลเกี่ยวกับชั้นเรียนได้อย่างสะดวก', description: 'ดูตารางเรียน ผลคะแนนของการบ้านได้อย่างสะดวกสบาย', color: 'from-red-500 to-pink-500', screenshot: '/mobile/feature-2.png' },
+  { id: 6, icon: <IconCalendarEvent size={24} />, title: 'แจ้งเตือนข่าวสาร', description: 'ดูกิจกรรม ประกาศข่าวสาร และรับการแจ้งเตือนต่างๆ ได้ทุกที่ ทุกเวลา', color: 'from-teal-500 to-cyan-500', screenshot: '/mobile/feature-3.png' },
 ];
 
 export default function FeaturesMobileSection() {
@@ -40,7 +40,7 @@ export default function FeaturesMobileSection() {
     <section id="features" className="section-padding">
       {/* Section Badge outside */}
       <div className="text-center mb-8">
-        <SectionBadge icon={IconDeviceMobile} text="ฟีเจอร์แอปพลิเคชัน" className="bg-[#FFCF9A]" />
+        <SectionBadge icon={IconDeviceMobile} text="จุดเด่นของแอปพลิเคชัน" className="bg-[#FFCF9A]" />
       </div>
 
       <motion.div
@@ -54,10 +54,10 @@ export default function FeaturesMobileSection() {
           {/* Header */}
           <div className="text-center mb-12">
             <h2 className="heading-lg text-foreground mb-4">
-              ฟีเจอร์ที่มี
+              จุดเด่นของแอปพลิเคชัน
             </h2>
             <p className="text-xl text-foreground/80 max-w-2xl mx-auto">
-              ทั้งหมด 6 ฟีเจอร์หลักที่ได้รับการออกแบบมาให้ใช้งานได้สะดวก
+              6 ความสามารถที่ได้รับการออกแบบมาให้ใช้งานได้สะดวก
             </p>
           </div>
 

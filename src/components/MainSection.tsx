@@ -28,7 +28,7 @@ export default function MainSection() {
         >
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-foreground text-sm font-medium mb-6">
             <span className="w-2 h-2 rounded-full bg-[#F97316] animate-pulse-soft" />
-            แพลตฟอร์มการศึกษาแห่งอนาคต
+            แพลตฟอร์มการศึกษาครบวงจร
           </span>
         </motion.div>
 
@@ -38,9 +38,9 @@ export default function MainSection() {
           transition={{ duration: 0.4, delay: 0.05 }}
           className="heading-xl text-foreground mb-6"
         >
-          ยกระดับการศึกษาของสถาบันคุณ
+          ยกระดับสถาบันการศึกษาของคุณ
           <br />
-          <span className="text-primary-orange">ด้วยแพลตฟอร์มเรียนการสอนอัจฉริยะ</span>
+          <span className="text-primary-orange gap-4 block mt-3">โดยแพลตฟอร์มจัดการที่ครบจบในตัว</span>
         </motion.h1>
 
         <motion.p
@@ -49,8 +49,11 @@ export default function MainSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-10"
         >
-          LinkLian เป็นแพลตฟอร์มเรียนการสอนทั้งหมดในตัว สำหรับโรงเรียน วิทยาลัย และมหาวิทยาลัย 
+          แพลตฟอร์มจัดการเรียนการสอนครบวงจร สำหรับโรงเรียนและมหาวิทยาลัย
+          <br />
           จัดการชั้นเรียน ส่งการบ้าน และติดตามความก้าวหน้าของนักเรียนได้อย่างง่ายดาย
+          <br />
+          ทำให้การเรียนการสอนมีประสิทธิภาพสูงสุด
         </motion.p>
 
         <motion.div
@@ -64,7 +67,7 @@ export default function MainSection() {
             onClick={handleScrollToFeatures}
             className="btn-hero w-full sm:w-auto"
           >
-            ดูฟีเจอร์ทั้งหมด
+            ดูจุดเด่นทั้งหมด
             <IconChevronDown size={20} stroke={2} />
           </a>
         </motion.div>
@@ -77,19 +80,11 @@ export default function MainSection() {
           className="mt-16 flex flex-wrap items-center justify-center gap-8 text-muted-foreground"
         >
           <div className="flex items-center gap-2">
-            <span className="text-3xl font-bold text-foreground">500+</span>
-            <span className="text-sm">สถาบันใช้งาน</span>
+            <span className="text-base font-semibold">ใช้งานได้กับสถานศึกษาทุกรูปแบบ</span>
           </div>
           <div className="w-px h-8 bg-border hidden sm:block" />
           <div className="flex items-center gap-2">
-            <span className="text-3xl font-bold text-foreground">50K+</span>
-            <span className="text-sm">ผู้ใช้งาน</span>
-          </div>
-          <div className="w-px h-8 bg-border hidden sm:block" />
-          <div className="flex items-center gap-2">
-            <span className="text-3xl font-bold text-primary-orange">4.8</span>
-            <IconStar size={18} className="text-primary-orange fill-primary-orange" />
-            <span className="text-sm">คะแนนรีวิว</span>
+            <span className="text-base font-semibold">รองรับผู้ใช้งานทุกประเภท</span>
           </div>
         </motion.div>
       </div>

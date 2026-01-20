@@ -20,7 +20,7 @@ export default function Footer() {
             <img 
               src={LOGO_PATH} 
               alt="LinkLian" 
-              className="h-8 object-contain"
+              className="h-12 object-contain"
             />
           </Link>
 

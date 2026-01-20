@@ -25,7 +25,7 @@ export default function MobileDisplaySection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.6 }}
-        className="grid items-center gap-12 md:grid-cols-2"
+        className="grid items-center gap-16 md:grid-cols-2"
       >
         {/* Left Content */}
         <div className="space-y-6">
@@ -36,7 +36,7 @@ export default function MobileDisplaySection() {
               <span className="text-primary-orange">สำหรับทุกคนในสถาบัน</span>
             </h2>
             <p className="text-lg text-muted-foreground">
-              ใช้งานจาก tablet หรือมือถือได้เต็มที่ สำหรับนักเรียน ครู ผู้ปกครอง และบุคลากรสถาบัน
+              ใช้งานได้จากหลากหลายอุปกรณ์ สำหรับนักเรียน ครู อาจารย์ และบุคลากรสถาบันของสถานศึกษา
             </p>
           </div>
 
@@ -45,25 +45,8 @@ export default function MobileDisplaySection() {
             className="btn-hero inline-flex"
           >
             <IconDeviceMobile size={20} />
-            ดาวน์โหลดแอป
+            ดาวน์โหลดแอปพลิเคชัน
           </Link>
-
-          {/* Stats */}
-          <div className="flex gap-8 pt-4">
-            <div className="space-y-1">
-              <div className="flex items-center gap-1">
-                <IconStar size={24} className="text-primary-orange fill-primary-orange" />
-                <span className="text-3xl font-bold text-foreground">4.8</span>
-              </div>
-              <p className="text-sm text-muted-foreground">คะแนน</p>
-            </div>
-            <div className="space-y-1">
-              <div className="text-3xl font-bold text-foreground">
-                500+
-              </div>
-              <p className="text-sm text-muted-foreground">สถาบันใช้งาน</p>
-            </div>
-          </div>
         </div>
 
         {/* Right Content - Dual Phone Mockup like reference image */}
@@ -108,18 +91,15 @@ export default function MobileDisplaySection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="absolute left-0 top-0 z-30 rounded-2xl bg-gradient-to-br from-emerald-300 to-green-400 px-4 py-3 shadow-xl animate-float sm:left-0"
+            className="absolute left-0 top-0 z-30 rounded-2xl bg-gradient-to-br from-emerald-600 to-green-700 px-4 py-3 shadow-xl animate-float sm:left-0"
           >
             <div className="flex items-center gap-3 text-white">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/30">
-                <IconChartBar size={20} />
+                <IconSchool size={20} />
               </div>
               <div>
-                <div className="text-lg font-bold">200k+</div>
-                <div className="flex items-center gap-1">
-                  <span className="h-2 w-2 rounded-full bg-white/60"></span>
-                  <span className="text-xs opacity-90">8 Launches</span>
-                </div>
+                <div className="text-lg font-bold">จัดการคลาส</div>
+                <div className="text-xs opacity-90">ง่ายสะดวก</div>
               </div>
             </div>
           </motion.div>
@@ -130,15 +110,15 @@ export default function MobileDisplaySection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.7 }}
-            className="absolute right-0 -top-2 z-30 rounded-2xl bg-gradient-to-br from-violet-400 to-purple-500 px-4 py-3 shadow-xl animate-float sm:right-0"
+            className="absolute right-0 top-[8%] z-30 rounded-2xl bg-gradient-to-br from-violet-600 to-purple-700 px-4 py-3 shadow-xl animate-float sm:right-0"
           >
             <div className="flex items-center gap-3 text-white">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/30">
                 <IconUsers size={20} />
               </div>
               <div>
-                <div className="text-lg font-bold">50+</div>
-                <div className="text-xs opacity-90">Monthly Partner</div>
+                <div className="text-lg font-bold">หลากหลาย</div>
+                <div className="text-xs opacity-90">บทบาทผู้ใช้</div>
               </div>
             </div>
           </motion.div>
@@ -149,14 +129,16 @@ export default function MobileDisplaySection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="absolute -left-4 bottom-[12%] z-30 rounded-2xl bg-gradient-to-br from-pink-300 to-rose-400 px-4 py-3 shadow-xl animate-float sm:-left-6"
+            className="absolute -left-4 bottom-[12%] z-30 rounded-2xl bg-gradient-to-br from-pink-600 to-rose-700 px-4 py-3 shadow-xl animate-float sm:-left-6"
           >
-            <div className="text-center text-white">
-              <div className="mb-1 flex items-center justify-center gap-1 text-base font-bold">
-                <IconStar size={16} className="fill-white text-white" /> 4.9
+            <div className="flex items-center gap-3 text-white">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/30">
+                <IconMessage size={20} />
               </div>
-              <div className="text-sm font-semibold">189</div>
-              <div className="text-xs opacity-90">Good Responses</div>
+              <div>
+                <div className="text-lg font-bold">แจ้งเตือน</div>
+                <div className="text-xs opacity-90">ข้อความ & ข่าวสาร</div>
+              </div>
             </div>
           </motion.div>
 
@@ -166,15 +148,15 @@ export default function MobileDisplaySection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.9 }}
-            className="absolute right-0 bottom-[8%] z-30 rounded-2xl bg-gradient-to-br from-sky-300 to-blue-400 px-4 py-3 shadow-xl animate-float-slow sm:right-0"
+            className="absolute right-0 bottom-[8%] z-30 rounded-2xl bg-gradient-to-br from-sky-600 to-blue-700 px-4 py-3 shadow-xl animate-float-slow sm:right-0"
           >
             <div className="flex items-center gap-3 text-white">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/30">
-                <IconChartLine size={20} />
+                <IconBook size={20} />
               </div>
               <div>
-                <div className="text-lg font-bold">92.5%</div>
-                <div className="text-xs opacity-90">Work more efficient</div>
+                <div className="text-lg font-bold">สะดวก</div>
+                <div className="text-xs opacity-90">ใช้งานง่าย</div>
               </div>
             </div>
           </motion.div>

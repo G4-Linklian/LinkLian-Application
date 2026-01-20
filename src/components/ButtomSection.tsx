@@ -51,7 +51,7 @@ export default function ButtomSection() {
           >
             ลงทะเบียนฟรี และเข้าใช้งาน LinkLian ได้เลยวันนี้ 
             <br className="hidden sm:block" />
-            ทดลองใช้ 30 วัน ไม่มีค่าใช้จ่ายใด ๆ
+            ทดลองใช้ 60 วัน ไม่มีค่าใช้จ่ายใด ๆ
           </motion.p>
 
           <motion.div
@@ -63,10 +63,9 @@ export default function ButtomSection() {
           >
             <Link
               to="/institution-register"
-              className="group flex h-14 w-full items-center justify-center gap-2 rounded-full bg-white px-8 text-lg font-semibold text-foreground transition-all duration-300 hover:bg-gray-100 hover:scale-105 hover:shadow-lg sm:w-auto border border-[hsl(25,95%,53%)]"
+              className="group flex h-14 w-full items-center justify-center rounded-full bg-white px-8 text-lg font-semibold text-foreground transition-all duration-300 hover:bg-gray-100 hover:scale-105 hover:shadow-lg sm:w-auto border border-[hsl(25,95%,53%)]"
             >
               ลงทะเบียนสถาบัน
-              <IconArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
             </Link>
           </motion.div>
 
@@ -86,28 +85,6 @@ export default function ButtomSection() {
               <IconMail size={20} />
               linklian.edu@gmail.com
             </a>
-          </motion.div>
-
-          {/* Trust badges */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="mt-10 flex flex-wrap items-center justify-center gap-6 text-foreground/70 text-sm"
-          >
-            <div className="flex items-center gap-2">
-              <IconCheck size={20} />
-              ไม่ต้องใช้บัตรเครดิต
-            </div>
-            <div className="flex items-center gap-2">
-              <IconCheck size={20} />
-              ทดลองใช้ 30 วันฟรี
-            </div>
-            <div className="flex items-center gap-2">
-              <IconCheck size={20} />
-              ซัพพอร์ตตลอด 24/7
-            </div>
           </motion.div>
         </div>
       </motion.div>

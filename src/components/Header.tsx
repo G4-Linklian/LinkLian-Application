@@ -17,7 +17,7 @@ export default function Header() {
         <img 
           src={LOGO_PATH} 
           alt="LinkLian" 
-          className="h-10 object-contain transition-transform duration-300 group-hover:scale-105"
+          className="h-14 object-contain transition-transform duration-300 group-hover:scale-105"
         />
       </Link>
       
