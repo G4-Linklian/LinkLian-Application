@@ -26,19 +26,10 @@ export default function InstitutionRegister() {
   const [approvalStatus, setApprovalStatus] = useState<ApprovalStatus>('pending');
   const [rejectionReason, setRejectionReason] = useState('');
 
-  // TODO: Replace with your API call to check registration status
-  const handleEmailSubmit = async (submittedEmail: string, status: EmailStatus) => {
+  const handleEmailSubmit = (submittedEmail: string, status: EmailStatus) => {
     setEmail(submittedEmail);
     setEmailStatus(status);
     
-    // TODO: Call your API to get actual status and rejection reason
-    // Example:
-    // const response = await fetch('/api/check-registration', { method: 'POST', body: JSON.stringify({ email: submittedEmail }) });
-    // const data = await response.json();
-    // status = data.status;
-    // if (data.rejectionReason) setRejectionReason(data.rejectionReason);
-    
-    // Navigate to appropriate step based on status
     if (status === 'approved') {
       setApprovalStatus('approved');
       setCurrentStep(4);
@@ -51,7 +42,6 @@ export default function InstitutionRegister() {
   };
 
   const handleRegistrationSubmit = () => {
-    // TODO: After submitting to your API, set approval status from response
     setApprovalStatus('pending');
     setCurrentStep(3);
   };

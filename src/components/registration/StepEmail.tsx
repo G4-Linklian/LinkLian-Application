@@ -18,7 +18,7 @@ export default function StepEmail({ onNext }: StepEmailProps) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
@@ -27,23 +27,7 @@ export default function StepEmail({ onNext }: StepEmailProps) {
       return;
     }
 
-    setIsLoading(true);
-
-    try {
-      // TODO: Replace with your API call
-      // Example: const response = await fetch('/api/check-email', { method: 'POST', body: JSON.stringify({ email }) });
-      // const data = await response.json();
-      // const status = data.status; // 'new' | 'pending' | 'approved'
-      
-      // For now, always treat as new registration
-      const status: 'new' | 'pending' | 'approved' = 'new';
-      
-      setIsLoading(false);
-      onNext(email, status);
-    } catch (err) {
-      setError('เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
-      setIsLoading(false);
-    }
+    onNext(email, 'new');
   };
 
   return (
