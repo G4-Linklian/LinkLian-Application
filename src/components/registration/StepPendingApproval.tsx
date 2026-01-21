@@ -1,15 +1,39 @@
 import { motion } from 'framer-motion';
-import { Clock, Mail, Phone, ShieldCheck } from 'lucide-react';
+import { Clock, Mail, Phone, ShieldCheck, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 interface StepPendingApprovalProps {
   email: string;
   isApproved?: boolean;
   onNext?: () => void;
+  onApprovalChange?: (approved: boolean) => void;
 }
 
-export default function StepPendingApproval({ email, isApproved = false, onNext }: StepPendingApprovalProps) {
+export default function StepPendingApproval({ 
+  email, 
+  isApproved: initialApproved = false, 
+  onNext,
+  onApprovalChange 
+}: StepPendingApprovalProps) {
+  const [isApproved, setIsApproved] = useState(initialApproved);
+  const [isSimulating, setIsSimulating] = useState(false);
+
+  useEffect(() => {
+    setIsApproved(initialApproved);
+  }, [initialApproved]);
+
+  const handleSimulateApproval = () => {
+    setIsSimulating(true);
+    // จำลองการรอการอนุมัติ 2 วินาที
+    setTimeout(() => {
+      setIsApproved(true);
+      setIsSimulating(false);
+      onApprovalChange?.(true);
+    }, 2000);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -18,20 +42,38 @@ export default function StepPendingApproval({ email, isApproved = false, onNext 
       className="w-full max-w-md mx-auto"
     >
       <div className="bg-card rounded-2xl p-8 shadow-lg border text-center">
-        <div className={`w-20 h-20 ${isApproved ? 'bg-green-100' : 'bg-amber-100'} rounded-full flex items-center justify-center mx-auto mb-6`}>
-          {isApproved ? (
+        <motion.div 
+          key={isApproved ? 'approved' : 'pending'}
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className={`w-20 h-20 ${isApproved ? 'bg-green-100' : 'bg-amber-100'} rounded-full flex items-center justify-center mx-auto mb-6`}
+        >
+          {isSimulating ? (
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+            >
+              <Clock className="w-10 h-10 text-amber-600" />
+            </motion.div>
+          ) : isApproved ? (
             <ShieldCheck className="w-10 h-10 text-green-600" />
           ) : (
             <Clock className="w-10 h-10 text-amber-600" />
           )}
-        </div>
+        </motion.div>
         
         <h2 className="text-2xl font-bold text-foreground mb-2">
-          {isApproved ? 'ได้รับการอนุมัติแล้ว' : 'รอการอนุมัติ'}
+          {isSimulating ? 'กำลังตรวจสอบ...' : isApproved ? 'ได้รับการอนุมัติแล้ว' : 'รอการอนุมัติ'}
         </h2>
         
         <p className="text-muted-foreground mb-6">
-          {isApproved ? (
+          {isSimulating ? (
+            <>
+              กำลังจำลองการพิจารณาคำขอ
+              <br />
+              กรุณารอสักครู่...
+            </>
+          ) : isApproved ? (
             <>
               คำขอลงทะเบียนของคุณได้รับการอนุมัติแล้ว
               <br />
@@ -51,7 +93,7 @@ export default function StepPendingApproval({ email, isApproved = false, onNext 
           <p className="text-foreground font-medium">{email}</p>
         </div>
 
-        {!isApproved && (
+        {!isApproved && !isSimulating && (
           <div className="space-y-3 mb-8">
             <div className="flex items-center gap-3 text-sm text-muted-foreground">
               <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
@@ -68,7 +110,29 @@ export default function StepPendingApproval({ email, isApproved = false, onNext 
           </div>
         )}
 
+        {isSimulating && (
+          <div className="mb-8">
+            <div className="h-2 bg-muted rounded-full overflow-hidden">
+              <motion.div 
+                className="h-full bg-primary"
+                initial={{ width: '0%' }}
+                animate={{ width: '100%' }}
+                transition={{ duration: 2, ease: 'easeInOut' }}
+              />
+            </div>
+          </div>
+        )}
+
         <div className="flex flex-col gap-3">
+          {!isApproved && !isSimulating && (
+            <Button 
+              onClick={handleSimulateApproval}
+              className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
+            >
+              <Play className="w-4 h-4 mr-2" />
+              จำลองการอนุมัติ (Demo)
+            </Button>
+          )}
           <Link to="/">
             <Button variant="outline" className="w-full">
               กลับหน้าหลัก
