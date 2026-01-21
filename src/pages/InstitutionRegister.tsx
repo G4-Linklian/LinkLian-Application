@@ -77,7 +77,8 @@ export default function InstitutionRegister() {
           <StepPendingApproval
             email={email}
             isApproved={isApproved}
-            onNext={isApproved ? handleApprovalNext : undefined}
+            onNext={handleApprovalNext}
+            onApprovalChange={setIsApproved}
           />
         );
       case 4:
