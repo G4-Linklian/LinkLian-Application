@@ -4,6 +4,7 @@ import { Mail, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { emailSchema } from '@/lib/validations/registration';
 
 interface StepEmailProps {
   onNext: (email: string, status: 'new' | 'pending' | 'approved') => void;
@@ -11,23 +12,21 @@ interface StepEmailProps {
 
 export default function StepEmail({ onNext }: StepEmailProps) {
   const [email, setEmail] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-
-  const validateEmail = (email: string) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    if (!validateEmail(email)) {
-      setError('กรุณากรอกอีเมลให้ถูกต้อง');
+    // Validate with zod schema
+    const result = emailSchema.safeParse({ email: email.trim() });
+    
+    if (!result.success) {
+      setError(result.error.errors[0]?.message || 'รูปแบบอีเมลไม่ถูกต้อง');
       return;
     }
 
-    onNext(email, 'new');
+    onNext(result.data.email, 'new');
   };
 
   return (
@@ -56,9 +55,12 @@ export default function StepEmail({ onNext }: StepEmailProps) {
               type="email"
               placeholder="example@institution.ac.th"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (error) setError('');
+              }}
               className="h-12"
-              disabled={isLoading}
+              maxLength={255}
             />
             {error && (
               <p className="text-sm text-destructive">{error}</p>
@@ -68,19 +70,12 @@ export default function StepEmail({ onNext }: StepEmailProps) {
           <Button
             type="submit"
             className="w-full h-12 text-base"
-            disabled={isLoading || !email}
+            disabled={!email.trim()}
           >
-            {isLoading ? (
-              <span className="flex items-center gap-2">
-                <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                กำลังตรวจสอบ...
-              </span>
-            ) : (
-              <span className="flex items-center gap-2">
-                ถัดไป
-                <ArrowRight className="w-4 h-4" />
-              </span>
-            )}
+            <span className="flex items-center gap-2">
+              ถัดไป
+              <ArrowRight className="w-4 h-4" />
+            </span>
           </Button>
         </form>
 

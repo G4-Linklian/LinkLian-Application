@@ -1,11 +1,18 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Building2, ArrowRight, ArrowLeft, Upload, FileText, Image, X } from 'lucide-react';
+import { Building2, ArrowRight, ArrowLeft, Upload, FileText, Image, X, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import DataReviewDialog from './DataReviewDialog';
+import { 
+  registrationFormSchema, 
+  validateFile, 
+  validateRegistration,
+  FILE_LIMITS,
+  type RegistrationFormData 
+} from '@/lib/validations/registration';
 
 interface StepRegistrationFormProps {
   email: string;
@@ -30,6 +37,7 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
     province: '',
     postalCode: '',
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [documentFile, setDocumentFile] = useState<File | null>(null);
   const logoInputRef = useRef<HTMLInputElement>(null);
@@ -37,11 +45,29 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
 
   const handleChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+    // Clear error when user types
+    if (errors[field]) {
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
+        return newErrors;
+      });
+    }
   };
 
   const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      const validation = validateFile(file, 'logo');
+      if (!validation.valid) {
+        setErrors(prev => ({ ...prev, logoFile: validation.error! }));
+        return;
+      }
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors.logoFile;
+        return newErrors;
+      });
       setLogoFile(file);
     }
   };
@@ -49,40 +75,64 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
   const handleDocumentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      const validation = validateFile(file, 'document');
+      if (!validation.valid) {
+        setErrors(prev => ({ ...prev, documentFile: validation.error! }));
+        return;
+      }
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors.documentFile;
+        return newErrors;
+      });
       setDocumentFile(file);
     }
   };
 
-  const isFormValid = () => {
-    return (
-      formData.institutionName &&
-      formData.institutionNameEn &&
-      formData.institutionType &&
-      formData.contactPhone &&
-      formData.address &&
-      formData.district &&
-      formData.subDistrict &&
-      formData.province &&
-      formData.postalCode &&
-      documentFile
-    );
-  };
-
   const handleOpenReview = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isFormValid()) return;
+    
+    // Validate all fields
+    const validation = validateRegistration(
+      formData as RegistrationFormData, 
+      logoFile, 
+      documentFile
+    );
+    
+    if (!validation.valid) {
+      setErrors(validation.errors);
+      // Scroll to first error
+      const firstErrorField = Object.keys(validation.errors)[0];
+      const element = document.getElementById(firstErrorField);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        element.focus();
+      }
+      return;
+    }
+    
     setShowReviewDialog(true);
   };
 
   const handleConfirmSubmit = async () => {
     setIsLoading(true);
 
-    // Mock API call - simulate submitting registration
+    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
 
     setIsLoading(false);
     setShowReviewDialog(false);
     onNext();
+  };
+
+  const renderFieldError = (field: string) => {
+    if (!errors[field]) return null;
+    return (
+      <p className="text-sm text-destructive flex items-center gap-1 mt-1">
+        <AlertCircle className="w-3 h-3" />
+        {errors[field]}
+      </p>
+    );
   };
 
   return (
@@ -117,7 +167,10 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   value={formData.institutionName}
                   onChange={(e) => handleChange('institutionName', e.target.value)}
                   disabled={isLoading}
+                  maxLength={200}
+                  className={errors.institutionName ? 'border-destructive' : ''}
                 />
+                {renderFieldError('institutionName')}
               </div>
 
               <div className="space-y-2">
@@ -128,6 +181,7 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   value={formData.institutionAbbr}
                   onChange={(e) => handleChange('institutionAbbr', e.target.value)}
                   disabled={isLoading}
+                  maxLength={20}
                 />
               </div>
 
@@ -139,7 +193,10 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   value={formData.institutionNameEn}
                   onChange={(e) => handleChange('institutionNameEn', e.target.value)}
                   disabled={isLoading}
+                  maxLength={200}
+                  className={errors.institutionNameEn ? 'border-destructive' : ''}
                 />
+                {renderFieldError('institutionNameEn')}
               </div>
 
               <div className="space-y-2">
@@ -150,6 +207,7 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   value={formData.institutionAbbrEn}
                   onChange={(e) => handleChange('institutionAbbrEn', e.target.value)}
                   disabled={isLoading}
+                  maxLength={20}
                 />
               </div>
             </div>
@@ -166,7 +224,7 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   onValueChange={(value) => handleChange('institutionType', value)}
                   disabled={isLoading}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className={errors.institutionType ? 'border-destructive' : ''}>
                     <SelectValue placeholder="เลือกประเภท" />
                   </SelectTrigger>
                   <SelectContent>
@@ -177,6 +235,7 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                     <SelectItem value="other">อื่นๆ</SelectItem>
                   </SelectContent>
                 </Select>
+                {renderFieldError('institutionType')}
               </div>
 
               <div className="space-y-2">
@@ -187,7 +246,10 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   value={formData.website}
                   onChange={(e) => handleChange('website', e.target.value)}
                   disabled={isLoading}
+                  maxLength={500}
+                  className={errors.website ? 'border-destructive' : ''}
                 />
+                {renderFieldError('website')}
               </div>
 
               <div className="space-y-2">
@@ -198,7 +260,10 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   value={formData.contactPhone}
                   onChange={(e) => handleChange('contactPhone', e.target.value)}
                   disabled={isLoading}
+                  maxLength={15}
+                  className={errors.contactPhone ? 'border-destructive' : ''}
                 />
+                {renderFieldError('contactPhone')}
               </div>
             </div>
           </div>
@@ -215,7 +280,10 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   value={formData.address}
                   onChange={(e) => handleChange('address', e.target.value)}
                   disabled={isLoading}
+                  maxLength={500}
+                  className={errors.address ? 'border-destructive' : ''}
                 />
+                {renderFieldError('address')}
               </div>
 
               <div className="space-y-2">
@@ -226,7 +294,10 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   value={formData.subDistrict}
                   onChange={(e) => handleChange('subDistrict', e.target.value)}
                   disabled={isLoading}
+                  maxLength={100}
+                  className={errors.subDistrict ? 'border-destructive' : ''}
                 />
+                {renderFieldError('subDistrict')}
               </div>
 
               <div className="space-y-2">
@@ -237,7 +308,10 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   value={formData.district}
                   onChange={(e) => handleChange('district', e.target.value)}
                   disabled={isLoading}
+                  maxLength={100}
+                  className={errors.district ? 'border-destructive' : ''}
                 />
+                {renderFieldError('district')}
               </div>
 
               <div className="space-y-2">
@@ -248,7 +322,10 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   value={formData.province}
                   onChange={(e) => handleChange('province', e.target.value)}
                   disabled={isLoading}
+                  maxLength={100}
+                  className={errors.province ? 'border-destructive' : ''}
                 />
+                {renderFieldError('province')}
               </div>
 
               <div className="space-y-2">
@@ -257,10 +334,16 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   id="postalCode"
                   placeholder="10XXX"
                   value={formData.postalCode}
-                  onChange={(e) => handleChange('postalCode', e.target.value)}
+                  onChange={(e) => {
+                    // Only allow digits
+                    const value = e.target.value.replace(/\D/g, '');
+                    handleChange('postalCode', value);
+                  }}
                   disabled={isLoading}
                   maxLength={5}
+                  className={errors.postalCode ? 'border-destructive' : ''}
                 />
+                {renderFieldError('postalCode')}
               </div>
             </div>
           </div>
@@ -271,11 +354,11 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
             
             {/* Logo Upload */}
             <div className="space-y-2">
-              <Label>โลโก้สถาบัน</Label>
+              <Label>โลโก้สถาบัน <span className="text-muted-foreground text-xs">(ไม่เกิน {FILE_LIMITS.logo.maxSize / (1024 * 1024)}MB)</span></Label>
               <input
                 ref={logoInputRef}
                 type="file"
-                accept="image/*"
+                accept={FILE_LIMITS.logo.allowedExtensions.join(',')}
                 onChange={handleLogoChange}
                 className="hidden"
                 disabled={isLoading}
@@ -298,7 +381,7 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                 <Button
                   type="button"
                   variant="outline"
-                  className="w-full h-20 border-dashed"
+                  className={`w-full h-20 border-dashed ${errors.logoFile ? 'border-destructive' : ''}`}
                   onClick={() => logoInputRef.current?.click()}
                   disabled={isLoading}
                 >
@@ -308,11 +391,12 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   </div>
                 </Button>
               )}
+              {renderFieldError('logoFile')}
             </div>
 
             {/* Document Upload - Highly Emphasized */}
             <motion.div 
-              className="relative overflow-hidden rounded-2xl border-2 border-primary bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-6 shadow-lg"
+              className={`relative overflow-hidden rounded-2xl border-2 ${errors.documentFile ? 'border-destructive' : 'border-primary'} bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-6 shadow-lg`}
               initial={{ scale: 0.98 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.3 }}
@@ -330,7 +414,9 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                     <Label className="text-lg font-bold text-foreground">
                       เอกสารขอใช้ระบบ *
                     </Label>
-                    <p className="text-xs text-primary font-medium">จำเป็นต้องแนบเอกสาร</p>
+                    <p className="text-xs text-primary font-medium">
+                      จำเป็นต้องแนบเอกสาร (ไม่เกิน {FILE_LIMITS.document.maxSize / (1024 * 1024)}MB)
+                    </p>
                   </div>
                 </div>
                 
@@ -341,7 +427,7 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                 <input
                   ref={documentInputRef}
                   type="file"
-                  accept=".pdf,.doc,.docx"
+                  accept={FILE_LIMITS.document.allowedExtensions.join(',')}
                   onChange={handleDocumentChange}
                   className="hidden"
                   disabled={isLoading}
@@ -371,7 +457,7 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full h-28 border-2 border-dashed border-primary/50 hover:border-primary hover:bg-primary/10 transition-all duration-300 group"
+                    className={`w-full h-28 border-2 border-dashed ${errors.documentFile ? 'border-destructive' : 'border-primary/50 hover:border-primary'} hover:bg-primary/10 transition-all duration-300 group`}
                     onClick={() => documentInputRef.current?.click()}
                     disabled={isLoading}
                   >
@@ -386,6 +472,7 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                     </div>
                   </Button>
                 )}
+                {renderFieldError('documentFile')}
               </div>
             </motion.div>
           </div>
@@ -404,7 +491,7 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
             <Button
               type="submit"
               className="flex-1 h-12"
-              disabled={isLoading || !isFormValid()}
+              disabled={isLoading}
             >
               <span className="flex items-center gap-2">
                 ตรวจสอบข้อมูล
