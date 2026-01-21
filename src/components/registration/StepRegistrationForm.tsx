@@ -17,6 +17,8 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
   const [formData, setFormData] = useState({
     institutionName: '',
     institutionNameEn: '',
+    institutionAbbr: '',
+    institutionAbbrEn: '',
     institutionType: '',
     website: '',
     contactPhone: '',
@@ -111,6 +113,17 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
               />
             </div>
 
+            <div className="space-y-2">
+              <Label htmlFor="institutionAbbr">ตัวย่อสถาบัน (ภาษาไทย)</Label>
+              <Input
+                id="institutionAbbr"
+                placeholder="เช่น จุฬาฯ, มก., มธ."
+                value={formData.institutionAbbr}
+                onChange={(e) => handleChange('institutionAbbr', e.target.value)}
+                disabled={isLoading}
+              />
+            </div>
+
             <div className="space-y-2 md:col-span-2">
               <Label htmlFor="institutionNameEn">ชื่อสถาบัน (ภาษาอังกฤษ) *</Label>
               <Input
@@ -118,6 +131,17 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                 placeholder="Institution Name in English"
                 value={formData.institutionNameEn}
                 onChange={(e) => handleChange('institutionNameEn', e.target.value)}
+                disabled={isLoading}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="institutionAbbrEn">ตัวย่อสถาบัน (ภาษาอังกฤษ)</Label>
+              <Input
+                id="institutionAbbrEn"
+                placeholder="e.g., CU, KU, TU"
+                value={formData.institutionAbbrEn}
+                onChange={(e) => handleChange('institutionAbbrEn', e.target.value)}
                 disabled={isLoading}
               />
             </div>

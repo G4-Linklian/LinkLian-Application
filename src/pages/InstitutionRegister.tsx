@@ -63,7 +63,7 @@ export default function InstitutionRegister() {
         return (
           <StepPendingApproval
             email={email}
-            onBack={handleBackToEmail}
+            onNext={() => setCurrentStep(4)}
           />
         );
       case 4:
