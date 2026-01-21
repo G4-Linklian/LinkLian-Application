@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import DataReviewDialog from './DataReviewDialog';
 
 interface StepRegistrationFormProps {
   email: string;
@@ -14,6 +15,7 @@ interface StepRegistrationFormProps {
 
 export default function StepRegistrationForm({ email, onNext, onBack }: StepRegistrationFormProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const [showReviewDialog, setShowReviewDialog] = useState(false);
   const [formData, setFormData] = useState({
     institutionName: '',
     institutionNameEn: '',
@@ -66,17 +68,20 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
     );
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleOpenReview = (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!isFormValid()) return;
+    setShowReviewDialog(true);
+  };
 
+  const handleConfirmSubmit = async () => {
     setIsLoading(true);
 
     // Mock API call - simulate submitting registration
     await new Promise(resolve => setTimeout(resolve, 1500));
 
     setIsLoading(false);
+    setShowReviewDialog(false);
     onNext();
   };
 
@@ -99,7 +104,7 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
           <p className="text-sm text-primary mt-1">{email}</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleOpenReview} className="space-y-6">
           {/* Institution Names */}
           <div className="space-y-4">
             <h3 className="font-semibold text-foreground border-b pb-2">ข้อมูลสถาบัน</h3>
@@ -401,20 +406,25 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
               className="flex-1 h-12"
               disabled={isLoading || !isFormValid()}
             >
-              {isLoading ? (
-                <span className="flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                  กำลังส่งข้อมูล...
-                </span>
-              ) : (
-                <span className="flex items-center gap-2">
-                  ส่งข้อมูลลงทะเบียน
-                  <ArrowRight className="w-4 h-4" />
-                </span>
-              )}
+              <span className="flex items-center gap-2">
+                ตรวจสอบข้อมูล
+                <ArrowRight className="w-4 h-4" />
+              </span>
             </Button>
           </div>
         </form>
+
+        {/* Data Review Dialog */}
+        <DataReviewDialog
+          open={showReviewDialog}
+          onClose={() => setShowReviewDialog(false)}
+          onConfirm={handleConfirmSubmit}
+          formData={formData}
+          logoFile={logoFile}
+          documentFile={documentFile}
+          email={email}
+          isLoading={isLoading}
+        />
       </div>
     </motion.div>
   );
