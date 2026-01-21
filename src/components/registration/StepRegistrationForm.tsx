@@ -100,92 +100,101 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Institution Info */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2 md:col-span-2">
-              <Label htmlFor="institutionName">ชื่อสถาบัน (ภาษาไทย) *</Label>
-              <Input
-                id="institutionName"
-                placeholder="โรงเรียน / มหาวิทยาลัย / วิทยาลัย"
-                value={formData.institutionName}
-                onChange={(e) => handleChange('institutionName', e.target.value)}
-                disabled={isLoading}
-              />
-            </div>
+          {/* Institution Names */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-foreground border-b pb-2">ข้อมูลสถาบัน</h3>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="space-y-2 md:col-span-3">
+                <Label htmlFor="institutionName">ชื่อสถาบัน (ภาษาไทย) *</Label>
+                <Input
+                  id="institutionName"
+                  placeholder="โรงเรียน / มหาวิทยาลัย / วิทยาลัย"
+                  value={formData.institutionName}
+                  onChange={(e) => handleChange('institutionName', e.target.value)}
+                  disabled={isLoading}
+                />
+              </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="institutionAbbr">ตัวย่อสถาบัน (ภาษาไทย)</Label>
-              <Input
-                id="institutionAbbr"
-                placeholder="เช่น จุฬาฯ, มก., มธ."
-                value={formData.institutionAbbr}
-                onChange={(e) => handleChange('institutionAbbr', e.target.value)}
-                disabled={isLoading}
-              />
-            </div>
+              <div className="space-y-2">
+                <Label htmlFor="institutionAbbr">ตัวย่อ (ไทย)</Label>
+                <Input
+                  id="institutionAbbr"
+                  placeholder="เช่น จุฬาฯ"
+                  value={formData.institutionAbbr}
+                  onChange={(e) => handleChange('institutionAbbr', e.target.value)}
+                  disabled={isLoading}
+                />
+              </div>
 
-            <div className="space-y-2 md:col-span-2">
-              <Label htmlFor="institutionNameEn">ชื่อสถาบัน (ภาษาอังกฤษ) *</Label>
-              <Input
-                id="institutionNameEn"
-                placeholder="Institution Name in English"
-                value={formData.institutionNameEn}
-                onChange={(e) => handleChange('institutionNameEn', e.target.value)}
-                disabled={isLoading}
-              />
-            </div>
+              <div className="space-y-2 md:col-span-3">
+                <Label htmlFor="institutionNameEn">ชื่อสถาบัน (ภาษาอังกฤษ) *</Label>
+                <Input
+                  id="institutionNameEn"
+                  placeholder="Institution Name in English"
+                  value={formData.institutionNameEn}
+                  onChange={(e) => handleChange('institutionNameEn', e.target.value)}
+                  disabled={isLoading}
+                />
+              </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="institutionAbbrEn">ตัวย่อสถาบัน (ภาษาอังกฤษ)</Label>
-              <Input
-                id="institutionAbbrEn"
-                placeholder="e.g., CU, KU, TU"
-                value={formData.institutionAbbrEn}
-                onChange={(e) => handleChange('institutionAbbrEn', e.target.value)}
-                disabled={isLoading}
-              />
+              <div className="space-y-2">
+                <Label htmlFor="institutionAbbrEn">ตัวย่อ (EN)</Label>
+                <Input
+                  id="institutionAbbrEn"
+                  placeholder="e.g., CU"
+                  value={formData.institutionAbbrEn}
+                  onChange={(e) => handleChange('institutionAbbrEn', e.target.value)}
+                  disabled={isLoading}
+                />
+              </div>
             </div>
+          </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="institutionType">ประเภทสถาบัน *</Label>
-              <Select
-                value={formData.institutionType}
-                onValueChange={(value) => handleChange('institutionType', value)}
-                disabled={isLoading}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="เลือกประเภท" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="school">โรงเรียน</SelectItem>
-                  <SelectItem value="university">มหาวิทยาลัย</SelectItem>
-                  <SelectItem value="college">วิทยาลัย</SelectItem>
-                  <SelectItem value="vocational">สถาบันอาชีวศึกษา</SelectItem>
-                  <SelectItem value="other">อื่นๆ</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+          {/* Institution Details */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-foreground border-b pb-2">รายละเอียดสถาบัน</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="institutionType">ประเภทสถาบัน *</Label>
+                <Select
+                  value={formData.institutionType}
+                  onValueChange={(value) => handleChange('institutionType', value)}
+                  disabled={isLoading}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="เลือกประเภท" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="school">โรงเรียน</SelectItem>
+                    <SelectItem value="university">มหาวิทยาลัย</SelectItem>
+                    <SelectItem value="college">วิทยาลัย</SelectItem>
+                    <SelectItem value="vocational">สถาบันอาชีวศึกษา</SelectItem>
+                    <SelectItem value="other">อื่นๆ</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="website">เว็บไซต์สถาบัน</Label>
-              <Input
-                id="website"
-                placeholder="https://www.example.ac.th"
-                value={formData.website}
-                onChange={(e) => handleChange('website', e.target.value)}
-                disabled={isLoading}
-              />
-            </div>
+              <div className="space-y-2">
+                <Label htmlFor="website">เว็บไซต์สถาบัน</Label>
+                <Input
+                  id="website"
+                  placeholder="https://www.example.ac.th"
+                  value={formData.website}
+                  onChange={(e) => handleChange('website', e.target.value)}
+                  disabled={isLoading}
+                />
+              </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="contactPhone">เบอร์โทรศัพท์ *</Label>
-              <Input
-                id="contactPhone"
-                placeholder="08X-XXX-XXXX"
-                value={formData.contactPhone}
-                onChange={(e) => handleChange('contactPhone', e.target.value)}
-                disabled={isLoading}
-              />
+              <div className="space-y-2">
+                <Label htmlFor="contactPhone">เบอร์โทรศัพท์ *</Label>
+                <Input
+                  id="contactPhone"
+                  placeholder="08X-XXX-XXXX"
+                  value={formData.contactPhone}
+                  onChange={(e) => handleChange('contactPhone', e.target.value)}
+                  disabled={isLoading}
+                />
+              </div>
             </div>
           </div>
 
@@ -296,53 +305,84 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
               )}
             </div>
 
-            {/* Document Upload - Emphasized */}
-            <div className="space-y-2 p-4 bg-primary/5 rounded-xl border-2 border-primary/20">
-              <Label className="text-base font-semibold flex items-center gap-2">
-                <FileText className="w-5 h-5 text-primary" />
-                เอกสารขอใช้ระบบ *
-              </Label>
-              <p className="text-sm text-muted-foreground mb-3">
-                กรุณาอัพโหลดเอกสารขอใช้ระบบจากสถาบันของท่าน (รองรับไฟล์ PDF, DOC, DOCX)
-              </p>
-              <input
-                ref={documentInputRef}
-                type="file"
-                accept=".pdf,.doc,.docx"
-                onChange={handleDocumentChange}
-                className="hidden"
-                disabled={isLoading}
-              />
-              {documentFile ? (
-                <div className="flex items-center gap-3 p-3 bg-background rounded-lg border border-primary/30">
-                  <FileText className="w-5 h-5 text-primary" />
-                  <span className="flex-1 text-sm truncate">{documentFile.name}</span>
+            {/* Document Upload - Highly Emphasized */}
+            <motion.div 
+              className="relative overflow-hidden rounded-2xl border-2 border-primary bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-6 shadow-lg"
+              initial={{ scale: 0.98 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              {/* Decorative corner accent */}
+              <div className="absolute -top-8 -right-8 w-24 h-24 bg-primary/20 rounded-full blur-2xl" />
+              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-primary/10 rounded-full blur-xl" />
+              
+              <div className="relative">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-md">
+                    <FileText className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <div>
+                    <Label className="text-lg font-bold text-foreground">
+                      เอกสารขอใช้ระบบ *
+                    </Label>
+                    <p className="text-xs text-primary font-medium">จำเป็นต้องแนบเอกสาร</p>
+                  </div>
+                </div>
+                
+                <p className="text-sm text-muted-foreground mb-4 pl-1">
+                  กรุณาอัพโหลดเอกสารขอใช้ระบบจากสถาบันของท่าน เช่น หนังสือขออนุญาต หรือ หนังสือรับรอง
+                </p>
+                
+                <input
+                  ref={documentInputRef}
+                  type="file"
+                  accept=".pdf,.doc,.docx"
+                  onChange={handleDocumentChange}
+                  className="hidden"
+                  disabled={isLoading}
+                />
+                
+                {documentFile ? (
+                  <div className="flex items-center gap-3 p-4 bg-background rounded-xl border-2 border-primary/40 shadow-inner">
+                    <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <FileText className="w-5 h-5 text-primary" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium truncate">{documentFile.name}</p>
+                      <p className="text-xs text-muted-foreground">อัพโหลดเรียบร้อย</p>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setDocumentFile(null)}
+                      disabled={isLoading}
+                      className="hover:bg-destructive/10 hover:text-destructive"
+                    >
+                      <X className="w-4 h-4" />
+                    </Button>
+                  </div>
+                ) : (
                   <Button
                     type="button"
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setDocumentFile(null)}
+                    variant="outline"
+                    className="w-full h-28 border-2 border-dashed border-primary/50 hover:border-primary hover:bg-primary/10 transition-all duration-300 group"
+                    onClick={() => documentInputRef.current?.click()}
                     disabled={isLoading}
                   >
-                    <X className="w-4 h-4" />
+                    <div className="flex flex-col items-center gap-3">
+                      <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        <Upload className="w-6 h-6 text-primary" />
+                      </div>
+                      <div className="text-center">
+                        <span className="text-sm font-semibold text-primary block">คลิกเพื่ออัพโหลดเอกสาร</span>
+                        <span className="text-xs text-muted-foreground">รองรับไฟล์ PDF, DOC, DOCX</span>
+                      </div>
+                    </div>
                   </Button>
-                </div>
-              ) : (
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="w-full h-24 border-dashed border-primary/30 hover:bg-primary/5"
-                  onClick={() => documentInputRef.current?.click()}
-                  disabled={isLoading}
-                >
-                  <div className="flex flex-col items-center gap-2">
-                    <Upload className="w-6 h-6 text-primary" />
-                    <span className="text-sm font-medium text-primary">คลิกเพื่ออัพโหลดเอกสาร</span>
-                    <span className="text-xs text-muted-foreground">PDF, DOC, DOCX</span>
-                  </div>
-                </Button>
-              )}
-            </div>
+                )}
+              </div>
+            </motion.div>
           </div>
 
           <div className="flex gap-3">
