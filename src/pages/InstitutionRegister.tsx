@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import RegistrationProgress from '@/components/registration/RegistrationProgress';
 import StepEmail from '@/components/registration/StepEmail';
 import StepRegistrationForm from '@/components/registration/StepRegistrationForm';
-import StepPendingApproval from '@/components/registration/StepPendingApproval';
+import StepPendingApproval, { ApprovalStatus } from '@/components/registration/StepPendingApproval';
 import StepUserGuide from '@/components/registration/StepUserGuide';
 
 const LOGO_PATH = "/logo.png";
@@ -16,14 +16,14 @@ const steps = [
   { label: 'คู่มือการใช้งาน', description: 'เริ่มต้นใช้งาน' },
 ];
 
-type EmailStatus = 'new' | 'pending' | 'approved';
-type ApprovalStatus = 'pending' | 'approved' | 'rejected';
+type EmailStatus = 'new' | 'pending' | 'approved' | 'rejected';
 
 export default function InstitutionRegister() {
   const [currentStep, setCurrentStep] = useState(1);
   const [email, setEmail] = useState('');
   const [emailStatus, setEmailStatus] = useState<EmailStatus>('new');
   const [approvalStatus, setApprovalStatus] = useState<ApprovalStatus>('pending');
+  const [rejectionReason, setRejectionReason] = useState<string>('');
 
   const handleEmailSubmit = (submittedEmail: string, status: EmailStatus) => {
     setEmail(submittedEmail);
@@ -34,17 +34,20 @@ export default function InstitutionRegister() {
       setApprovalStatus('approved');
       setCurrentStep(4); // Go to user guide
     } else if (status === 'pending') {
-      // Email is already registered but pending approval - go to step 3
       setApprovalStatus('pending');
-      setCurrentStep(3); // Go to pending approval (cannot proceed to step 4)
+      setCurrentStep(3);
+    } else if (status === 'rejected') {
+      setApprovalStatus('rejected');
+      setRejectionReason('เอกสารประกอบการสมัครไม่ครบถ้วน'); // This will come from backend
+      setCurrentStep(3);
     } else {
       setCurrentStep(2); // Go to registration form
     }
   };
 
   const handleRegistrationSubmit = () => {
-    setApprovalStatus('pending'); // Just registered, not approved yet
-    setCurrentStep(3); // Go to pending approval
+    setApprovalStatus('pending');
+    setCurrentStep(3);
   };
 
   const handleBackToEmail = () => {
@@ -52,17 +55,19 @@ export default function InstitutionRegister() {
     setEmail('');
     setEmailStatus('new');
     setApprovalStatus('pending');
+    setRejectionReason('');
   };
 
   const handleApprovalNext = () => {
-    // Only allow going to step 4 if approved
     if (approvalStatus === 'approved') {
       setCurrentStep(4);
     }
   };
 
-  const handleStatusChange = (status: ApprovalStatus) => {
-    setApprovalStatus(status);
+  const handleRetry = () => {
+    setCurrentStep(2);
+    setApprovalStatus('pending');
+    setRejectionReason('');
   };
 
   const renderStep = () => {
@@ -81,9 +86,10 @@ export default function InstitutionRegister() {
         return (
           <StepPendingApproval
             email={email}
-            initialStatus={approvalStatus}
+            status={approvalStatus}
+            rejectionReason={rejectionReason}
             onNext={handleApprovalNext}
-            onStatusChange={handleStatusChange}
+            onRetry={handleRetry}
           />
         );
       case 4:
