@@ -98,17 +98,11 @@ export default function StepUserGuide({ email }: StepUserGuideProps) {
           ))}
         </div>
 
-        <div className="flex gap-3">
-          <Link to="/" className="flex-1">
-            <Button variant="outline" className="w-full h-12">
-              กลับหน้าหลัก
-            </Button>
-          </Link>
-          <Button className="flex-1 h-12">
-            เข้าสู่ระบบ
-            <ExternalLink className="w-4 h-4 ml-2" />
+        <Link to="/">
+          <Button variant="outline" className="w-full h-12">
+            กลับหน้าหลัก
           </Button>
-        </div>
+        </Link>
       </div>
     </motion.div>
   );
