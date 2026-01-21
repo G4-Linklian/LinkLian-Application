@@ -22,6 +22,7 @@ export default function InstitutionRegister() {
   const [currentStep, setCurrentStep] = useState(1);
   const [email, setEmail] = useState('');
   const [emailStatus, setEmailStatus] = useState<EmailStatus>('new');
+  const [isApproved, setIsApproved] = useState(false);
 
   const handleEmailSubmit = (submittedEmail: string, status: EmailStatus) => {
     setEmail(submittedEmail);
@@ -29,15 +30,19 @@ export default function InstitutionRegister() {
     
     // Navigate to appropriate step based on status
     if (status === 'approved') {
+      setIsApproved(true);
       setCurrentStep(4); // Go to user guide
     } else if (status === 'pending') {
-      setCurrentStep(3); // Go to pending approval
+      // Email is already registered but pending approval - go to step 3
+      setIsApproved(false);
+      setCurrentStep(3); // Go to pending approval (cannot proceed to step 4)
     } else {
       setCurrentStep(2); // Go to registration form
     }
   };
 
   const handleRegistrationSubmit = () => {
+    setIsApproved(false); // Just registered, not approved yet
     setCurrentStep(3); // Go to pending approval
   };
 
@@ -45,6 +50,14 @@ export default function InstitutionRegister() {
     setCurrentStep(1);
     setEmail('');
     setEmailStatus('new');
+    setIsApproved(false);
+  };
+
+  const handleApprovalNext = () => {
+    // Only allow going to step 4 if approved
+    if (isApproved) {
+      setCurrentStep(4);
+    }
   };
 
   const renderStep = () => {
@@ -63,7 +76,8 @@ export default function InstitutionRegister() {
         return (
           <StepPendingApproval
             email={email}
-            onNext={() => setCurrentStep(4)}
+            isApproved={isApproved}
+            onNext={isApproved ? handleApprovalNext : undefined}
           />
         );
       case 4:

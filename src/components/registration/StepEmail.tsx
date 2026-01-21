@@ -34,13 +34,14 @@ export default function StepEmail({ onNext }: StepEmailProps) {
     await new Promise(resolve => setTimeout(resolve, 1000));
 
     // For demo: 
-    // - emails ending with @approved.com -> approved
-    // - emails ending with @pending.com -> pending
-    // - other emails -> new registration
+    // - emails ending with @approved.com -> approved (go to step 4)
+    // - emails ending with @pending.com -> pending (go to step 3)
+    // - emails ending with @registered.com -> registered but pending (go to step 3)
+    // - other emails -> new registration (go to step 2)
     let status: 'new' | 'pending' | 'approved' = 'new';
     if (email.endsWith('@approved.com')) {
       status = 'approved';
-    } else if (email.endsWith('@pending.com')) {
+    } else if (email.endsWith('@pending.com') || email.endsWith('@registered.com')) {
       status = 'pending';
     }
 
