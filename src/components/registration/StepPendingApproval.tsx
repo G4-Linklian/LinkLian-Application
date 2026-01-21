@@ -1,38 +1,96 @@
 import { motion } from 'framer-motion';
-import { Clock, Mail, Phone, ShieldCheck, Play } from 'lucide-react';
+import { Clock, Mail, Phone, ShieldCheck, Play, XCircle, AlertTriangle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
+type ApprovalStatus = 'pending' | 'approved' | 'rejected';
+
 interface StepPendingApprovalProps {
   email: string;
-  isApproved?: boolean;
+  initialStatus?: ApprovalStatus;
   onNext?: () => void;
-  onApprovalChange?: (approved: boolean) => void;
+  onStatusChange?: (status: ApprovalStatus) => void;
 }
 
 export default function StepPendingApproval({ 
   email, 
-  isApproved: initialApproved = false, 
+  initialStatus = 'pending', 
   onNext,
-  onApprovalChange 
+  onStatusChange 
 }: StepPendingApprovalProps) {
-  const [isApproved, setIsApproved] = useState(initialApproved);
+  const [status, setStatus] = useState<ApprovalStatus>(initialStatus);
   const [isSimulating, setIsSimulating] = useState(false);
+  const [simulationType, setSimulationType] = useState<'approve' | 'reject' | null>(null);
+  const [rejectionReason, setRejectionReason] = useState('');
 
   useEffect(() => {
-    setIsApproved(initialApproved);
-  }, [initialApproved]);
+    setStatus(initialStatus);
+  }, [initialStatus]);
 
-  const handleSimulateApproval = () => {
+  const handleSimulate = (type: 'approve' | 'reject') => {
     setIsSimulating(true);
-    // จำลองการรอการอนุมัติ 2 วินาที
+    setSimulationType(type);
+    
     setTimeout(() => {
-      setIsApproved(true);
+      if (type === 'approve') {
+        setStatus('approved');
+        onStatusChange?.('approved');
+      } else {
+        setStatus('rejected');
+        setRejectionReason('เอกสารประกอบการสมัครไม่ครบถ้วน กรุณาตรวจสอบและยื่นเอกสารเพิ่มเติม ได้แก่ หนังสือรับรองจากหน่วยงาน และสำเนาบัตรประจำตัวผู้มีอำนาจลงนาม');
+        onStatusChange?.('rejected');
+      }
       setIsSimulating(false);
-      onApprovalChange?.(true);
+      setSimulationType(null);
     }, 2000);
   };
+
+  const getStatusConfig = () => {
+    switch (status) {
+      case 'approved':
+        return {
+          icon: <ShieldCheck className="w-10 h-10 text-green-600" />,
+          bgColor: 'bg-green-100',
+          title: 'ได้รับการอนุมัติแล้ว',
+          description: (
+            <>
+              คำขอลงทะเบียนของคุณได้รับการอนุมัติแล้ว
+              <br />
+              คุณสามารถเริ่มใช้งานระบบได้ทันที
+            </>
+          )
+        };
+      case 'rejected':
+        return {
+          icon: <XCircle className="w-10 h-10 text-red-600" />,
+          bgColor: 'bg-red-100',
+          title: 'ไม่ผ่านการอนุมัติ',
+          description: (
+            <>
+              คำขอลงทะเบียนของคุณไม่ผ่านการพิจารณา
+              <br />
+              กรุณาตรวจสอบเหตุผลด้านล่างและดำเนินการแก้ไข
+            </>
+          )
+        };
+      default:
+        return {
+          icon: <Clock className="w-10 h-10 text-amber-600" />,
+          bgColor: 'bg-amber-100',
+          title: 'รอการอนุมัติ',
+          description: (
+            <>
+              คำขอลงทะเบียนของคุณอยู่ระหว่างการพิจารณา
+              <br />
+              เราจะแจ้งผลผ่านอีเมลเมื่อดำเนินการเสร็จสิ้น
+            </>
+          )
+        };
+    }
+  };
+
+  const statusConfig = getStatusConfig();
 
   return (
     <motion.div
@@ -43,10 +101,10 @@ export default function StepPendingApproval({
     >
       <div className="bg-card rounded-2xl p-8 shadow-lg border text-center">
         <motion.div 
-          key={isApproved ? 'approved' : 'pending'}
+          key={status}
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className={`w-20 h-20 ${isApproved ? 'bg-green-100' : 'bg-amber-100'} rounded-full flex items-center justify-center mx-auto mb-6`}
+          className={`w-20 h-20 ${statusConfig.bgColor} rounded-full flex items-center justify-center mx-auto mb-6`}
         >
           {isSimulating ? (
             <motion.div
@@ -55,15 +113,16 @@ export default function StepPendingApproval({
             >
               <Clock className="w-10 h-10 text-amber-600" />
             </motion.div>
-          ) : isApproved ? (
-            <ShieldCheck className="w-10 h-10 text-green-600" />
           ) : (
-            <Clock className="w-10 h-10 text-amber-600" />
+            statusConfig.icon
           )}
         </motion.div>
         
         <h2 className="text-2xl font-bold text-foreground mb-2">
-          {isSimulating ? 'กำลังตรวจสอบ...' : isApproved ? 'ได้รับการอนุมัติแล้ว' : 'รอการอนุมัติ'}
+          {isSimulating 
+            ? (simulationType === 'approve' ? 'กำลังอนุมัติ...' : 'กำลังตรวจสอบ...')
+            : statusConfig.title
+          }
         </h2>
         
         <p className="text-muted-foreground mb-6">
@@ -73,18 +132,8 @@ export default function StepPendingApproval({
               <br />
               กรุณารอสักครู่...
             </>
-          ) : isApproved ? (
-            <>
-              คำขอลงทะเบียนของคุณได้รับการอนุมัติแล้ว
-              <br />
-              คุณสามารถเริ่มใช้งานระบบได้ทันที
-            </>
           ) : (
-            <>
-              คำขอลงทะเบียนของคุณอยู่ระหว่างการพิจารณา
-              <br />
-              เราจะแจ้งผลผ่านอีเมลเมื่อดำเนินการเสร็จสิ้น
-            </>
+            statusConfig.description
           )}
         </p>
 
@@ -93,7 +142,24 @@ export default function StepPendingApproval({
           <p className="text-foreground font-medium">{email}</p>
         </div>
 
-        {!isApproved && !isSimulating && (
+        {/* Rejection Reason */}
+        {status === 'rejected' && rejectionReason && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6 text-left"
+          >
+            <div className="flex items-start gap-3">
+              <AlertTriangle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="text-sm font-medium text-red-800 mb-1">เหตุผลที่ไม่ผ่านการอนุมัติ</p>
+                <p className="text-sm text-red-700">{rejectionReason}</p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {status === 'pending' && !isSimulating && (
           <div className="space-y-3 mb-8">
             <div className="flex items-center gap-3 text-sm text-muted-foreground">
               <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
@@ -114,7 +180,7 @@ export default function StepPendingApproval({
           <div className="mb-8">
             <div className="h-2 bg-muted rounded-full overflow-hidden">
               <motion.div 
-                className="h-full bg-primary"
+                className={`h-full ${simulationType === 'approve' ? 'bg-green-500' : 'bg-red-500'}`}
                 initial={{ width: '0%' }}
                 animate={{ width: '100%' }}
                 transition={{ duration: 2, ease: 'easeInOut' }}
@@ -124,21 +190,47 @@ export default function StepPendingApproval({
         )}
 
         <div className="flex flex-col gap-3">
-          {!isApproved && !isSimulating && (
+          {status === 'pending' && !isSimulating && (
+            <div className="flex gap-3">
+              <Button 
+                onClick={() => handleSimulate('approve')}
+                className="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
+              >
+                <Play className="w-4 h-4 mr-2" />
+                จำลอง: อนุมัติ
+              </Button>
+              <Button 
+                onClick={() => handleSimulate('reject')}
+                variant="destructive"
+                className="flex-1"
+              >
+                <XCircle className="w-4 h-4 mr-2" />
+                จำลอง: ปฏิเสธ
+              </Button>
+            </div>
+          )}
+
+          {status === 'rejected' && (
             <Button 
-              onClick={handleSimulateApproval}
-              className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
+              onClick={() => {
+                setStatus('pending');
+                setRejectionReason('');
+                onStatusChange?.('pending');
+              }}
+              variant="outline"
+              className="w-full"
             >
-              <Play className="w-4 h-4 mr-2" />
-              จำลองการอนุมัติ (Demo)
+              ยื่นคำขอใหม่
             </Button>
           )}
+
           <Link to="/">
             <Button variant="outline" className="w-full">
               กลับหน้าหลัก
             </Button>
           </Link>
-          {isApproved && onNext && (
+
+          {status === 'approved' && onNext && (
             <Button onClick={onNext} className="w-full">
               ไปหน้าคู่มือการใช้งาน
             </Button>
