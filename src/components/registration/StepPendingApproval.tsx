@@ -1,14 +1,14 @@
 import { motion } from 'framer-motion';
-import { Clock, Mail, Phone, ArrowLeft } from 'lucide-react';
+import { Clock, Mail, Phone, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
 interface StepPendingApprovalProps {
   email: string;
-  onBack?: () => void;
+  onNext?: () => void;
 }
 
-export default function StepPendingApproval({ email, onBack }: StepPendingApprovalProps) {
+export default function StepPendingApproval({ email, onNext }: StepPendingApprovalProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -57,10 +57,9 @@ export default function StepPendingApproval({ email, onBack }: StepPendingApprov
               กลับหน้าหลัก
             </Button>
           </Link>
-          {onBack && (
-            <Button variant="ghost" onClick={onBack} className="w-full">
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              ใช้อีเมลอื่น
+          {onNext && (
+            <Button onClick={onNext} className="w-full">
+              ไปหน้าถัดไป
             </Button>
           )}
         </div>
