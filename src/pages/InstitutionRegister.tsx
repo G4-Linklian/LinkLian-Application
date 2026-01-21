@@ -24,27 +24,36 @@ export default function InstitutionRegister() {
   const [email, setEmail] = useState('');
   const [emailStatus, setEmailStatus] = useState<EmailStatus>('new');
   const [approvalStatus, setApprovalStatus] = useState<ApprovalStatus>('pending');
+  const [rejectionReason, setRejectionReason] = useState('');
 
-  const handleEmailSubmit = (submittedEmail: string, status: EmailStatus) => {
+  // TODO: Replace with your API call to check registration status
+  const handleEmailSubmit = async (submittedEmail: string, status: EmailStatus) => {
     setEmail(submittedEmail);
     setEmailStatus(status);
+    
+    // TODO: Call your API to get actual status and rejection reason
+    // Example:
+    // const response = await fetch('/api/check-registration', { method: 'POST', body: JSON.stringify({ email: submittedEmail }) });
+    // const data = await response.json();
+    // status = data.status;
+    // if (data.rejectionReason) setRejectionReason(data.rejectionReason);
     
     // Navigate to appropriate step based on status
     if (status === 'approved') {
       setApprovalStatus('approved');
-      setCurrentStep(4); // Go to user guide
+      setCurrentStep(4);
     } else if (status === 'pending') {
-      // Email is already registered but pending approval - go to step 3
       setApprovalStatus('pending');
-      setCurrentStep(3); // Go to pending approval (cannot proceed to step 4)
+      setCurrentStep(3);
     } else {
-      setCurrentStep(2); // Go to registration form
+      setCurrentStep(2);
     }
   };
 
   const handleRegistrationSubmit = () => {
-    setApprovalStatus('pending'); // Just registered, not approved yet
-    setCurrentStep(3); // Go to pending approval
+    // TODO: After submitting to your API, set approval status from response
+    setApprovalStatus('pending');
+    setCurrentStep(3);
   };
 
   const handleBackToEmail = () => {
@@ -52,17 +61,20 @@ export default function InstitutionRegister() {
     setEmail('');
     setEmailStatus('new');
     setApprovalStatus('pending');
+    setRejectionReason('');
   };
 
   const handleApprovalNext = () => {
-    // Only allow going to step 4 if approved
     if (approvalStatus === 'approved') {
       setCurrentStep(4);
     }
   };
 
-  const handleStatusChange = (status: ApprovalStatus) => {
-    setApprovalStatus(status);
+  const handleResubmit = () => {
+    // Go back to registration form to resubmit
+    setApprovalStatus('pending');
+    setRejectionReason('');
+    setCurrentStep(2);
   };
 
   const renderStep = () => {
@@ -82,8 +94,9 @@ export default function InstitutionRegister() {
           <StepPendingApproval
             email={email}
             initialStatus={approvalStatus}
+            rejectionReason={rejectionReason}
             onNext={handleApprovalNext}
-            onStatusChange={handleStatusChange}
+            onResubmit={handleResubmit}
           />
         );
       case 4:

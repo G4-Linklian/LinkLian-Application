@@ -29,24 +29,21 @@ export default function StepEmail({ onNext }: StepEmailProps) {
 
     setIsLoading(true);
 
-    // Mock API call - simulate checking email status
-    // In real implementation, this would check the database
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    // For demo: 
-    // - emails ending with @approved.com -> approved (go to step 4)
-    // - emails ending with @pending.com -> pending (go to step 3)
-    // - emails ending with @registered.com -> registered but pending (go to step 3)
-    // - other emails -> new registration (go to step 2)
-    let status: 'new' | 'pending' | 'approved' = 'new';
-    if (email.endsWith('@approved.com')) {
-      status = 'approved';
-    } else if (email.endsWith('@pending.com') || email.endsWith('@registered.com')) {
-      status = 'pending';
+    try {
+      // TODO: Replace with your API call
+      // Example: const response = await fetch('/api/check-email', { method: 'POST', body: JSON.stringify({ email }) });
+      // const data = await response.json();
+      // const status = data.status; // 'new' | 'pending' | 'approved'
+      
+      // For now, always treat as new registration
+      const status: 'new' | 'pending' | 'approved' = 'new';
+      
+      setIsLoading(false);
+      onNext(email, status);
+    } catch (err) {
+      setError('เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
-    onNext(email, status);
   };
 
   return (
