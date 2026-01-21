@@ -17,12 +17,13 @@ const steps = [
 ];
 
 type EmailStatus = 'new' | 'pending' | 'approved';
+type ApprovalStatus = 'pending' | 'approved' | 'rejected';
 
 export default function InstitutionRegister() {
   const [currentStep, setCurrentStep] = useState(1);
   const [email, setEmail] = useState('');
   const [emailStatus, setEmailStatus] = useState<EmailStatus>('new');
-  const [isApproved, setIsApproved] = useState(false);
+  const [approvalStatus, setApprovalStatus] = useState<ApprovalStatus>('pending');
 
   const handleEmailSubmit = (submittedEmail: string, status: EmailStatus) => {
     setEmail(submittedEmail);
@@ -30,11 +31,11 @@ export default function InstitutionRegister() {
     
     // Navigate to appropriate step based on status
     if (status === 'approved') {
-      setIsApproved(true);
+      setApprovalStatus('approved');
       setCurrentStep(4); // Go to user guide
     } else if (status === 'pending') {
       // Email is already registered but pending approval - go to step 3
-      setIsApproved(false);
+      setApprovalStatus('pending');
       setCurrentStep(3); // Go to pending approval (cannot proceed to step 4)
     } else {
       setCurrentStep(2); // Go to registration form
@@ -42,7 +43,7 @@ export default function InstitutionRegister() {
   };
 
   const handleRegistrationSubmit = () => {
-    setIsApproved(false); // Just registered, not approved yet
+    setApprovalStatus('pending'); // Just registered, not approved yet
     setCurrentStep(3); // Go to pending approval
   };
 
@@ -50,14 +51,18 @@ export default function InstitutionRegister() {
     setCurrentStep(1);
     setEmail('');
     setEmailStatus('new');
-    setIsApproved(false);
+    setApprovalStatus('pending');
   };
 
   const handleApprovalNext = () => {
     // Only allow going to step 4 if approved
-    if (isApproved) {
+    if (approvalStatus === 'approved') {
       setCurrentStep(4);
     }
+  };
+
+  const handleStatusChange = (status: ApprovalStatus) => {
+    setApprovalStatus(status);
   };
 
   const renderStep = () => {
@@ -76,9 +81,9 @@ export default function InstitutionRegister() {
         return (
           <StepPendingApproval
             email={email}
-            isApproved={isApproved}
+            initialStatus={approvalStatus}
             onNext={handleApprovalNext}
-            onApprovalChange={setIsApproved}
+            onStatusChange={handleStatusChange}
           />
         );
       case 4:
