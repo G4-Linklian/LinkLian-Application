@@ -13,7 +13,7 @@ const steps = [
   { label: 'อีเมล', description: 'ยืนยันอีเมล' },
   { label: 'ข้อมูลสถาบัน', description: 'กรอกรายละเอียด' },
   { label: 'รอการอนุมัติ', description: 'ตรวจสอบข้อมูล' },
-  { label: 'คู่มือการใช้งาน', description: 'เริ่มต้นใช้งาน' },
+  { label: 'เข้าสู่ระบบ', description: 'เริ่มต้นใช้งาน' },
 ];
 
 type EmailStatus = 'new' | 'pending' | 'approved';
@@ -55,13 +55,17 @@ export default function InstitutionRegister() {
   };
 
   const handleApprovalNext = () => {
-    if (approvalStatus === 'approved') {
+    setCurrentStep(4);
+  };
+
+  const handleApprovalStatusChange = (newStatus: ApprovalStatus) => {
+    setApprovalStatus(newStatus);
+    if (newStatus === 'approved') {
       setCurrentStep(4);
     }
   };
 
   const handleResubmit = () => {
-    // Go back to registration form to resubmit
     setApprovalStatus('pending');
     setRejectionReason('');
     setCurrentStep(2);
@@ -86,6 +90,7 @@ export default function InstitutionRegister() {
             initialStatus={approvalStatus}
             rejectionReason={rejectionReason}
             onNext={handleApprovalNext}
+            onStatusChange={handleApprovalStatusChange}
             onResubmit={handleResubmit}
           />
         );
@@ -99,11 +104,11 @@ export default function InstitutionRegister() {
   return (
     <div className="min-h-screen bg-background">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
+        {/* Header with Login Link */}
         <motion.header
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-center mb-12"
+          className="flex items-center justify-between mb-12"
         >
           <Link to="/" className="flex items-center group">
             <img

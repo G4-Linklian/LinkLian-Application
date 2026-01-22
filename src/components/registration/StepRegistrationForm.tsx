@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import DataReviewDialog from './DataReviewDialog';
+import { submitRegistration, uploadFile } from '@/services/registration';
 import { 
   registrationFormSchema, 
   validateFile, 
@@ -117,12 +118,72 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
   const handleConfirmSubmit = async () => {
     setIsLoading(true);
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      let logoUrl = '';
+      let docsUrl = '';
 
-    setIsLoading(false);
-    setShowReviewDialog(false);
-    onNext();
+      // Upload logo ถ้ามีไฟล์
+      if (logoFile) {
+        console.log('📤 Uploading Logo...');
+        const logoUpload = await uploadFile(logoFile, 'logo');
+        if (logoUpload.success && logoUpload.data?.fileUrl) {
+          logoUrl = logoUpload.data.fileUrl;
+          console.log('✅ Logo URL from Blob:', logoUrl);
+        } else {
+          console.warn('⚠️ Logo upload failed, continuing without logo');
+        }
+      }
+
+      // Upload document ถ้ามีไฟล์
+      if (documentFile) {
+        console.log('📤 Uploading Document...');
+        const docUpload = await uploadFile(documentFile, 'document');
+        if (docUpload.success && docUpload.data?.fileUrl) {
+          docsUrl = docUpload.data.fileUrl;
+          console.log('✅ Document URL from Blob:', docsUrl);
+        } else {
+          console.warn('⚠️ Document upload failed, continuing without document');
+        }
+      }
+
+      // แปลงข้อมูล form ให้ตรงกับ backend
+      const submitData = {
+        inst_email: email,
+        inst_password: 'tempPassword',
+        inst_name_th: formData.institutionName,
+        inst_name_en: formData.institutionNameEn,
+        inst_abbr_th: formData.institutionAbbr,
+        inst_abbr_en: formData.institutionAbbrEn,
+        inst_type: formData.institutionType,
+        inst_phone: formData.contactPhone,
+        website: formData.website,
+        address: formData.address,
+        subdistrict: formData.subDistrict,
+        district: formData.district,
+        province: formData.province,
+        postal_code: formData.postalCode,
+        logo_url: logoUrl,
+        docs_url: docsUrl, 
+        flag_valid: true,
+      };
+
+      console.log('📤 Submitting Registration Data with Blob URLs:', submitData);
+
+      const response = await submitRegistration(submitData);
+
+      if (response.success) {
+        console.log('✅ Registration Submitted:', response.data);
+        setShowReviewDialog(false);
+        onNext();
+      } else {
+        setErrors({ submit: response.error || 'เกิดข้อผิดพลาด ลองอีกครั้ง' });
+      }
+    } catch (err) {
+      console.error('Submit Error:', err);
+      setErrors({ submit: 'เกิดข้อผิดพลาดในการส่งข้อมูล' });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const renderFieldError = (field: string) => {
@@ -151,7 +212,6 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
           <p className="text-muted-foreground mt-2">
             กรอกรายละเอียดสถาบันของคุณเพื่อดำเนินการลงทะเบียน
           </p>
-          <p className="text-sm text-primary mt-1">{email}</p>
         </div>
 
         <form onSubmit={handleOpenReview} className="space-y-6">

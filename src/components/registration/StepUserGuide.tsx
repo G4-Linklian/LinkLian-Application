@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { CheckCircle, Download, PlayCircle, BookOpen, ExternalLink } from 'lucide-react';
+import { CheckCircle, LogIn, Mail, Lock, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
@@ -9,26 +9,23 @@ interface StepUserGuideProps {
 
 const guides = [
   {
-    icon: PlayCircle,
-    title: 'วิดีโอแนะนำการใช้งาน',
-    description: 'เรียนรู้การใช้งานเบื้องต้นผ่านวิดีโอ 5 นาที',
-    action: 'ดูวิดีโอ',
-    color: 'text-red-500',
-    bgColor: 'bg-red-100',
-  },
-  {
-    icon: Download,
-    title: 'ดาวน์โหลดคู่มือ PDF',
-    description: 'คู่มือฉบับเต็มสำหรับผู้ดูแลระบบ',
-    action: 'ดาวน์โหลด',
+    icon: Mail,
+    title: 'ตรวจสอบอีเมลของคุณ',
+    description: 'เราได้ส่งรหัสผ่านไปยังอีเมล โปรดตรวจสอบ',
     color: 'text-blue-500',
     bgColor: 'bg-blue-100',
   },
   {
-    icon: BookOpen,
-    title: 'บทความช่วยเหลือ',
-    description: 'คำถามที่พบบ่อยและวิธีแก้ไขปัญหา',
-    action: 'อ่านบทความ',
+    icon: Lock,
+    title: 'เตรียมรหัสผ่าน',
+    description: 'ใช้อีเมลและรหัสผ่านที่ได้รับเพื่อเข้าสู่ระบบ',
+    color: 'text-amber-500',
+    bgColor: 'bg-amber-100',
+  },
+  {
+    icon: LogIn,
+    title: 'เข้าสู่ระบบได้แล้ว',
+    description: 'เข้าสู่ระบบได้ที่ https://uat-webapp.linklian.org/registration',
     color: 'text-green-500',
     bgColor: 'bg-green-100',
   },
@@ -55,7 +52,6 @@ export default function StepUserGuide({ email }: StepUserGuideProps) {
             <br />
             เริ่มต้นใช้งานได้เลย
           </p>
-          <p className="text-sm text-primary mt-2">{email}</p>
         </div>
 
         <div className="bg-primary/5 rounded-xl p-4 mb-8">
@@ -72,7 +68,7 @@ export default function StepUserGuide({ email }: StepUserGuideProps) {
           </div>
         </div>
 
-        <h3 className="font-semibold text-foreground mb-4">เริ่มต้นใช้งาน</h3>
+        <h3 className="font-semibold text-foreground mb-4">ขั้นตอนการเข้าสู่ระบบ</h3>
         
         <div className="space-y-3 mb-8">
           {guides.map((guide, index) => (
@@ -81,28 +77,35 @@ export default function StepUserGuide({ email }: StepUserGuideProps) {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="flex items-center gap-4 p-4 bg-muted/30 rounded-xl hover:bg-muted/50 transition-colors cursor-pointer group"
+              className="flex items-center gap-4 p-4 bg-muted/30 rounded-xl"
             >
-              <div className={`w-12 h-12 ${guide.bgColor} rounded-xl flex items-center justify-center`}>
+              <div className={`w-12 h-12 ${guide.bgColor} rounded-xl flex items-center justify-center flex-shrink-0`}>
                 <guide.icon className={`w-6 h-6 ${guide.color}`} />
               </div>
               <div className="flex-1">
                 <h4 className="font-medium text-foreground">{guide.title}</h4>
                 <p className="text-sm text-muted-foreground">{guide.description}</p>
               </div>
-              <Button variant="ghost" size="sm" className="opacity-0 group-hover:opacity-100 transition-opacity">
-                {guide.action}
-                <ExternalLink className="w-3 h-3 ml-1" />
-              </Button>
             </motion.div>
           ))}
         </div>
 
-        <Link to="/">
-          <Button variant="outline" className="w-full h-12">
-            กลับหน้าหลัก
-          </Button>
-        </Link>
+        <div className="grid grid-cols-1 gap-3">
+          <a href="https://uat-webapp.linklian.org/registration/login" target="_blank" rel="noopener noreferrer">
+            <Button className="w-full h-12">
+              <span className="flex items-center gap-2">
+                <LogIn className="w-4 h-4" />
+                เข้าสู่ระบบ
+              </span>
+            </Button>
+          </a>
+
+          <Link to="/">
+            <Button variant="outline" className="w-full h-12">
+              กลับหน้าหลัก
+            </Button>
+          </Link>
+        </div>
       </div>
     </motion.div>
   );

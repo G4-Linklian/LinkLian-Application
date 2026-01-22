@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, ArrowRight } from 'lucide-react';
+import { Mail, ArrowRight, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { emailSchema } from '@/lib/validations/registration';
+import { verifyEmail } from '@/services/registration';
 
 interface StepEmailProps {
   onNext: (email: string, status: 'new' | 'pending' | 'approved') => void;
@@ -13,20 +14,58 @@ interface StepEmailProps {
 export default function StepEmail({ onNext }: StepEmailProps) {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setIsLoading(true);
 
     // Validate with zod schema
     const result = emailSchema.safeParse({ email: email.trim() });
     
     if (!result.success) {
       setError(result.error.errors[0]?.message || 'รูปแบบอีเมลไม่ถูกต้อง');
+      setIsLoading(false);
       return;
     }
 
-    onNext(result.data.email, 'new');
+    // Define the expected response type
+    type VerifyEmailResponse = {
+      success: boolean;
+      data?: any[] | { data?: any[] };
+      error?: string;
+    };
+
+    try {
+      // เรียก API ตรวจสอบ email ผ่าน POST /institution.get
+      const response = await verifyEmail(result.data.email) as VerifyEmailResponse;
+      
+      console.log('📊 Verify Email Response:', response);
+      
+      if (response.success) {
+        console.log('Data:', response.data, 'Type:', typeof response.data);
+        
+        // ถ้า data.length === 0 → email ใหม่ → ไป step 2
+        // ถ้า data.length > 0 → email มีอยู่ → ไป step 3
+        const dataArray = Array.isArray(response.data)
+          ? response.data
+          : (response.data && Array.isArray((response.data as any).data) ? (response.data as any).data : []);
+        const isNewEmail = dataArray.length === 0;
+        const status = isNewEmail ? 'new' : 'pending';
+        
+        console.log('🔍 Is New Email?:', isNewEmail, 'Status:', status);
+        
+        onNext(result.data.email, status);
+      } else {
+        setError(response.error || 'เกิดข้อผิดพลาด ลองอีกครั้ง');
+      }
+    } catch (err) {
+      setError('เกิดข้อผิดพลาดในการเชื่อมต่อ ลองอีกครั้ง');
+      console.error('Email verification error:', err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -70,11 +109,20 @@ export default function StepEmail({ onNext }: StepEmailProps) {
           <Button
             type="submit"
             className="w-full h-12 text-base"
-            disabled={!email.trim()}
+            disabled={!email.trim() || isLoading}
           >
             <span className="flex items-center gap-2">
-              ถัดไป
-              <ArrowRight className="w-4 h-4" />
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  กำลังตรวจสอบ...
+                </>
+              ) : (
+                <>
+                  ถัดไป
+                  <ArrowRight className="w-4 h-4" />
+                </>
+              )}
             </span>
           </Button>
         </form>
