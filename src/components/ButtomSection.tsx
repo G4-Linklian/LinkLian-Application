@@ -51,7 +51,6 @@ export default function ButtomSection() {
           >
             ลงทะเบียนฟรี และเข้าใช้งาน LinkLian ได้เลยวันนี้ 
             <br className="hidden sm:block" />
-            ทดลองใช้ 60 วัน ไม่มีค่าใช้จ่ายใด ๆ
           </motion.p>
 
           <motion.div
