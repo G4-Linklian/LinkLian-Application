@@ -12,10 +12,11 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
     allowedHosts: [
-      'link-wachawich.linklian.org'
+      'linklian.org'
     ]
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  base: '/LinkLian-Application/',
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
