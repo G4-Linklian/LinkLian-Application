@@ -15,7 +15,7 @@ export async function fetchDataApi(
   body: any = {}
 ): Promise<any> {
   const baseUrl = import.meta.env.VITE_BASE_URL;
-  const basePath = import.meta.env.VITE_BASE_PATH || '/api';
+  const basePath = import.meta.env.VITE_BASE_PATH || '/v1';
 
   if (!baseUrl) {
     throw new Error('VITE_BASE_URL ไม่ได้ถูกกำหนด ตรวจสอบ .env ไฟล์');

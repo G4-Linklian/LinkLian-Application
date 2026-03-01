@@ -45,7 +45,7 @@ export interface RegistrationResponse {
  * - data: [{...}] → email มีอยู่ → ไป step 3 หรือ 4
  */
 export const verifyEmail = async (email: string) => {
-  const data = await fetchDataApi('POST', 'institution.get', {
+  const data = await fetchDataApi('GET', 'institution', {
     inst_email: email,
   });
   return data;
@@ -56,7 +56,7 @@ export const submitRegistration = async (formData: RegistrationFormData) => {
     ...formData,
     inst_password: formData.inst_password || 'tempPassword',
   };
-  const data = await fetchDataApi('POST', 'institution.create', body);
+  const data = await fetchDataApi('POST', 'institution', body);
   return data;
 };
 
