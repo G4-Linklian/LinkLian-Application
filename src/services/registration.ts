@@ -1,4 +1,4 @@
-import { apiPost, apiGet } from './api';
+import { fetchDataApi } from './api';
 
 export interface EmailVerificationRequest {
   email: string;
@@ -41,102 +41,46 @@ export interface RegistrationResponse {
 /**
  * Request: { inst_email }
  * Response:
- * - success: true, data: { data: [] } → email ยังไม่มี (ใหม่) → ไป step 2
- * - success: true, data: { data: [{...}] } → email มีอยู่ → ไป step 3 หรือ 4
+ * - data: [] → email ยังไม่มี (ใหม่) → ไป step 2
+ * - data: [{...}] → email มีอยู่ → ไป step 3 หรือ 4
  */
-export async function verifyEmail(email: string) {
-  return apiPost<any>('/institution.get', { 
-    inst_email: email
+export const verifyEmail = async (email: string) => {
+  const data = await fetchDataApi('POST', 'institution.get', {
+    inst_email: email,
   });
-}
+  return data;
+};
 
-
-export async function submitRegistration(formData: RegistrationFormData) {
-  // ตั้ง password เป็น "tempPassword" ถ้ายังไม่มี
-  const data = {
+export const submitRegistration = async (formData: RegistrationFormData) => {
+  const body = {
     ...formData,
-    inst_password: formData.inst_password || 'tempPassword'
+    inst_password: formData.inst_password || 'tempPassword',
   };
-  return apiPost<RegistrationResponse>('/institution.create', data);
-}
+  const data = await fetchDataApi('POST', 'institution.create', body);
+  return data;
+};
 
-
-export async function checkRegistrationStatus(email: string) {
-  return apiGet<RegistrationResponse>(`auth/registration-status?email=${email}`);
-}
+export const checkRegistrationStatus = async (email: string) => {
+  const data = await fetchDataApi('GET', 'auth/registration-status', { email });
+  return data;
+};
 
 /**
  * ดึงข้อมูลการลงทะเบียนสำหรับแสดงผล
  */
-export async function getRegistrationData(email: string) {
-  return apiGet(`auth/registration-data?email=${email}`);
-}
+export const getRegistrationData = async (email: string) => {
+  const data = await fetchDataApi('GET', 'auth/registration-data', { email });
+  return data;
+};
 
-
-export async function uploadFile(files: File, fileType: 'logo' | 'document') {
-  const baseUrl = import.meta.env.VITE_BASE_URL || 'https://uat-api.linklian.org';
-  const apiPath = import.meta.env.VITE_BASE_PATH || '/api';
-  
-  const endpoint = fileType === 'logo' 
-    ? 'uploadFile/institution/logo' 
+export const uploadFile = async (files: File, fileType: 'logo' | 'document') => {
+  const endpoint = fileType === 'logo'
+    ? 'uploadFile/institution/logo'
     : 'uploadFile/institution/docs';
-  
-  const url = `${baseUrl}${apiPath}/${endpoint}`;
 
-  try {
-    console.log('Uploading File with FormData:', { 
-      fileName: files.name, 
-      fileType, 
-      size: files.size,
-      type: files.type,
-      url 
-    });
+  const formData = new FormData();
+  formData.append('files', files);
 
-    const formData = new FormData();
-    formData.append('files', files); 
-
-    const response = await fetch(url, {
-      method: 'POST',
-      body: formData,
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Upload Error:', response.status, errorText);
-      return {
-        success: false,
-        error: `Upload failed (${response.status}): ${errorText}`,
-        data: null
-      };
-    }
-
-    const data = await response.json();
-    console.log('✅ File Uploaded:', data);
-
-    if (data.success && data.files && data.files.length > 0) {
-      return {
-        success: true,
-        data: {
-          fileUrl: data.files[0].fileUrl,
-          originalName: data.files[0].originalName,
-          fileType: data.files[0].fileType,
-          fileName: data.files[0].fileName,
-        },
-        error: null
-      };
-    }
-
-    return {
-      success: true,
-      data: data,
-      error: null
-    };
-  } catch (error) {
-    console.error('Upload Exception:', error);
-    return {
-      success: false,
-      error: `Upload error: ${error instanceof Error ? error.message : 'Unknown error'}`,
-      data: null
-    };
-  }
-}
+  const data = await fetchDataApi('POST', endpoint, formData);
+  return data;
+};

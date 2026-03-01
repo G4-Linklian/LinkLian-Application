@@ -1,104 +1,59 @@
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-const API_PATH = import.meta.env.VITE_BASE_PATH || '/api';
+type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
-interface ApiResponse<T> {
-  success: boolean;
-  data?: T;
-  message?: string;
-  error?: string;
+// Helper function to build query string from object
+function buildQueryString(params: Record<string, any>): string {
+  const query = Object.entries(params)
+    .filter(([_, value]) => value !== undefined && value !== null && value !== '')
+    .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+    .join('&');
+  return query ? `?${query}` : '';
 }
 
-
-export async function apiCall<T>(
+export async function fetchDataApi(
+  method: RequestMethod,
   endpoint: string,
-  options: RequestInit = {}
-): Promise<ApiResponse<T>> {
-  const url = `${BASE_URL}${API_PATH}${endpoint}`;
+  body: any = {}
+): Promise<any> {
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const basePath = import.meta.env.VITE_BASE_PATH || '/api';
 
-  console.log('API Call:', { url, method: options.method || 'GET' });
+  if (!baseUrl) {
+    throw new Error('VITE_BASE_URL ไม่ได้ถูกกำหนด ตรวจสอบ .env ไฟล์');
+  }
 
   try {
-    if (!BASE_URL) {
-      throw new Error('BASE_URL ไม่ได้ถูกกำหนด ตรวจสอบ .env ไฟล์');
+    let url = `${baseUrl}${basePath}/${endpoint}`;
+
+    if (method === 'GET' && Object.keys(body).length > 0) {
+      url += buildQueryString(body);
     }
+
+    const isFormData = body instanceof FormData;
 
     const response = await fetch(url, {
+      method,
       headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
+        ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
       },
-      ...options,
+      body:
+        method !== 'GET'
+          ? isFormData
+            ? body
+            : JSON.stringify(body)
+          : undefined,
     });
 
-    // อ่าน response text ก่อน
-    const responseText = await response.text();
-    console.log('📨 Response Status:', response.status, 'Body:', responseText);
+    const text = await response.text();
 
-    let data;
     try {
-      data = responseText ? JSON.parse(responseText) : {};
-    } catch (parseError) {
-      console.error('❌ JSON Parse Error:', parseError);
-      return {
-        success: false,
-        error: `ข้อผิดพลาด: Response ไม่ใช่ JSON (${response.status})`,
-      };
+      return JSON.parse(text);
+    } catch {
+      console.error("Server response is not JSON:", text);
+      throw new Error(`Invalid JSON: ${text}`);
     }
 
-    if (!response.ok) {
-      return {
-        success: false,
-        error: data.message || `Error: ${response.status}`,
-        data: data,
-      };
-    }
-
-    return {
-      success: true,
-      data: data,
-    };
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    console.error('🚨 API Error:', errorMessage);
-    return {
-      success: false,
-      error: errorMessage,
-    };
+    console.error('API call failed:', error);
+    throw error;
   }
-}
-
-
-export async function apiGet<T>(endpoint: string): Promise<ApiResponse<T>> {
-  return apiCall<T>(endpoint, {
-    method: 'GET',
-  });
-}
-
-
-export async function apiPost<T>(
-  endpoint: string,
-  body: Record<string, any>
-): Promise<ApiResponse<T>> {
-  return apiCall<T>(endpoint, {
-    method: 'POST',
-    body: JSON.stringify(body),
-  });
-}
-
-
-export async function apiPut<T>(
-  endpoint: string,
-  body: Record<string, any>
-): Promise<ApiResponse<T>> {
-  return apiCall<T>(endpoint, {
-    method: 'PUT',
-    body: JSON.stringify(body),
-  });
-}
-
-
-export async function apiDelete<T>(endpoint: string): Promise<ApiResponse<T>> {
-  return apiCall<T>(endpoint, {
-    method: 'DELETE',
-  });
 }

@@ -126,8 +126,8 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
       if (logoFile) {
         console.log('📤 Uploading Logo...');
         const logoUpload = await uploadFile(logoFile, 'logo');
-        if (logoUpload.success && logoUpload.data?.fileUrl) {
-          logoUrl = logoUpload.data.fileUrl;
+        if (logoUpload?.files && logoUpload.files.length > 0) {
+          logoUrl = logoUpload.files[0].fileUrl;
           console.log('✅ Logo URL from Blob:', logoUrl);
         } else {
           console.warn('⚠️ Logo upload failed, continuing without logo');
@@ -138,8 +138,8 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
       if (documentFile) {
         console.log('📤 Uploading Document...');
         const docUpload = await uploadFile(documentFile, 'document');
-        if (docUpload.success && docUpload.data?.fileUrl) {
-          docsUrl = docUpload.data.fileUrl;
+        if (docUpload?.files && docUpload.files.length > 0) {
+          docsUrl = docUpload.files[0].fileUrl;
           console.log('✅ Document URL from Blob:', docsUrl);
         } else {
           console.warn('⚠️ Document upload failed, continuing without document');
@@ -170,14 +170,9 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
       console.log('📤 Submitting Registration Data with Blob URLs:', submitData);
 
       const response = await submitRegistration(submitData);
-
-      if (response.success) {
-        console.log('✅ Registration Submitted:', response.data);
-        setShowReviewDialog(false);
-        onNext();
-      } else {
-        setErrors({ submit: response.error || 'เกิดข้อผิดพลาด ลองอีกครั้ง' });
-      }
+      console.log('✅ Registration Submitted:', response);
+      setShowReviewDialog(false);
+      onNext();
     } catch (err) {
       console.error('Submit Error:', err);
       setErrors({ submit: 'เกิดข้อผิดพลาดในการส่งข้อมูล' });

@@ -38,8 +38,8 @@ export default function StepPendingApproval({
         
         console.log('📊 Approval Status Response:', response);
 
-        if (response.success && response.data?.data && response.data.data.length > 0) {
-          const institution = response.data.data[0];
+        if (response?.data && response.data.length > 0) {
+          const institution = response.data[0];
           setInstitutionData(institution);
 
           // ตรวจสอบ approve_status

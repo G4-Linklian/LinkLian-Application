@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => ({
     ]
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
-  base: '/LinkLian-Application/',
+  // base: '/LinkLian-Application/',
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

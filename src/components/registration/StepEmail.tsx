@@ -32,9 +32,7 @@ export default function StepEmail({ onNext }: StepEmailProps) {
 
     // Define the expected response type
     type VerifyEmailResponse = {
-      success: boolean;
-      data?: any[] | { data?: any[] };
-      error?: string;
+      data?: any[];
     };
 
     try {
@@ -43,23 +41,15 @@ export default function StepEmail({ onNext }: StepEmailProps) {
       
       console.log('📊 Verify Email Response:', response);
       
-      if (response.success) {
-        console.log('Data:', response.data, 'Type:', typeof response.data);
-        
-        // ถ้า data.length === 0 → email ใหม่ → ไป step 2
-        // ถ้า data.length > 0 → email มีอยู่ → ไป step 3
-        const dataArray = Array.isArray(response.data)
-          ? response.data
-          : (response.data && Array.isArray((response.data as any).data) ? (response.data as any).data : []);
-        const isNewEmail = dataArray.length === 0;
-        const status = isNewEmail ? 'new' : 'pending';
-        
-        console.log('🔍 Is New Email?:', isNewEmail, 'Status:', status);
-        
-        onNext(result.data.email, status);
-      } else {
-        setError(response.error || 'เกิดข้อผิดพลาด ลองอีกครั้ง');
-      }
+      // ถ้า data.length === 0 → email ใหม่ → ไป step 2
+      // ถ้า data.length > 0 → email มีอยู่ → ไป step 3
+      const dataArray = Array.isArray(response.data) ? response.data : [];
+      const isNewEmail = dataArray.length === 0;
+      const status = isNewEmail ? 'new' : 'pending';
+      
+      console.log('🔍 Is New Email?:', isNewEmail, 'Status:', status);
+      
+      onNext(result.data.email, status);
     } catch (err) {
       setError('เกิดข้อผิดพลาดในการเชื่อมต่อ ลองอีกครั้ง');
       console.error('Email verification error:', err);
