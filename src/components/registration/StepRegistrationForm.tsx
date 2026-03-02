@@ -285,9 +285,6 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   <SelectContent>
                     <SelectItem value="school">โรงเรียน</SelectItem>
                     <SelectItem value="university">มหาวิทยาลัย</SelectItem>
-                    <SelectItem value="college">วิทยาลัย</SelectItem>
-                    <SelectItem value="vocational">สถาบันอาชีวศึกษา</SelectItem>
-                    <SelectItem value="other">อื่นๆ</SelectItem>
                   </SelectContent>
                 </Select>
                 {renderFieldError('institutionType')}

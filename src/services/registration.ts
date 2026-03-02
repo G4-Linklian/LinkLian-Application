@@ -171,8 +171,8 @@ export const loginInstitution = async (credentials: LoginInstitutionRequest): Pr
 
 export const uploadFile = async (files: File, fileType: 'logo' | 'document') => {
   const endpoint = fileType === 'logo'
-    ? 'uploadFile/institution/logo'
-    : 'uploadFile/institution/docs';
+    ? 'file-storage/upload/institution/logo'
+    : 'file-storage/upload/institution/docs';
 
   const formData = new FormData();
   formData.append('files', files);
