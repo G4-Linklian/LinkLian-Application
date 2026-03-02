@@ -36,7 +36,6 @@ export default function StepEmail({ onNext }: StepEmailProps) {
     };
 
     try {
-      // เรียก API ตรวจสอบ email ผ่าน POST /institution.get
       const response = await verifyEmail(result.data.email) as VerifyEmailResponse;
       
       console.log('📊 Verify Email Response:', response);
