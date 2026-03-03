@@ -124,32 +124,29 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
 
       // Upload logo ถ้ามีไฟล์
       if (logoFile) {
-        console.log('📤 Uploading Logo...');
         const logoUpload = await uploadFile(logoFile, 'logo');
         if (logoUpload?.files && logoUpload.files.length > 0) {
           logoUrl = logoUpload.files[0].fileUrl;
-          console.log('✅ Logo URL from Blob:', logoUrl);
         } else {
-          console.warn('⚠️ Logo upload failed, continuing without logo');
+          console.warn('Logo upload failed, continuing without logo');
         }
       }
 
       // Upload document ถ้ามีไฟล์
       if (documentFile) {
-        console.log('📤 Uploading Document...');
         const docUpload = await uploadFile(documentFile, 'document');
         if (docUpload?.files && docUpload.files.length > 0) {
           docsUrl = docUpload.files[0].fileUrl;
-          console.log('✅ Document URL from Blob:', docsUrl);
+          console.log('Document URL from Blob:', docsUrl);
         } else {
-          console.warn('⚠️ Document upload failed, continuing without document');
+          console.warn('Document upload failed, continuing without document');
         }
       }
 
       // แปลงข้อมูล form ให้ตรงกับ backend
       const submitData = {
         inst_email: email,
-        inst_password: 'tempPassword',
+        // inst_password: 'tempPassword',
         inst_name_th: formData.institutionName,
         inst_name_en: formData.institutionNameEn,
         inst_abbr_th: formData.institutionAbbr,
@@ -167,10 +164,9 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
         flag_valid: true,
       };
 
-      console.log('📤 Submitting Registration Data with Blob URLs:', submitData);
+      console.log('Submitting Registration Data with Blob URLs:', submitData);
 
       const response = await submitRegistration(submitData);
-      console.log('✅ Registration Submitted:', response);
       setShowReviewDialog(false);
       onNext();
     } catch (err) {
@@ -224,6 +220,7 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   disabled={isLoading}
                   maxLength={200}
                   className={errors.institutionName ? 'border-destructive' : ''}
+                  required
                 />
                 {renderFieldError('institutionName')}
               </div>
@@ -250,6 +247,7 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   disabled={isLoading}
                   maxLength={200}
                   className={errors.institutionNameEn ? 'border-destructive' : ''}
+                  required
                 />
                 {renderFieldError('institutionNameEn')}
               </div>
@@ -278,13 +276,14 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   value={formData.institutionType}
                   onValueChange={(value) => handleChange('institutionType', value)}
                   disabled={isLoading}
+                  required
                 >
                   <SelectTrigger className={errors.institutionType ? 'border-destructive' : ''}>
                     <SelectValue placeholder="เลือกประเภท" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="school">โรงเรียน</SelectItem>
-                    <SelectItem value="university">มหาวิทยาลัย</SelectItem>
+                    <SelectItem value="uni">มหาวิทยาลัย</SelectItem>
                   </SelectContent>
                 </Select>
                 {renderFieldError('institutionType')}
@@ -314,6 +313,7 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   disabled={isLoading}
                   maxLength={15}
                   className={errors.contactPhone ? 'border-destructive' : ''}
+                  required
                 />
                 {renderFieldError('contactPhone')}
               </div>
@@ -334,6 +334,7 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   disabled={isLoading}
                   maxLength={500}
                   className={errors.address ? 'border-destructive' : ''}
+                  required
                 />
                 {renderFieldError('address')}
               </div>
@@ -348,6 +349,7 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   disabled={isLoading}
                   maxLength={100}
                   className={errors.subDistrict ? 'border-destructive' : ''}
+                  required
                 />
                 {renderFieldError('subDistrict')}
               </div>
@@ -362,6 +364,7 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   disabled={isLoading}
                   maxLength={100}
                   className={errors.district ? 'border-destructive' : ''}
+                  required
                 />
                 {renderFieldError('district')}
               </div>
@@ -376,6 +379,7 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   disabled={isLoading}
                   maxLength={100}
                   className={errors.province ? 'border-destructive' : ''}
+                  required
                 />
                 {renderFieldError('province')}
               </div>
@@ -394,6 +398,7 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   disabled={isLoading}
                   maxLength={5}
                   className={errors.postalCode ? 'border-destructive' : ''}
+                  required
                 />
                 {renderFieldError('postalCode')}
               </div>
@@ -483,6 +488,7 @@ export default function StepRegistrationForm({ email, onNext, onBack }: StepRegi
                   onChange={handleDocumentChange}
                   className="hidden"
                   disabled={isLoading}
+                  required
                 />
                 
                 {documentFile ? (

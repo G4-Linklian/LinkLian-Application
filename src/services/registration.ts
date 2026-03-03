@@ -12,7 +12,7 @@ export interface EmailVerificationResponse {
 
 export interface RegistrationFormData {
   inst_email: string;
-  inst_password: string;
+  // inst_password: string;
   inst_name_th: string;
   inst_name_en: string;
   inst_abbr_th: string;
@@ -127,7 +127,7 @@ export const getInstitutionDetailById = async (id: number) => {
 export const submitRegistration = async (formData: RegistrationFormData) => {
   const body = {
     ...formData,
-    inst_password: formData.inst_password || 'tempPassword',
+    // inst_password: formData.inst_password || 'tempPassword',
   };
   const data = await fetchDataApi('POST', 'institution', body);
   return data;

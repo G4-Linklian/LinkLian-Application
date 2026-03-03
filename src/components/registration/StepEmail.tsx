@@ -38,15 +38,11 @@ export default function StepEmail({ onNext }: StepEmailProps) {
     try {
       const response = await verifyEmail(result.data.email) as VerifyEmailResponse;
       
-      console.log('📊 Verify Email Response:', response);
-      
-      // ถ้า data.length === 0 → email ใหม่ → ไป step 2
-      // ถ้า data.length > 0 → email มีอยู่ → ไป step 3
+      // data.length === 0 → email ใหม่ → ไป step 2
+      // data.length > 0 → email มีอยู่ → ไป step 3
       const dataArray = Array.isArray(response.data) ? response.data : [];
       const isNewEmail = dataArray.length === 0;
       const status = isNewEmail ? 'new' : 'pending';
-      
-      console.log('🔍 Is New Email?:', isNewEmail, 'Status:', status);
       
       onNext(result.data.email, status);
     } catch (err) {

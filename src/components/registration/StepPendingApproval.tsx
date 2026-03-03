@@ -35,8 +35,6 @@ export default function StepPendingApproval({
       setIsLoading(true);
       try {
         const response = await verifyEmail(email);
-        
-        console.log('📊 Approval Status Response:', response);
 
         if (response?.data && response.data.length > 0) {
           const institution = response.data[0];
@@ -56,8 +54,6 @@ export default function StepPendingApproval({
             setStatus('pending');
             onStatusChange?.('pending');
           }
-
-          console.log('✅ Institution Data:', institution);
         }
       } catch (err) {
         console.error('❌ Error fetching approval status:', err);
