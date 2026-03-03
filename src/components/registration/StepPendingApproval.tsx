@@ -35,11 +35,9 @@ export default function StepPendingApproval({
       setIsLoading(true);
       try {
         const response = await verifyEmail(email);
-        
-        console.log('📊 Approval Status Response:', response);
 
-        if (response.success && response.data?.data && response.data.data.length > 0) {
-          const institution = response.data.data[0];
+        if (response?.data && response.data.length > 0) {
+          const institution = response.data[0];
           setInstitutionData(institution);
 
           // ตรวจสอบ approve_status
@@ -56,8 +54,6 @@ export default function StepPendingApproval({
             setStatus('pending');
             onStatusChange?.('pending');
           }
-
-          console.log('✅ Institution Data:', institution);
         }
       } catch (err) {
         console.error('❌ Error fetching approval status:', err);

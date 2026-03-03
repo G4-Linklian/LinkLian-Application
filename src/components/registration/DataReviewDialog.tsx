@@ -38,10 +38,7 @@ interface DataReviewDialogProps {
 
 const institutionTypeLabels: Record<string, string> = {
   school: 'โรงเรียน',
-  university: 'มหาวิทยาลัย',
-  college: 'วิทยาลัย',
-  vocational: 'สถาบันอาชีวศึกษา',
-  other: 'อื่นๆ',
+  uni: 'มหาวิทยาลัย',
 };
 
 export default function DataReviewDialog({
@@ -82,7 +79,7 @@ export default function DataReviewDialog({
           {/* Email */}
           <div className="bg-primary/5 rounded-lg p-3">
             <p className="text-xs text-muted-foreground mb-1">อีเมลที่ลงทะเบียน</p>
-            <p className="text-primary font-medium">{email}</p>
+            <p className="font-medium">{email}</p>
           </div>
 
           {/* Institution Info */}
@@ -143,7 +140,7 @@ export default function DataReviewDialog({
               )}
               {documentFile && (
                 <div className="flex items-center gap-2 text-sm">
-                  <FileText className="w-4 h-4 text-primary" />
+                  <FileText className="w-4 h-4 text-muted-foreground" />
                   <span className="text-muted-foreground">เอกสารขอใช้ระบบ:</span>
                   <span className="font-medium truncate">{documentFile.name}</span>
                 </div>

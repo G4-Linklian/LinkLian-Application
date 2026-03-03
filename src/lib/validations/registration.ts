@@ -70,7 +70,7 @@ const optionalSanitizedString = (maxLength: number) =>
     .or(z.literal(''));
 
 // Institution types enum
-export const institutionTypes = ['school', 'university', 'college', 'vocational', 'other'] as const;
+export const institutionTypes = ['school', 'uni'] as const;
 
 // Registration form schema
 export const registrationFormSchema = z.object({
