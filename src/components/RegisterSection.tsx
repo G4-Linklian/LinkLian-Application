@@ -36,27 +36,30 @@ interface RegisterFeature {
   highlight: string;
 }
 
-const slides: Slide[] = [
-  { id: 1, title: 'ลงทะเบียนนักเรียนใหม่', description: 'ระบบรับสมัครนักเรียนใหม่ออนไลน์', icon: <IconClipboardList size={48} /> },
-  { id: 2, title: 'จัดการรายวิชา', description: 'เพิ่ม ลบ แก้ไขรายวิชา กำหนดหน่วยกิต', icon: <IconBook size={48} /> },
-  { id: 3, title: 'ตารางเรียนและตารางสอน', description: 'สร้างตารางเรียนได้ง่ายดาย', icon: <IconCalendarEvent size={48} /> },
-  { id: 4, title: 'จัดการข้อมูลนักเรียน', description: 'เก็บข้อมูลประวัติ ผลการเรียน', icon: <IconUserCircle size={48} /> },
-  { id: 5, title: 'รายงานและสถิติ', description: 'ดูสถิติการลงทะเบียน จำนวนนักเรียน', icon: <IconReportAnalytics size={48} /> },
-  { id: 6, title: 'ระบบความปลอดภัย', description: 'การเข้าถึงตามสิทธิ์ต่าง ๆ ของบุคคลากรในสถานศึกษา', icon: <IconShieldLock size={48} /> },
+interface SlideWithImage extends Slide {
+  imagePath: string;
+}
+
+const slides: SlideWithImage[] = [
+  { id: 1, title: 'ลงทะเบียนนักเรียนใหม่', description: 'ระบบรับสมัครนักเรียนใหม่ออนไลน์', icon: <IconClipboardList size={48} />, imagePath: '/mobile/notebook-screen-1.png' },
+  { id: 2, title: 'จัดการรายวิชา', description: 'เพิ่ม ลบ แก้ไขรายวิชา กำหนดหน่วยกิต', icon: <IconBook size={48} />, imagePath: '/mobile/notebook-screen-2.png' },
+  { id: 3, title: 'ตารางเรียนและตารางสอน', description: 'สร้างตารางเรียนได้ง่ายดาย', icon: <IconCalendarEvent size={48} />, imagePath: '/mobile/notebook-screen-3.png' },
+  { id: 4, title: 'จัดการข้อมูลของบุคลากรทางการศึกษา', description: 'เก็บข้อมูลประวัติ และข้อมูลการสอน', icon: <IconUserCircle size={48} />, imagePath: '/mobile/notebook-screen-4.png' },
+  { id: 5, title: 'รายงานและสถิติ', description: 'ดูสถิติการลงทะเบียน จำนวนนักเรียน', icon: <IconReportAnalytics size={48} />, imagePath: '/mobile/notebook-screen-5.png' },
 ];
 
 const registerFeatures: RegisterFeature[] = [
   {
     icon: <IconClipboardList size={28} />,
-    title: 'ลงทะเบียนนักเรียนใหม่',
-    description: 'ระบบรับสมัครนักเรียนใหม่ออนไลน์ ลดการกรอกเอกสารซ้ำซ้อน',
-    highlight: 'คัดกรองข้อมูลได้อย่างเป็นระบบ'
+    title: 'บันทึกข้อมูลของนักเรียนเข้าสู่ระบบ',
+    description: 'จัดการข้อมูลนักเรียนอย่างเป็นระบบ แก้ไขข้อมูลได้อย่างง่ายดาย',
+    highlight: 'ข้อมูลครบถ้วนในที่เดียว แก้ไขสะดวก'
   },
   {
     icon: <IconBook size={28} />,
-    title: 'จัดการรายวิชา',
-    description: 'เพิ่ม ลบ แก้ไขรายวิชา กำหนดหน่วยกิต และเงื่อนไขการลงทะเบียน',
-    highlight: 'ยืดหยุ่นตามความต้องการ'
+    title: 'จัดการงานหลักสูตรและรายวิชาได้อย่างสะดวก',
+    description: 'เพิ่ม ลบ แก้ไข กลุ่มการเรียนรู้ แผนการเรียน และรายวิชาได้อย่างไม่ซับซ้อน',
+    highlight: 'ยืดหยุ่นตามความต้องการของฝ่ายทะเบียนและสถาบัน'
   },
   {
     icon: <IconCalendarEvent size={28} />,
@@ -66,21 +69,15 @@ const registerFeatures: RegisterFeature[] = [
   },
   {
     icon: <IconUserCircle size={28} />,
-    title: 'จัดการข้อมูลนักเรียน',
-    description: 'เก็บข้อมูลประวัติ ผลการเรียน และข้อมูลติดต่อผู้ปกครอง',
-    highlight: 'ข้อมูลครบถ้วนในที่เดียว แก้ไขสะดวก'
+    title: 'จัดการข้อมูลของบุคลากรทางการศึกษา',
+    description: 'เพิ่ม ลบ แก้ไข ข้อมูล เกี่ยวกับข้อมูลของผู้สอนและบุคลากรทางการศึกษาได้ตามต้องการ',
+    highlight: 'ข้อมูลบุคลากรครบถ้วนในที่เดียว แก้ไขสะดวกสบาย'
   },
   {
     icon: <IconReportAnalytics size={28} />,
-    title: 'รายงานและสถิติ',
-    description: 'ดูสถิติการลงทะเบียน จำนวนนักเรียน และรายงานต่างๆ',
-    highlight: 'เห็นข้อมูลทันทีที่ต้องการ'
-  },
-  {
-    icon: <IconShieldLock size={28} />,
-    title: 'ระบบความปลอดภัย',
-    description: 'การเข้าถึงตามสิทธิ์ต่าง ๆ ของบุคคลากรในสถานศึกษา',
-    highlight: 'ปกป้องข้อมูลสำคัญของสถานศึกษาได้อย่างมั่นใจ'
+    title: 'รายงานและสถิติของสถาบัน',
+    description: 'ดูสถิติจำนวนนักเรียนในระบบ ทั้งกำลังศึกษา สำเร็จการศึกษา รวมทั้งบุคลากรและการรายงานสถิติของหลักสูตร',
+    highlight: 'เห็นข้อมูลภาพรวมของสถาบันได้อย่างชัดเจน'
   },
 ];
 
@@ -142,11 +139,11 @@ export default function RegisterSection() {
                 </div>
                 
                 {/* Screen with real screenshot */}
-                <div className="relative rounded-t-lg overflow-hidden" style={{ aspectRatio: '16/10' }}>
+                <div className="relative rounded-t-lg overflow-hidden bg-white" style={{ aspectRatio: '16/10' }}>
                   <img 
-                    src="/mobile/notebook-screen.png" 
-                    alt="LinkLian Dashboard" 
-                    className="w-full h-full object-cover object-top"
+                    src={slides[currentSlide].imagePath}
+                    alt={slides[currentSlide].title}
+                    className="w-full h-full object-contain"
                   />
                 </div>
               </div>

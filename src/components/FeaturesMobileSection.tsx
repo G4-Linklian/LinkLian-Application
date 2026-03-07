@@ -27,9 +27,9 @@ const features: Feature[] = [
   { id: 1, icon: <IconDeviceMobile size={24} />, title: 'รองรับทุกอุปกรณ์', description: 'รองรับการใช้งานทุกอุปกรณ์ ใช้งานง่ายได้ทุกที่ ทุกเวลา', color: 'from-blue-500 to-blue-600', screenshot: '/mobile/feature-1.png' },
   { id: 2, icon: <IconPencil size={24} />, title: 'รูปแบบการส่งงาน', description: 'ส่งการบ้านออนไลน์ ให้ครูปรับแต่งเวลาส่งได้ตามใจต้องการ และให้ความเห็นต่อชิ้นงานของผู้เรียน', color: 'from-purple-500 to-purple-600', screenshot: '/mobile/feature-2.png' },
   { id: 3, icon: <IconBook size={24} />, title: 'เตรียมสอบได้ง่าย ๆ เพียงปลายนิ้ว', description: 'สามารถใช้ AI Summarize เพื่อเตรียมสอบ จากข้อมูลสื่อการสอนในห้องเรียนได้', color: 'from-green-500 to-green-600', screenshot: '/mobile/feature-3.png' },
-  { id: 4, icon: <IconHome size={24} />, title: 'ชุมชนผู้เรียนสำหรับแบ่งปันความรู้', description: 'เปิดโอกาสให้ผู้เรียนที่มีความสนใจเหมือนกันเปิดชุมชนไว้สำหรับพูดคุยแลกเปลี่ยนความรู้', color: 'from-amber-500 to-orange-500', screenshot: '/mobile/feature-1.png' },
-  { id: 5, icon: <IconCalendarEvent size={24} />, title: 'ดูข้อมูลเกี่ยวกับชั้นเรียนได้อย่างสะดวก', description: 'ดูตารางเรียน ผลคะแนนของการบ้านได้อย่างสะดวกสบาย', color: 'from-red-500 to-pink-500', screenshot: '/mobile/feature-2.png' },
-  { id: 6, icon: <IconCalendarEvent size={24} />, title: 'แจ้งเตือนข่าวสาร', description: 'ดูกิจกรรม ประกาศข่าวสาร และรับการแจ้งเตือนต่างๆ ได้ทุกที่ ทุกเวลา', color: 'from-teal-500 to-cyan-500', screenshot: '/mobile/feature-3.png' },
+  { id: 4, icon: <IconHome size={24} />, title: 'ชุมชนผู้เรียนสำหรับแบ่งปันความรู้', description: 'เปิดโอกาสให้ผู้เรียนที่มีความสนใจเหมือนกันเปิดชุมชนไว้สำหรับพูดคุยแลกเปลี่ยนความรู้', color: 'from-amber-500 to-orange-500', screenshot: '/mobile/feature-4.png' },
+  { id: 5, icon: <IconCalendarEvent size={24} />, title: 'ดูข้อมูลเกี่ยวกับชั้นเรียนได้อย่างสะดวก', description: 'ดูตารางเรียน ผลคะแนนของการบ้านได้อย่างสะดวกสบาย', color: 'from-red-500 to-pink-500', screenshot: '/mobile/feature-5.png' },
+  { id: 6, icon: <IconCalendarEvent size={24} />, title: 'แจ้งเตือนข่าวสาร', description: 'ดูกิจกรรม ประกาศข่าวสาร และรับการแจ้งเตือนต่างๆ ได้ทุกที่ ทุกเวลา', color: 'from-teal-500 to-cyan-500', screenshot: '/mobile/feature-6.png' },
 ];
 
 export default function FeaturesMobileSection() {
