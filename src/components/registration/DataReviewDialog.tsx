@@ -51,19 +51,27 @@ export default function DataReviewDialog({
   email,
   isLoading,
 }: DataReviewDialogProps) {
+  
+  // ปรับเป็น Flexbox เพื่อให้ข้อมูลชิดซ้ายต่อจาก Label
   const DataRow = ({ label, value }: { label: string; value: string }) => (
-    <div className="flex justify-between py-2 border-b border-border/50 last:border-0">
-      <span className="text-muted-foreground text-sm">{label}</span>
-      <span className="text-foreground font-medium text-sm text-right max-w-[60%]">{value || '-'}</span>
+    <div className="flex py-2 border-b border-border/40 last:border-0 items-start gap-2">
+      <span className="text-muted-foreground text-sm font-medium shrink-0 min-w-[110px]">
+        {label}:
+      </span>
+      <span className="text-foreground text-sm font-semibold break-words">
+        {value || '-'}
+      </span>
     </div>
   );
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-2 text-xl">
-            <Check className="w-5 h-5 text-primary" />
+      <DialogContent className="sm:max-w-[650px] p-0 gap-0 overflow-hidden flex flex-col max-h-[92vh] rounded-xl">
+        
+        {/* Header */}
+        <DialogHeader className="p-6 pb-4 border-b bg-white">
+          <DialogTitle className="flex items-center gap-2 text-xl text-slate-800">
+            <Check className="w-5 h-5 text-emerald-500" />
             ตรวจสอบข้อมูลก่อนส่ง
           </DialogTitle>
           <DialogDescription>
@@ -71,24 +79,22 @@ export default function DataReviewDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="space-y-4"
-        >
-          {/* Email */}
-          <div className="bg-primary/5 rounded-lg p-3">
-            <p className="text-xs text-muted-foreground mb-1">อีเมลที่ลงทะเบียน</p>
-            <p className="font-medium">{email}</p>
+        {/* Content Area */}
+        <div className="flex-1 overflow-y-auto p-6 space-y-6 bg-slate-50/50">
+          
+          {/* Email Highlight */}
+          <div className="bg-orange-50 border border-orange-100 rounded-xl p-4 flex items-center gap-3">
+            <span className="text-[#B7552B] text-sm font-medium shrink-0">อีเมลที่ลงทะเบียน:</span>
+            <span className= "text-[#B7552B] font-bold text-lg">{email}</span>
           </div>
 
-          {/* Institution Info */}
-          <div className="space-y-1">
-            <div className="flex items-center gap-2 mb-2">
-              <Building2 className="w-4 h-4 text-primary" />
-              <h4 className="font-semibold text-foreground">ข้อมูลสถาบัน</h4>
+          {/* Section: ข้อมูลสถาบัน */}
+          <div className="bg-white rounded-xl border p-5 shadow-sm space-y-3">
+            <div className="flex items-center gap-2 text-slate-700 border-b pb-3 mb-1">
+              <Building2 className="w-4 h-4 text-[#B7552B]" />
+              <h4 className="font-bold text-sm tracking-tight">ข้อมูลสถาบัน</h4>
             </div>
-            <div className="bg-muted/30 rounded-lg px-4">
+            <div className="grid grid-cols-1">
               <DataRow label="ชื่อสถาบัน (ไทย)" value={formData.institutionName} />
               <DataRow label="ตัวย่อ (ไทย)" value={formData.institutionAbbr} />
               <DataRow label="ชื่อสถาบัน (EN)" value={formData.institutionNameEn} />
@@ -97,26 +103,47 @@ export default function DataReviewDialog({
             </div>
           </div>
 
-          {/* Contact Info */}
-          <div className="space-y-1">
-            <div className="flex items-center gap-2 mb-2">
-              <Phone className="w-4 h-4 text-primary" />
-              <h4 className="font-semibold text-foreground">ข้อมูลติดต่อ</h4>
-            </div>
-            <div className="bg-muted/30 rounded-lg px-4">
-              <DataRow label="เบอร์โทรศัพท์" value={formData.contactPhone} />
+          {/* Section: ข้อมูลติดต่อ & เอกสาร */}
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div className="bg-white rounded-xl border p-5 shadow-sm">
+              <div className="flex items-center gap-2 text-slate-700 border-b pb-3 mb-2">
+                <Phone className="w-4 h-4 text-[#B7552B]" />
+                <h4 className="font-bold text-sm">ข้อมูลติดต่อ</h4>
+              </div>
+              <DataRow label="เบอร์โทร" value={formData.contactPhone} />
               <DataRow label="เว็บไซต์" value={formData.website} />
+            </div>
+
+            <div className="bg-white rounded-xl border p-5 shadow-sm">
+              <div className="flex items-center gap-2 text-slate-700 border-b pb-3 mb-2">
+                <FileText className="w-4 h-4 text-[#B7552B]" />
+                <h4 className="font-bold text-sm">เอกสารแนบ</h4>
+              </div>
+              <div className="mt-2 space-y-2">
+                {logoFile && (
+                  <div className="flex items-center gap-2 text-xs p-2.5 bg-slate-50 rounded-lg border border-dashed border-slate-300">
+                    <Image className="w-3.5 h-3.5 text-slate-400" />
+                    <span className="truncate font-medium text-slate-600">{logoFile.name}</span>
+                  </div>
+                )}
+                {documentFile && (
+                  <div className="flex items-center gap-2 text-xs p-2.5 bg-slate-50 rounded-lg border border-dashed border-slate-300">
+                    <FileText className="w-3.5 h-3.5 text-slate-400" />
+                    <span className="truncate font-medium text-slate-600">{documentFile.name}</span>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
-          {/* Address */}
-          <div className="space-y-1">
-            <div className="flex items-center gap-2 mb-2">
-              <MapPin className="w-4 h-4 text-primary" />
-              <h4 className="font-semibold text-foreground">ที่อยู่</h4>
+          {/* Section: สถานที่ตั้ง */}
+          <div className="bg-white rounded-xl border p-5 shadow-sm">
+            <div className="flex items-center gap-2 text-slate-700 border-b pb-3 mb-1">
+              <MapPin className="w-4 h-4 text-[#B7552B]" />
+              <h4 className="font-bold text-sm">สถานที่ตั้ง</h4>
             </div>
-            <div className="bg-muted/30 rounded-lg px-4">
-              <DataRow label="ที่อยู่" value={formData.address} />
+            <DataRow label="ที่อยู่" value={formData.address} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-x-8">
               <DataRow label="แขวง/ตำบล" value={formData.subDistrict} />
               <DataRow label="เขต/อำเภอ" value={formData.district} />
               <DataRow label="จังหวัด" value={formData.province} />
@@ -124,37 +151,15 @@ export default function DataReviewDialog({
             </div>
           </div>
 
-          {/* Files */}
-          <div className="space-y-1">
-            <div className="flex items-center gap-2 mb-2">
-              <FileText className="w-4 h-4 text-primary" />
-              <h4 className="font-semibold text-foreground">เอกสารแนบ</h4>
-            </div>
-            <div className="bg-muted/30 rounded-lg px-4 py-2 space-y-2">
-              {logoFile && (
-                <div className="flex items-center gap-2 text-sm">
-                  <Image className="w-4 h-4 text-muted-foreground" />
-                  <span className="text-muted-foreground">โลโก้:</span>
-                  <span className="font-medium truncate">{logoFile.name}</span>
-                </div>
-              )}
-              {documentFile && (
-                <div className="flex items-center gap-2 text-sm">
-                  <FileText className="w-4 h-4 text-muted-foreground" />
-                  <span className="text-muted-foreground">เอกสารขอใช้ระบบ:</span>
-                  <span className="font-medium truncate">{documentFile.name}</span>
-                </div>
-              )}
-            </div>
-          </div>
-        </motion.div>
+        </div>
 
-        <DialogFooter className="flex gap-2 mt-4">
+        {/* Footer */}
+        <DialogFooter className="p-4 px-6 border-t bg-white flex flex-row gap-3">
           <Button
-            variant="outline"
+            variant="ghost"
             onClick={onClose}
             disabled={isLoading}
-            className="flex-1"
+            className="flex-1 text-slate-500 hover:bg-slate-50 hover:text-slate-700"
           >
             <X className="w-4 h-4 mr-2" />
             แก้ไขข้อมูล
@@ -162,15 +167,12 @@ export default function DataReviewDialog({
           <Button
             onClick={onConfirm}
             disabled={isLoading}
-            className="flex-1"
+            className="flex-1 bg-[#FDE6B1] hover:bg-[#FCD985] text-[#B7552B] border-none shadow-sm transition-all active:scale-[0.98]"
           >
             {isLoading ? (
-              <span className="flex items-center gap-2">
-                <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                กำลังส่ง...
-              </span>
+              <div className="w-5 h-5 border-2 border-[#B7552B]/30 border-t-[#B7552B] rounded-full animate-spin" />
             ) : (
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-2 font-bold">
                 <Check className="w-4 h-4" />
                 ยืนยันส่งข้อมูล
               </span>
