@@ -3,6 +3,12 @@ FROM oven/bun:1 AS builder
 
 WORKDIR /app
 
+ARG VITE_BASE_URL
+ARG VITE_BASE_PATH
+
+ENV VITE_BASE_URL=$VITE_BASE_URL
+ENV VITE_BASE_PATH=$VITE_BASE_PATH
+
 COPY package.json bun.lockb ./
 
 RUN bun install --frozen-lockfile
