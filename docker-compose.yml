@@ -5,12 +5,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - VITE_BASE_URL=${VITE_BASE_URL}
+        - VITE_BASE_PATH=${VITE_BASE_PATH}
     ports:
       - "1412:1412"
     environment:
-      VITE_BASE_URL: ${VITE_BASE_URL}
-      VITE_BASE_PATH: ${VITE_BASE_PATH}
-      NODE_ENV: production
+      - NODE_ENV=production
     # volumes:
     #   - .:/app
     #   - /app/node_modules
