@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 // Logo path - replace with your actual logo
-const LOGO_PATH = "/logo.png";
+const LOGO_PATH = "/logo-web.png";
 
 export default function Footer() {
   return (
