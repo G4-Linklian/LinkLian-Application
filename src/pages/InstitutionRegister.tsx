@@ -7,7 +7,7 @@ import StepRegistrationForm from '@/components/registration/StepRegistrationForm
 import StepPendingApproval from '@/components/registration/StepPendingApproval';
 import StepUserGuide from '@/components/registration/StepUserGuide';
 
-const LOGO_PATH = "/logo.png";
+const LOGO_PATH = "/logo-web.png";
 
 const steps = [
   { label: 'อีเมล', description: 'ยืนยันอีเมล' },
